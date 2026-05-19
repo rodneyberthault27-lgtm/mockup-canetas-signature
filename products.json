@@ -1,0 +1,1762 @@
+﻿[
+    {
+        "name":  "chromo",
+        "category":  "Chromo",
+        "src":  "assets/products/chromo-chromo.png"
+    },
+    {
+        "name":  "clic b amarela",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-amarela.png"
+    },
+    {
+        "name":  "clic b azul",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-azul.png"
+    },
+    {
+        "name":  "clic b azul claro",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-azul-claro.png"
+    },
+    {
+        "name":  "clic b branca",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-branca.png"
+    },
+    {
+        "name":  "clic b laranja",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-laranja.png"
+    },
+    {
+        "name":  "clic b marrom",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-marrom.png"
+    },
+    {
+        "name":  "clic b preta",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-preta.png"
+    },
+    {
+        "name":  "clic b rosa",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-rosa.png"
+    },
+    {
+        "name":  "clic b roxo",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-roxo.png"
+    },
+    {
+        "name":  "clic b verde",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-verde.png"
+    },
+    {
+        "name":  "clic b verde claro",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-verde-claro.png"
+    },
+    {
+        "name":  "clic b vermelha",
+        "category":  "Clic Black",
+        "src":  "assets/products/clic-black-clic-b-vermelha.png"
+    },
+    {
+        "name":  "clic c amarela",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-amarela.png"
+    },
+    {
+        "name":  "clic c azul",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-azul.png"
+    },
+    {
+        "name":  "clic c azul claro",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-azul-claro.png"
+    },
+    {
+        "name":  "clic c branca",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-branca.png"
+    },
+    {
+        "name":  "clic c laranja",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-laranja.png"
+    },
+    {
+        "name":  "clic c marrom",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-marrom.png"
+    },
+    {
+        "name":  "clic c preta",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-preta.png"
+    },
+    {
+        "name":  "clic c rosa",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-rosa.png"
+    },
+    {
+        "name":  "clic c roxo",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-roxo.png"
+    },
+    {
+        "name":  "clic c verde",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-verde.png"
+    },
+    {
+        "name":  "clic c verde claro",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-verde-claro.png"
+    },
+    {
+        "name":  "clic c vermelha",
+        "category":  "Clic Clear",
+        "src":  "assets/products/clic-clear-clic-c-vermelha.png"
+    },
+    {
+        "name":  "clic cl amarela",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-amarela.png"
+    },
+    {
+        "name":  "clic cl azul",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-azul.png"
+    },
+    {
+        "name":  "clic cl azul clara",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-azul-clara.png"
+    },
+    {
+        "name":  "clic cl azul medio",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-azul-medio.png"
+    },
+    {
+        "name":  "clic cl laranja",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-laranja.png"
+    },
+    {
+        "name":  "clic cl marrom",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-marrom.png"
+    },
+    {
+        "name":  "clic cl marrom clara",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-marrom-clara.png"
+    },
+    {
+        "name":  "clic cl preta",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-preta.png"
+    },
+    {
+        "name":  "clic cl rosa",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-rosa.png"
+    },
+    {
+        "name":  "clic cl rosa claro",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-rosa-claro.png"
+    },
+    {
+        "name":  "clic cl roxo",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-roxo.png"
+    },
+    {
+        "name":  "clic cl verde",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-verde.png"
+    },
+    {
+        "name":  "clic cl verde claro",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-verde-claro.png"
+    },
+    {
+        "name":  "clic cl vermelha",
+        "category":  "Clic Color",
+        "src":  "assets/products/clic-color-clic-cl-vermelha.png"
+    },
+    {
+        "name":  "clic gc azul",
+        "category":  "Clic Grip Color",
+        "src":  "assets/products/clic-grip-color-clic-gc-azul.png"
+    },
+    {
+        "name":  "clic gc preta",
+        "category":  "Clic Grip Color",
+        "src":  "assets/products/clic-grip-color-clic-gc-preta.png"
+    },
+    {
+        "name":  "clic gc vermelha",
+        "category":  "Clic Grip Color",
+        "src":  "assets/products/clic-grip-color-clic-gc-vermelha.png"
+    },
+    {
+        "name":  "clic gw azul",
+        "category":  "Clic Grip White",
+        "src":  "assets/products/clic-grip-white-clic-gw-azul.png"
+    },
+    {
+        "name":  "clic gw laranja",
+        "category":  "Clic Grip White",
+        "src":  "assets/products/clic-grip-white-clic-gw-laranja.png"
+    },
+    {
+        "name":  "clic gw preta",
+        "category":  "Clic Grip White",
+        "src":  "assets/products/clic-grip-white-clic-gw-preta.png"
+    },
+    {
+        "name":  "clic gw rosa",
+        "category":  "Clic Grip White",
+        "src":  "assets/products/clic-grip-white-clic-gw-rosa.png"
+    },
+    {
+        "name":  "clic gw verde",
+        "category":  "Clic Grip White",
+        "src":  "assets/products/clic-grip-white-clic-gw-verde.png"
+    },
+    {
+        "name":  "clic gw vermelha",
+        "category":  "Clic Grip White",
+        "src":  "assets/products/clic-grip-white-clic-gw-vermelha.png"
+    },
+    {
+        "name":  "clic m dourada",
+        "category":  "Clic Metalic",
+        "src":  "assets/products/clic-metalic-clic-m-dourada.png"
+    },
+    {
+        "name":  "clic m prata",
+        "category":  "Clic Metalic",
+        "src":  "assets/products/clic-metalic-clic-m-prata.png"
+    },
+    {
+        "name":  "clic m rose",
+        "category":  "Clic Metalic",
+        "src":  "assets/products/clic-metalic-clic-m-rose.png"
+    },
+    {
+        "name":  "clic s amarela",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-amarela.png"
+    },
+    {
+        "name":  "clic s azul",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-azul.png"
+    },
+    {
+        "name":  "clic s azul clara",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-azul-clara.png"
+    },
+    {
+        "name":  "clic s branca",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-branca.png"
+    },
+    {
+        "name":  "clic s laranja",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-laranja.png"
+    },
+    {
+        "name":  "clic s marrom",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-marrom.png"
+    },
+    {
+        "name":  "clic s preta",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-preta.png"
+    },
+    {
+        "name":  "clic s rosa",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-rosa.png"
+    },
+    {
+        "name":  "clic s roxo",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-roxo.png"
+    },
+    {
+        "name":  "clic s verde",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-verde.png"
+    },
+    {
+        "name":  "clic s verde clara",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-verde-clara.png"
+    },
+    {
+        "name":  "clic s vermelha",
+        "category":  "Clic Solid",
+        "src":  "assets/products/clic-solid-clic-s-vermelha.png"
+    },
+    {
+        "name":  "clic sp amarela",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-amarela.png"
+    },
+    {
+        "name":  "clic sp azul clara",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-azul-clara.png"
+    },
+    {
+        "name":  "clic sp azul escura",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-azul-escura.png"
+    },
+    {
+        "name":  "clic sp lilas",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-lilas.png"
+    },
+    {
+        "name":  "clic sp magenta",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-magenta.png"
+    },
+    {
+        "name":  "clic sp marrom",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-marrom.png"
+    },
+    {
+        "name":  "clic sp rosa",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-rosa.png"
+    },
+    {
+        "name":  "clic sp verde",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-verde.png"
+    },
+    {
+        "name":  "clic sp vermelha",
+        "category":  "Clic Solid Pastel",
+        "src":  "assets/products/clic-solid-pastel-clic-sp-vermelha.png"
+    },
+    {
+        "name":  "clic w amarela",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-amarela.png"
+    },
+    {
+        "name":  "clic w azul",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-azul.png"
+    },
+    {
+        "name":  "clic w azul clara",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-azul-clara.png"
+    },
+    {
+        "name":  "clic w branca",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-branca.png"
+    },
+    {
+        "name":  "clic w laranja",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-laranja.png"
+    },
+    {
+        "name":  "clic w marrom",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-marrom.png"
+    },
+    {
+        "name":  "clic w preta",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-preta.png"
+    },
+    {
+        "name":  "clic w rosa",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-rosa.png"
+    },
+    {
+        "name":  "clic w roxo",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-roxo.png"
+    },
+    {
+        "name":  "clic w verde",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-verde.png"
+    },
+    {
+        "name":  "clic w verde clara",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-verde-clara.png"
+    },
+    {
+        "name":  "clic w vermelha",
+        "category":  "Clic White",
+        "src":  "assets/products/clic-white-clic-w-vermelha.png"
+    },
+    {
+        "name":  "clinic azul",
+        "category":  "Clinic Pen",
+        "src":  "assets/products/clinic-pen-clinic-azul.png"
+    },
+    {
+        "name":  "clinic branca",
+        "category":  "Clinic Pen",
+        "src":  "assets/products/clinic-pen-clinic-branca.png"
+    },
+    {
+        "name":  "clip w diamante",
+        "category":  "Clip White",
+        "src":  "assets/products/clip-white-clip-w-diamante.png"
+    },
+    {
+        "name":  "clip w gato",
+        "category":  "Clip White",
+        "src":  "assets/products/clip-white-clip-w-gato.png"
+    },
+    {
+        "name":  "erase pen",
+        "category":  "Erase Pen",
+        "src":  "assets/products/erase-pen-erase-pen.png"
+    },
+    {
+        "name":  "estodo veludo",
+        "category":  "Estojo",
+        "src":  "assets/products/estojo-estodo-veludo.png"
+    },
+    {
+        "name":  "estojo kraft",
+        "category":  "Estojo",
+        "src":  "assets/products/estojo-estojo-kraft.png"
+    },
+    {
+        "name":  "free amarela",
+        "category":  "Free",
+        "src":  "assets/products/free-free-amarela.png"
+    },
+    {
+        "name":  "free azul",
+        "category":  "Free",
+        "src":  "assets/products/free-free-azul.png"
+    },
+    {
+        "name":  "free azul claro",
+        "category":  "Free",
+        "src":  "assets/products/free-free-azul-claro.png"
+    },
+    {
+        "name":  "free branca",
+        "category":  "Free",
+        "src":  "assets/products/free-free-branca.png"
+    },
+    {
+        "name":  "free laranja",
+        "category":  "Free",
+        "src":  "assets/products/free-free-laranja.png"
+    },
+    {
+        "name":  "free marrom",
+        "category":  "Free",
+        "src":  "assets/products/free-free-marrom.png"
+    },
+    {
+        "name":  "free preta",
+        "category":  "Free",
+        "src":  "assets/products/free-free-preta.png"
+    },
+    {
+        "name":  "free rosa",
+        "category":  "Free",
+        "src":  "assets/products/free-free-rosa.png"
+    },
+    {
+        "name":  "free roxo",
+        "category":  "Free",
+        "src":  "assets/products/free-free-roxo.png"
+    },
+    {
+        "name":  "free verde",
+        "category":  "Free",
+        "src":  "assets/products/free-free-verde.png"
+    },
+    {
+        "name":  "free verde clara",
+        "category":  "Free",
+        "src":  "assets/products/free-free-verde-clara.png"
+    },
+    {
+        "name":  "free vermelha",
+        "category":  "Free",
+        "src":  "assets/products/free-free-vermelha.png"
+    },
+    {
+        "name":  "galaxy azul",
+        "category":  "Galaxy",
+        "src":  "assets/products/galaxy-galaxy-azul.png"
+    },
+    {
+        "name":  "galaxy preta",
+        "category":  "Galaxy",
+        "src":  "assets/products/galaxy-galaxy-preta.png"
+    },
+    {
+        "name":  "galaxy verde",
+        "category":  "Galaxy",
+        "src":  "assets/products/galaxy-galaxy-verde.png"
+    },
+    {
+        "name":  "galaxy vermelha",
+        "category":  "Galaxy",
+        "src":  "assets/products/galaxy-galaxy-vermelha.png"
+    },
+    {
+        "name":  "lapis all black",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-all-black.png"
+    },
+    {
+        "name":  "lapis amarelo",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-amarelo.png"
+    },
+    {
+        "name":  "lapis azul",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-azul.png"
+    },
+    {
+        "name":  "lapis branco",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-branco.png"
+    },
+    {
+        "name":  "lapis cinza",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-cinza.png"
+    },
+    {
+        "name":  "lapis laranja",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-laranja.png"
+    },
+    {
+        "name":  "lapis preto",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-preto.png"
+    },
+    {
+        "name":  "lapis rosa",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-rosa.png"
+    },
+    {
+        "name":  "lapis roxo",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-roxo.png"
+    },
+    {
+        "name":  "lapis verde",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-verde.png"
+    },
+    {
+        "name":  "lapis vermelho",
+        "category":  "Lapis",
+        "src":  "assets/products/lapis-lapis-vermelho.png"
+    },
+    {
+        "name":  "lapis infinito branco",
+        "category":  "Lapis Infinito",
+        "src":  "assets/products/lapis-infinito-lapis-infinito-branco.png"
+    },
+    {
+        "name":  "lapis infinito cinza",
+        "category":  "Lapis Infinito",
+        "src":  "assets/products/lapis-infinito-lapis-infinito-cinza.png"
+    },
+    {
+        "name":  "lapis infinito preto",
+        "category":  "Lapis Infinito",
+        "src":  "assets/products/lapis-infinito-lapis-infinito-preto.png"
+    },
+    {
+        "name":  "lapis infinito rosa",
+        "category":  "Lapis Infinito",
+        "src":  "assets/products/lapis-infinito-lapis-infinito-rosa.png"
+    },
+    {
+        "name":  "lapis infinito roxo",
+        "category":  "Lapis Infinito",
+        "src":  "assets/products/lapis-infinito-lapis-infinito-roxo.png"
+    },
+    {
+        "name":  "lapis infinito amarelo",
+        "category":  "Lapis Infinito com borracha",
+        "src":  "assets/products/lapis-infinito-com-borracha-lapis-infinito-amarelo.png"
+    },
+    {
+        "name":  "lapis infinito laranja",
+        "category":  "Lapis Infinito com borracha",
+        "src":  "assets/products/lapis-infinito-com-borracha-lapis-infinito-laranja.png"
+    },
+    {
+        "name":  "lapis infinito roxo",
+        "category":  "Lapis Infinito com borracha",
+        "src":  "assets/products/lapis-infinito-com-borracha-lapis-infinito-roxo.png"
+    },
+    {
+        "name":  "lapis infinito verde",
+        "category":  "Lapis Infinito com borracha",
+        "src":  "assets/products/lapis-infinito-com-borracha-lapis-infinito-verde.png"
+    },
+    {
+        "name":  "lapis infinito vermelho",
+        "category":  "Lapis Infinito com borracha",
+        "src":  "assets/products/lapis-infinito-com-borracha-lapis-infinito-vermelho.png"
+    },
+    {
+        "name":  "Lapix amarelo",
+        "category":  "Lapix",
+        "src":  "assets/products/lapix-lapix-amarelo.png"
+    },
+    {
+        "name":  "Lapix azul",
+        "category":  "Lapix",
+        "src":  "assets/products/lapix-lapix-azul.png"
+    },
+    {
+        "name":  "Lapix cinza",
+        "category":  "Lapix",
+        "src":  "assets/products/lapix-lapix-cinza.png"
+    },
+    {
+        "name":  "Lapix rosa",
+        "category":  "Lapix",
+        "src":  "assets/products/lapix-lapix-rosa.png"
+    },
+    {
+        "name":  "Lapix verde",
+        "category":  "Lapix",
+        "src":  "assets/products/lapix-lapix-verde.png"
+    },
+    {
+        "name":  "marcador np amarela",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-amarela.png"
+    },
+    {
+        "name":  "marcador np amarela clara",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-amarela-clara.png"
+    },
+    {
+        "name":  "marcador np azul",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-azul.png"
+    },
+    {
+        "name":  "marcador np azul claro",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-azul-claro.png"
+    },
+    {
+        "name":  "marcador np laranja",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-laranja.png"
+    },
+    {
+        "name":  "marcador np laranja claro",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-laranja-claro.png"
+    },
+    {
+        "name":  "marcador np lilas",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-lilas.png"
+    },
+    {
+        "name":  "marcador np rosa",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-rosa.png"
+    },
+    {
+        "name":  "marcador np rosa clara",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-rosa-clara.png"
+    },
+    {
+        "name":  "marcador np roxo",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-roxo.png"
+    },
+    {
+        "name":  "marcador np verde",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-verde.png"
+    },
+    {
+        "name":  "marcador np verde claro",
+        "category":  "Marcador Neon e Pastel",
+        "src":  "assets/products/marcador-neon-e-pastel-marcador-np-verde-claro.png"
+    },
+    {
+        "name":  "marcador ps azul",
+        "category":  "Marcador Permanente Slim",
+        "src":  "assets/products/marcador-permanente-slim-marcador-ps-azul.png"
+    },
+    {
+        "name":  "marcador ps preto",
+        "category":  "Marcador Permanente Slim",
+        "src":  "assets/products/marcador-permanente-slim-marcador-ps-preto.png"
+    },
+    {
+        "name":  "marcador ps vermelho",
+        "category":  "Marcador Permanente Slim",
+        "src":  "assets/products/marcador-permanente-slim-marcador-ps-vermelho.png"
+    },
+    {
+        "name":  "marcador pb azul",
+        "category":  "Marcador Permanete Big",
+        "src":  "assets/products/marcador-permanete-big-marcador-pb-azul.png"
+    },
+    {
+        "name":  "marcador pb preto",
+        "category":  "Marcador Permanete Big",
+        "src":  "assets/products/marcador-permanete-big-marcador-pb-preto.png"
+    },
+    {
+        "name":  "marcador pb vermelho",
+        "category":  "Marcador Permanete Big",
+        "src":  "assets/products/marcador-permanete-big-marcador-pb-vermelho.png"
+    },
+    {
+        "name":  "marcador qb azul",
+        "category":  "Marcador Quadro Branco",
+        "src":  "assets/products/marcador-quadro-branco-marcador-qb-azul.png"
+    },
+    {
+        "name":  "marcador qb preto",
+        "category":  "Marcador Quadro Branco",
+        "src":  "assets/products/marcador-quadro-branco-marcador-qb-preto.png"
+    },
+    {
+        "name":  "marcador qb vermelho",
+        "category":  "Marcador Quadro Branco",
+        "src":  "assets/products/marcador-quadro-branco-marcador-qb-vermelho.png"
+    },
+    {
+        "name":  "marcador tb amarelo",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-amarelo.png"
+    },
+    {
+        "name":  "marcador tb azul",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-azul.png"
+    },
+    {
+        "name":  "marcador tb azul claro",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-azul-claro.png"
+    },
+    {
+        "name":  "marcador tb laranja",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-laranja.png"
+    },
+    {
+        "name":  "marcador tb marrom",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-marrom.png"
+    },
+    {
+        "name":  "marcador tb preto",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-preto.png"
+    },
+    {
+        "name":  "marcador tb rosa",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-rosa.png"
+    },
+    {
+        "name":  "marcador tb roxo",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-roxo.png"
+    },
+    {
+        "name":  "marcador tb verde",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-verde.png"
+    },
+    {
+        "name":  "marcador tb vermelho",
+        "category":  "Marcador Textil Big",
+        "src":  "assets/products/marcador-textil-big-marcador-tb-vermelho.png"
+    },
+    {
+        "name":  "newpop b amarela",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-amarela.png"
+    },
+    {
+        "name":  "newpop b azul",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-azul.png"
+    },
+    {
+        "name":  "newpop b azul clara",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-azul-clara.png"
+    },
+    {
+        "name":  "newpop b branca",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-branca.png"
+    },
+    {
+        "name":  "newpop b laranja",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-laranja.png"
+    },
+    {
+        "name":  "newpop b marrom",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-marrom.png"
+    },
+    {
+        "name":  "newpop b preta",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-preta.png"
+    },
+    {
+        "name":  "newpop b rosa",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-rosa.png"
+    },
+    {
+        "name":  "newpop b roxo",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-roxo.png"
+    },
+    {
+        "name":  "newpop b verde",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-verde.png"
+    },
+    {
+        "name":  "newpop b verde claro",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-verde-claro.png"
+    },
+    {
+        "name":  "newpop b vermelho",
+        "category":  "Newpop Black",
+        "src":  "assets/products/newpop-black-newpop-b-vermelho.png"
+    },
+    {
+        "name":  "newpop s amarela",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-amarela.png"
+    },
+    {
+        "name":  "newpop s azul claro",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-azul-claro.png"
+    },
+    {
+        "name":  "newpop s azul escuro",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-azul-escuro.png"
+    },
+    {
+        "name":  "newpop s branca",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-branca.png"
+    },
+    {
+        "name":  "newpop s dourada",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-dourada.png"
+    },
+    {
+        "name":  "newpop s laranja",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-laranja.png"
+    },
+    {
+        "name":  "newpop s marrom",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-marrom.png"
+    },
+    {
+        "name":  "newpop s prata",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-prata.png"
+    },
+    {
+        "name":  "newpop s preta",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-preta.png"
+    },
+    {
+        "name":  "newpop s rosa",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-rosa.png"
+    },
+    {
+        "name":  "newpop s rose gold",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-rose-gold.png"
+    },
+    {
+        "name":  "newpop s roxo",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-roxo.png"
+    },
+    {
+        "name":  "newpop s verde claro",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-verde-claro.png"
+    },
+    {
+        "name":  "newpop s verde escuro",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-verde-escuro.png"
+    },
+    {
+        "name":  "newpop s vermelho",
+        "category":  "Newpop Solid Metalic",
+        "src":  "assets/products/newpop-solid-metalic-newpop-s-vermelho.png"
+    },
+    {
+        "name":  "newpop w amarela",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-amarela.png"
+    },
+    {
+        "name":  "newpop w azul",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-azul.png"
+    },
+    {
+        "name":  "newpop w azul claro",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-azul-claro.png"
+    },
+    {
+        "name":  "newpop w azul laranja",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-azul-laranja.png"
+    },
+    {
+        "name":  "newpop w azul verde",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-azul-verde.png"
+    },
+    {
+        "name":  "newpop w branca",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-branca.png"
+    },
+    {
+        "name":  "newpop w marrom",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-marrom.png"
+    },
+    {
+        "name":  "newpop w preta",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-preta.png"
+    },
+    {
+        "name":  "newpop w rosa",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-rosa.png"
+    },
+    {
+        "name":  "newpop w roxo",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-roxo.png"
+    },
+    {
+        "name":  "newpop w verde",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-verde.png"
+    },
+    {
+        "name":  "newpop w verde claro",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-verde-claro.png"
+    },
+    {
+        "name":  "newpop w vermelha",
+        "category":  "Newpop White",
+        "src":  "assets/products/newpop-white-newpop-w-vermelha.png"
+    },
+    {
+        "name":  "pentoop b amarela",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-amarela.png"
+    },
+    {
+        "name":  "pentoop b azul",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-azul.png"
+    },
+    {
+        "name":  "pentoop b azul clara",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-azul-clara.png"
+    },
+    {
+        "name":  "pentoop b branca",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-branca.png"
+    },
+    {
+        "name":  "pentoop b laranja",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-laranja.png"
+    },
+    {
+        "name":  "pentoop b marrom",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-marrom.png"
+    },
+    {
+        "name":  "pentoop b preta",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-preta.png"
+    },
+    {
+        "name":  "pentoop b rosa",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-rosa.png"
+    },
+    {
+        "name":  "pentoop b roxa",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-roxa.png"
+    },
+    {
+        "name":  "pentoop b verde",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-verde.png"
+    },
+    {
+        "name":  "pentoop b verde claro",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-verde-claro.png"
+    },
+    {
+        "name":  "pentoop b vermelha",
+        "category":  "Pentop Black",
+        "src":  "assets/products/pentop-black-pentoop-b-vermelha.png"
+    },
+    {
+        "name":  "pentop c amarela",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-amarela.png"
+    },
+    {
+        "name":  "pentop c azul",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-azul.png"
+    },
+    {
+        "name":  "pentop c azul clara",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-azul-clara.png"
+    },
+    {
+        "name":  "pentop c branca",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-branca.png"
+    },
+    {
+        "name":  "pentop c laranja",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-laranja.png"
+    },
+    {
+        "name":  "pentop c marrom",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-marrom.png"
+    },
+    {
+        "name":  "pentop c preta",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-preta.png"
+    },
+    {
+        "name":  "pentop c rosa",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-rosa.png"
+    },
+    {
+        "name":  "pentop c roxo",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-roxo.png"
+    },
+    {
+        "name":  "pentop c verde",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-verde.png"
+    },
+    {
+        "name":  "pentop c verde clara",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-verde-clara.png"
+    },
+    {
+        "name":  "pentop c vermelha",
+        "category":  "Pentop Clear",
+        "src":  "assets/products/pentop-clear-pentop-c-vermelha.png"
+    },
+    {
+        "name":  "pentop c amarela",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-amarela.png"
+    },
+    {
+        "name":  "pentop c azul",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-azul.png"
+    },
+    {
+        "name":  "pentop c azul claro",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-azul-claro.png"
+    },
+    {
+        "name":  "pentop c branca",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-branca.png"
+    },
+    {
+        "name":  "pentop c laranja",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-laranja.png"
+    },
+    {
+        "name":  "pentop c marrom",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-marrom.png"
+    },
+    {
+        "name":  "pentop c preta",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-preta.png"
+    },
+    {
+        "name":  "pentop c rosa",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-rosa.png"
+    },
+    {
+        "name":  "pentop c roxa",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-roxa.png"
+    },
+    {
+        "name":  "pentop c verde",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-verde.png"
+    },
+    {
+        "name":  "pentop c verde claro",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-verde-claro.png"
+    },
+    {
+        "name":  "pentop c vermelha",
+        "category":  "Pentop Color",
+        "src":  "assets/products/pentop-color-pentop-c-vermelha.png"
+    },
+    {
+        "name":  "pentop eco azul",
+        "category":  "Pentop Eco",
+        "src":  "assets/products/pentop-eco-pentop-eco-azul.png"
+    },
+    {
+        "name":  "pentop eco preta",
+        "category":  "Pentop Eco",
+        "src":  "assets/products/pentop-eco-pentop-eco-preta.png"
+    },
+    {
+        "name":  "pentop eco vermelha",
+        "category":  "Pentop Eco",
+        "src":  "assets/products/pentop-eco-pentop-eco-vermelha.png"
+    },
+    {
+        "name":  "pentop s amarelo",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-amarelo.png"
+    },
+    {
+        "name":  "pentop s azul",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-azul.png"
+    },
+    {
+        "name":  "pentop s azul clara",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-azul-clara.png"
+    },
+    {
+        "name":  "pentop s branca",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-branca.png"
+    },
+    {
+        "name":  "pentop s laranja",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-laranja.png"
+    },
+    {
+        "name":  "pentop s marrom",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-marrom.png"
+    },
+    {
+        "name":  "pentop s preta",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-preta.png"
+    },
+    {
+        "name":  "pentop s rosa",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-rosa.png"
+    },
+    {
+        "name":  "pentop s roxo",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-roxo.png"
+    },
+    {
+        "name":  "pentop s verde",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-verde.png"
+    },
+    {
+        "name":  "pentop s verde clara",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-verde-clara.png"
+    },
+    {
+        "name":  "pentop s vermelha",
+        "category":  "Pentop Solid",
+        "src":  "assets/products/pentop-solid-pentop-s-vermelha.png"
+    },
+    {
+        "name":  "pentoop w amarela",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-amarela.png"
+    },
+    {
+        "name":  "pentoop w azul",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-azul.png"
+    },
+    {
+        "name":  "pentoop w azul clara",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-azul-clara.png"
+    },
+    {
+        "name":  "pentoop w branca",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-branca.png"
+    },
+    {
+        "name":  "pentoop w laranja",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-laranja.png"
+    },
+    {
+        "name":  "pentoop w marrom",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-marrom.png"
+    },
+    {
+        "name":  "pentoop w preta",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-preta.png"
+    },
+    {
+        "name":  "pentoop w rosa",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-rosa.png"
+    },
+    {
+        "name":  "pentoop w roxo",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-roxo.png"
+    },
+    {
+        "name":  "pentoop w verde",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-verde.png"
+    },
+    {
+        "name":  "pentoop w verde claro",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-verde-claro.png"
+    },
+    {
+        "name":  "pentoop w vermelha",
+        "category":  "Pentop White",
+        "src":  "assets/products/pentop-white-pentoop-w-vermelha.png"
+    },
+    {
+        "name":  "pixel amarelo",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-amarelo.png"
+    },
+    {
+        "name":  "pixel azul",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-azul.png"
+    },
+    {
+        "name":  "pixel azul claro",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-azul-claro.png"
+    },
+    {
+        "name":  "pixel black",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-black.png"
+    },
+    {
+        "name":  "pixel cinza",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-cinza.png"
+    },
+    {
+        "name":  "pixel laranja",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-laranja.png"
+    },
+    {
+        "name":  "pixel marrom",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-marrom.png"
+    },
+    {
+        "name":  "pixel rosa",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-rosa.png"
+    },
+    {
+        "name":  "pixel roxo",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-roxo.png"
+    },
+    {
+        "name":  "pixel verde",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-verde.png"
+    },
+    {
+        "name":  "pixel verde claro",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-verde-claro.png"
+    },
+    {
+        "name":  "pixel vermelho",
+        "category":  "Pixel",
+        "src":  "assets/products/pixel-pixel-vermelho.png"
+    },
+    {
+        "name":  "porta canetas amarelo",
+        "category":  "Porta Canetas",
+        "src":  "assets/products/porta-canetas-porta-canetas-amarelo.png"
+    },
+    {
+        "name":  "porta canetas azul",
+        "category":  "Porta Canetas",
+        "src":  "assets/products/porta-canetas-porta-canetas-azul.png"
+    },
+    {
+        "name":  "porta canetas rosa",
+        "category":  "Porta Canetas",
+        "src":  "assets/products/porta-canetas-porta-canetas-rosa.png"
+    },
+    {
+        "name":  "porta canetas verde",
+        "category":  "Porta Canetas",
+        "src":  "assets/products/porta-canetas-porta-canetas-verde.png"
+    },
+    {
+        "name":  "régua 20",
+        "category":  "Régua",
+        "src":  "assets/products/regua-regua-20.png"
+    },
+    {
+        "name":  "régua 30",
+        "category":  "Régua",
+        "src":  "assets/products/regua-regua-30.png"
+    },
+    {
+        "name":  "1",
+        "category":  "Report",
+        "src":  "assets/products/report-1.png"
+    },
+    {
+        "name":  "2",
+        "category":  "Report",
+        "src":  "assets/products/report-2.png"
+    },
+    {
+        "name":  "3",
+        "category":  "Report",
+        "src":  "assets/products/report-3.png"
+    },
+    {
+        "name":  "4",
+        "category":  "Report",
+        "src":  "assets/products/report-4.png"
+    },
+    {
+        "name":  "5",
+        "category":  "Report",
+        "src":  "assets/products/report-5.png"
+    },
+    {
+        "name":  "6",
+        "category":  "Report",
+        "src":  "assets/products/report-6.png"
+    },
+    {
+        "name":  "revolution bambu",
+        "category":  "Revolution Bambu",
+        "src":  "assets/products/revolution-bambu-revolution-bambu.png"
+    },
+    {
+        "name":  "zero b amarela",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-amarela.png"
+    },
+    {
+        "name":  "zero b azul clara",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-azul-clara.png"
+    },
+    {
+        "name":  "zero b azul escura",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-azul-escura.png"
+    },
+    {
+        "name":  "zero b branca",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-branca.png"
+    },
+    {
+        "name":  "zero b laranja",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-laranja.png"
+    },
+    {
+        "name":  "zero b marrom",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-marrom.png"
+    },
+    {
+        "name":  "zero b preta",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-preta.png"
+    },
+    {
+        "name":  "zero b rosa",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-rosa.png"
+    },
+    {
+        "name":  "zero b roxa",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-roxa.png"
+    },
+    {
+        "name":  "zero b verde clara",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-verde-clara.png"
+    },
+    {
+        "name":  "zero b verde escura",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-verde-escura.png"
+    },
+    {
+        "name":  "zero b vermelha",
+        "category":  "Zero Black",
+        "src":  "assets/products/zero-black-zero-b-vermelha.png"
+    },
+    {
+        "name":  "zero c amarela",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-amarela.png"
+    },
+    {
+        "name":  "zero c azul",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-azul.png"
+    },
+    {
+        "name":  "zero c azul clara",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-azul-clara.png"
+    },
+    {
+        "name":  "zero c branca",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-branca.png"
+    },
+    {
+        "name":  "zero c laranja",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-laranja.png"
+    },
+    {
+        "name":  "zero c marrom",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-marrom.png"
+    },
+    {
+        "name":  "zero c preta",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-preta.png"
+    },
+    {
+        "name":  "zero c rosa",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-rosa.png"
+    },
+    {
+        "name":  "zero c roxa",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-roxa.png"
+    },
+    {
+        "name":  "zero c verde",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-verde.png"
+    },
+    {
+        "name":  "zero c verde clara",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-verde-clara.png"
+    },
+    {
+        "name":  "zero c vermelha",
+        "category":  "Zero Clear",
+        "src":  "assets/products/zero-clear-zero-c-vermelha.png"
+    },
+    {
+        "name":  "zero c amarela",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-amarela.png"
+    },
+    {
+        "name":  "zero c azul",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-azul.png"
+    },
+    {
+        "name":  "zero c azul claro",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-azul-claro.png"
+    },
+    {
+        "name":  "zero c branca",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-branca.png"
+    },
+    {
+        "name":  "zero c laranja",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-laranja.png"
+    },
+    {
+        "name":  "zero c marrom",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-marrom.png"
+    },
+    {
+        "name":  "zero c preta",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-preta.png"
+    },
+    {
+        "name":  "zero c rosa",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-rosa.png"
+    },
+    {
+        "name":  "zero c roxo",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-roxo.png"
+    },
+    {
+        "name":  "zero c verde",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-verde.png"
+    },
+    {
+        "name":  "zero c verde clara",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-verde-clara.png"
+    },
+    {
+        "name":  "zero c vermelha",
+        "category":  "Zero Colors",
+        "src":  "assets/products/zero-colors-zero-c-vermelha.png"
+    },
+    {
+        "name":  "zero s amarelo",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-amarelo.png"
+    },
+    {
+        "name":  "zero s azul",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-azul.png"
+    },
+    {
+        "name":  "zero s azul claro",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-azul-claro.png"
+    },
+    {
+        "name":  "zero s branca",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-branca.png"
+    },
+    {
+        "name":  "zero s laranja",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-laranja.png"
+    },
+    {
+        "name":  "zero s marrom",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-marrom.png"
+    },
+    {
+        "name":  "zero s preto",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-preto.png"
+    },
+    {
+        "name":  "zero s rosa",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-rosa.png"
+    },
+    {
+        "name":  "zero s roxo",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-roxo.png"
+    },
+    {
+        "name":  "zero s verde",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-verde.png"
+    },
+    {
+        "name":  "zero s verde claro",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-verde-claro.png"
+    },
+    {
+        "name":  "zero s vermelha",
+        "category":  "Zero Solid",
+        "src":  "assets/products/zero-solid-zero-s-vermelha.png"
+    },
+    {
+        "name":  "zero w amarela",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-amarela.png"
+    },
+    {
+        "name":  "zero w azul",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-azul.png"
+    },
+    {
+        "name":  "zero w azul clara",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-azul-clara.png"
+    },
+    {
+        "name":  "zero w branca",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-branca.png"
+    },
+    {
+        "name":  "zero w laranja",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-laranja.png"
+    },
+    {
+        "name":  "zero w marrom",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-marrom.png"
+    },
+    {
+        "name":  "zero w preta",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-preta.png"
+    },
+    {
+        "name":  "zero w rosa",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-rosa.png"
+    },
+    {
+        "name":  "zero w roxa",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-roxa.png"
+    },
+    {
+        "name":  "zero w verde",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-verde.png"
+    },
+    {
+        "name":  "zero w verde claro",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-verde-claro.png"
+    },
+    {
+        "name":  "zero w vermelha",
+        "category":  "Zero White",
+        "src":  "assets/products/zero-white-zero-w-vermelha.png"
+    }
+]

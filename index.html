@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mockup de Logo em Canetas</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="Editor de mockup">
+        <header class="topbar">
+          <div class="brand-lockup">
+            <img class="brand-logo" src="./assets/newpen-signature.png" alt="Newpen Signature" />
+            <div>
+              <p class="eyebrow">Mockup Studio</p>
+              <h1>Logo em canetas</h1>
+            </div>
+          </div>
+          <button id="downloadBtn" class="primary-button" type="button">Baixar imagem</button>
+        </header>
+
+        <div class="stage-wrap">
+          <canvas id="mockupCanvas" width="1200" height="760" aria-label="Prévia do mockup"></canvas>
+          <div id="emptyState" class="empty-state">
+            <strong>Envie um logo</strong>
+            <span>Depois arraste sobre a caneta para ajustar a posição.</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel" aria-label="Controles do mockup">
+        <section class="control-group">
+          <h2>Caneta</h2>
+          <div class="product-tools">
+            <input id="productSearch" type="search" placeholder="Buscar produto ou cor" aria-label="Buscar produto ou cor" />
+            <select id="categoryFilter" aria-label="Filtrar linha">
+              <option value="all">Todas as linhas</option>
+            </select>
+          </div>
+          <div class="color-filter" aria-label="Filtrar por cor">
+            <button class="is-active" type="button" data-product-color="all">Todas</button>
+            <button type="button" data-product-color="preta" style="--swatch: #171717">Preta</button>
+            <button type="button" data-product-color="branca" style="--swatch: #ffffff">Branca</button>
+            <button type="button" data-product-color="azul" style="--swatch: #2563eb">Azul</button>
+            <button type="button" data-product-color="vermelha" style="--swatch: #dc2626">Vermelha</button>
+            <button type="button" data-product-color="verde" style="--swatch: #16a34a">Verde</button>
+            <button type="button" data-product-color="amarela" style="--swatch: #facc15">Amarela</button>
+            <button type="button" data-product-color="rosa" style="--swatch: #ec4899">Rosa</button>
+            <button type="button" data-product-color="roxo" style="--swatch: #7c3aed">Roxo</button>
+            <button type="button" data-product-color="laranja" style="--swatch: #f97316">Laranja</button>
+            <button type="button" data-product-color="dourada" style="--swatch: #c79a2b">Dourada</button>
+            <button type="button" data-product-color="prata" style="--swatch: #a3a3a3">Prata</button>
+          </div>
+          <p id="productCount" class="count">Carregando produtos...</p>
+          <div class="pen-grid" id="penGrid" aria-live="polite">
+            <p class="hint">Carregando galeria...</p>
+          </div>
+          <label class="file-drop">
+            <span>Usar foto própria</span>
+            <input id="penUpload" type="file" accept="image/*" />
+          </label>
+        </section>
+
+        <section class="control-group">
+          <h2>Logo</h2>
+          <label class="file-drop accent">
+            <span>Enviar logo</span>
+            <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
+          </label>
+          <p class="hint">PNG transparente costuma dar o melhor resultado.</p>
+        </section>
+
+        <section class="control-group">
+          <h2>Ajustes da caneta</h2>
+          <label class="range-row">
+            <span>Girar caneta</span>
+            <input id="penRotationControl" type="range" min="-180" max="180" value="0" />
+          </label>
+          <label class="range-row">
+            <span>Recorte</span>
+            <input id="maskControl" type="range" min="0" max="80" value="24" />
+          </label>
+          <label class="check-row">
+            <input id="showBackControl" type="checkbox" />
+            <span>Mostrar frente e verso</span>
+          </label>
+        </section>
+
+        <section class="control-group">
+          <h2>Logo enviado</h2>
+          <label class="range-row">
+            <span>Tamanho</span>
+            <input id="scaleControl" type="range" min="8" max="90" value="26" />
+          </label>
+          <label class="range-row">
+            <span>Rotação</span>
+            <input id="rotationControl" type="range" min="-360" max="360" value="-9" />
+          </label>
+          <label class="range-row">
+            <span>Opacidade</span>
+            <input id="opacityControl" type="range" min="20" max="100" value="92" />
+          </label>
+          <label class="range-row">
+            <span>Fundo logo</span>
+            <input id="logoCutoutControl" type="range" min="0" max="90" value="24" />
+          </label>
+          <label class="range-row">
+            <span>Cor</span>
+            <select id="logoColorMode">
+              <option value="original">Original</option>
+              <option value="#111111">Preto</option>
+              <option value="#ffffff">Branco</option>
+              <option value="#c79a2b">Dourado</option>
+              <option value="#9aa3ad">Prata</option>
+              <option value="custom">Personalizada</option>
+            </select>
+          </label>
+          <label class="range-row color-row">
+            <span>Tom</span>
+            <input id="logoColorInput" type="color" value="#111111" />
+          </label>
+          <label class="range-row">
+            <span>Abraçar</span>
+            <input id="blendControl" type="range" min="0" max="70" value="34" />
+          </label>
+          <p class="hint">O logo pode ser movido livremente, mas só aparece dentro do recorte da caneta.</p>
+        </section>
+
+        <section class="control-group">
+          <h2>Fundo</h2>
+          <div class="segmented">
+            <button type="button" data-fit="cover">Preencher</button>
+            <button class="is-active" type="button" data-fit="contain">Inteira</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
