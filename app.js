@@ -6,7 +6,6 @@ const logoUpload = document.querySelector("#logoUpload");
 const penUpload = document.querySelector("#penUpload");
 const penRotationControl = document.querySelector("#penRotationControl");
 const maskControl = document.querySelector("#maskControl");
-const showBackControl = document.querySelector("#showBackControl");
 const scaleControl = document.querySelector("#scaleControl");
 const rotationControl = document.querySelector("#rotationControl");
 const opacityControl = document.querySelector("#opacityControl");
@@ -34,7 +33,6 @@ const state = {
   fit: "contain",
   penRotation: Number(penRotationControl.value),
   maskTolerance: Number(maskControl.value),
-  showBack: showBackControl.checked,
   logoX: canvas.width * 0.5,
   logoY: canvas.height * 0.52,
   scale: Number(scaleControl.value) / 100,
@@ -201,24 +199,6 @@ function renderScene(targetCtx, includeSelection) {
   targetCtx.fillStyle = "#ffffff";
   targetCtx.fillRect(0, 0, canvas.width, canvas.height);
 
-  if (state.showBack) {
-    const front = getViewFrame("front");
-    const back = getViewFrame("back");
-    drawViewLabel(targetCtx, "Frente", front.centerY);
-    drawViewLabel(targetCtx, "Verso", back.centerY);
-    drawPen(targetCtx, front);
-    drawPen(targetCtx, back);
-
-    if (!state.logo) return;
-
-    const logoWidth = Math.max(60, canvas.width * state.scale);
-    const logoHeight = logoWidth * (state.logo.height / state.logo.width);
-    drawLogoClippedToPen(targetCtx, logoWidth, logoHeight, front, state.logoX, front.centerY);
-    drawLogoClippedToPen(targetCtx, logoWidth, logoHeight, back, canvas.width - state.logoX, back.centerY, Math.max(80, logoWidth * 0.38));
-    if (includeSelection) drawSelection(targetCtx, logoWidth, logoHeight, state.logoX, front.centerY);
-    return;
-  }
-
   const single = getViewFrame("single");
   drawPen(targetCtx, single);
 
@@ -231,18 +211,7 @@ function renderScene(targetCtx, includeSelection) {
 }
 
 function getViewFrame(side) {
-  if (side === "front") return { centerX: canvas.width / 2, centerY: 245, width: canvas.width * 0.9, height: 310 };
-  if (side === "back") return { centerX: canvas.width / 2, centerY: 565, width: canvas.width * 0.9, height: 310 };
   return { centerX: canvas.width / 2, centerY: canvas.height / 2, width: canvas.width, height: canvas.height };
-}
-
-function drawViewLabel(targetCtx, label, centerY) {
-  targetCtx.save();
-  targetCtx.fillStyle = "#65707f";
-  targetCtx.font = "700 20px Inter, system-ui, sans-serif";
-  targetCtx.textAlign = "left";
-  targetCtx.fillText(label, 44, centerY - 118);
-  targetCtx.restore();
 }
 
 function drawPen(targetCtx, frame) {
@@ -478,7 +447,7 @@ function handlePointerDown(event) {
   const point = canvasPoint(event);
   state.isDragging = true;
   state.dragOffsetX = point.x - state.logoX;
-  state.dragOffsetY = point.y - (state.showBack ? getViewFrame("front").centerY : state.logoY);
+  state.dragOffsetY = point.y - state.logoY;
   canvas.setPointerCapture(event.pointerId);
 }
 
@@ -486,11 +455,7 @@ function handlePointerMove(event) {
   if (!state.isDragging) return;
   const point = canvasPoint(event);
   state.logoX = point.x - state.dragOffsetX;
-  if (state.showBack) {
-    state.logoY = getViewFrame("front").centerY;
-  } else {
-    state.logoY = point.y - state.dragOffsetY;
-  }
+  state.logoY = point.y - state.dragOffsetY;
   draw();
 }
 
@@ -550,12 +515,6 @@ penRotationControl.addEventListener("input", () => {
 
 maskControl.addEventListener("input", () => {
   state.maskTolerance = Number(maskControl.value);
-  draw();
-});
-
-showBackControl.addEventListener("change", () => {
-  state.showBack = showBackControl.checked;
-  if (state.showBack) state.logoY = getViewFrame("front").centerY;
   draw();
 });
 

@@ -22,7 +22,6 @@ Funcionalidades:
 - enviar logo em PNG, JPG, WebP ou SVG;
 - arrastar o logo na prévia;
 - girar a caneta;
-- mostrar frente e verso da mesma caneta;
 - ajustar tamanho, rotação 360, opacidade e efeito de gravação do logo;
 - remover automaticamente fundo branco/claro do logo enviado;
 - aplicar cor original, preta, branca, dourada, prata ou personalizada ao logo;
