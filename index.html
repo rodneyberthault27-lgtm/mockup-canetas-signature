@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mockup de Logo em Canetas</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -17,13 +18,7 @@
               <h1>Logo em canetas</h1>
             </div>
           </div>
-          <div class="top-actions">
-            <div class="segmented compact">
-              <button class="is-active" type="button" data-mode="simple">Cliente</button>
-              <button type="button" data-mode="advanced">Admin</button>
-            </div>
-            <button id="downloadBtn" class="primary-button" type="button">Baixar imagem</button>
-          </div>
+          <button id="downloadBtn" class="primary-button" type="button">Baixar imagem</button>
         </header>
 
         <div class="stage-wrap">
@@ -80,53 +75,31 @@
         <section class="control-group">
           <h2>Ajustes da caneta</h2>
           <label class="range-row">
-            <span>Girar <b id="penRotationValue">0°</b></span>
+            <span>Girar caneta</span>
             <input id="penRotationControl" type="range" min="-180" max="180" value="0" />
           </label>
-          <label class="range-row advanced-only">
-            <span>Recorte <b id="maskValue">24</b></span>
+          <label class="range-row">
+            <span>Recorte</span>
             <input id="maskControl" type="range" min="0" max="80" value="24" />
           </label>
-          <div class="button-row advanced-only">
-            <button id="saveProfileBtn" type="button">Salvar padrão</button>
-            <button id="resetProfileBtn" type="button">Padrão da linha</button>
-          </div>
         </section>
 
         <section class="control-group">
           <h2>Logo enviado</h2>
-          <div class="preset-grid">
-            <button type="button" data-preset="subtle">Discreto</button>
-            <button type="button" data-preset="white">Branco escuro</button>
-            <button type="button" data-preset="black">Preto claro</button>
-            <button type="button" data-preset="gold">Dourado</button>
-          </div>
-          <div class="button-row">
-            <button id="centerLogoBtn" type="button">Centralizar</button>
-            <button id="resetLogoBtn" type="button">Resetar</button>
-          </div>
-          <div class="nudge-grid" aria-label="Mover logo com precisão">
-            <span></span>
-            <button type="button" data-nudge="up">↑</button>
-            <span></span>
-            <button type="button" data-nudge="left">←</button>
-            <button type="button" data-nudge="down">↓</button>
-            <button type="button" data-nudge="right">→</button>
-          </div>
           <label class="range-row">
-            <span>Tamanho <b id="scaleValue">26%</b></span>
+            <span>Tamanho</span>
             <input id="scaleControl" type="range" min="8" max="90" value="26" />
           </label>
           <label class="range-row">
-            <span>Rotação <b id="rotationValue">-9°</b></span>
+            <span>Rotação</span>
             <input id="rotationControl" type="range" min="-360" max="360" value="-9" />
           </label>
           <label class="range-row">
-            <span>Opacidade <b id="opacityValue">92%</b></span>
+            <span>Opacidade</span>
             <input id="opacityControl" type="range" min="20" max="100" value="92" />
           </label>
-          <label class="range-row advanced-only">
-            <span>Fundo <b id="logoCutoutValue">24</b></span>
+          <label class="range-row">
+            <span>Fundo logo</span>
             <input id="logoCutoutControl" type="range" min="0" max="90" value="24" />
           </label>
           <label class="range-row">
@@ -144,31 +117,19 @@
             <span>Tom</span>
             <input id="logoColorInput" type="color" value="#111111" />
           </label>
-          <label class="range-row advanced-only">
-            <span>Abraçar <b id="blendValue">34</b></span>
+          <label class="range-row">
+            <span>Abraçar</span>
             <input id="blendControl" type="range" min="0" max="70" value="34" />
           </label>
           <p class="hint">O logo pode ser movido livremente, mas só aparece dentro do recorte da caneta.</p>
         </section>
 
-        <section class="control-group advanced-only">
-          <h2>Visualização</h2>
+        <section class="control-group">
+          <h2>Fundo</h2>
           <div class="segmented">
             <button type="button" data-fit="cover">Preencher</button>
             <button class="is-active" type="button" data-fit="contain">Inteira</button>
           </div>
-        </section>
-
-        <section class="control-group">
-          <h2>Download</h2>
-          <select id="exportFormat" aria-label="Formato do download">
-            <option value="standard">Alta resolução</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="instagram-post">Instagram post</option>
-            <option value="instagram-story">Instagram story</option>
-          </select>
-          <button id="batchDownloadBtn" class="secondary-button" type="button">Baixar cores filtradas</button>
-          <p class="hint">Usa a linha/cor filtrada e mantém o mesmo logo em todas.</p>
         </section>
       </aside>
     </main>

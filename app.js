@@ -14,38 +14,14 @@ const logoColorMode = document.querySelector("#logoColorMode");
 const logoColorInput = document.querySelector("#logoColorInput");
 const logoColorRow = document.querySelector(".color-row");
 const blendControl = document.querySelector("#blendControl");
-const penRotationValue = document.querySelector("#penRotationValue");
-const maskValue = document.querySelector("#maskValue");
-const scaleValue = document.querySelector("#scaleValue");
-const rotationValue = document.querySelector("#rotationValue");
-const opacityValue = document.querySelector("#opacityValue");
-const logoCutoutValue = document.querySelector("#logoCutoutValue");
-const blendValue = document.querySelector("#blendValue");
-const centerLogoBtn = document.querySelector("#centerLogoBtn");
-const resetLogoBtn = document.querySelector("#resetLogoBtn");
-const saveProfileBtn = document.querySelector("#saveProfileBtn");
-const resetProfileBtn = document.querySelector("#resetProfileBtn");
-const exportFormat = document.querySelector("#exportFormat");
-const batchDownloadBtn = document.querySelector("#batchDownloadBtn");
 const penGrid = document.querySelector("#penGrid");
 const productSearch = document.querySelector("#productSearch");
 const categoryFilter = document.querySelector("#categoryFilter");
 const productCount = document.querySelector("#productCount");
 const fitButtons = document.querySelectorAll("[data-fit]");
 const productColorButtons = document.querySelectorAll("[data-product-color]");
-const modeButtons = document.querySelectorAll("[data-mode]");
-const presetButtons = document.querySelectorAll("[data-preset]");
-const nudgeButtons = document.querySelectorAll("[data-nudge]");
 const brandImage = new Image();
 brandImage.src = "./assets/newpen-signature.png";
-
-const PROFILE_STORAGE_KEY = "newpen-signature-product-profiles";
-const EXPORT_FORMATS = {
-  standard: { width: 1600, height: 1280, label: "alta-resolucao" },
-  whatsapp: { width: 1200, height: 1200, label: "whatsapp" },
-  "instagram-post": { width: 1080, height: 1080, label: "instagram-post" },
-  "instagram-story": { width: 1080, height: 1920, label: "instagram-story" },
-};
 
 const state = {
   pen: new Image(),
@@ -71,7 +47,6 @@ const state = {
   dragOffsetY: 0,
 };
 
-document.body.classList.add("simple-mode");
 state.pen.crossOrigin = "anonymous";
 loadProducts();
 
@@ -152,7 +127,15 @@ function renderCategoryOptions() {
 }
 
 function renderProducts() {
-  const filtered = getFilteredProducts();
+  const term = normalizeText(productSearch.value);
+  const category = categoryFilter.value;
+  const filtered = state.products.filter((product) => {
+    const productText = normalizeText(`${product.category} ${product.name}`);
+    const matchesCategory = category === "all" || product.category === category;
+    const matchesTerm = !term || productText.includes(term);
+    const matchesColor = state.productColor === "all" || matchesProductColor(productText, state.productColor);
+    return matchesCategory && matchesTerm && matchesColor;
+  });
 
   productCount.textContent = `${filtered.length} produto${filtered.length === 1 ? "" : "s"}`;
   penGrid.innerHTML = "";
@@ -172,18 +155,6 @@ function renderProducts() {
       <span>${product.category}<br>${product.name}</span>
     `;
     penGrid.appendChild(button);
-  });
-}
-
-function getFilteredProducts() {
-  const term = normalizeText(productSearch.value);
-  const category = categoryFilter.value;
-  return state.products.filter((product) => {
-    const productText = normalizeText(`${product.category} ${product.name}`);
-    const matchesCategory = category === "all" || product.category === category;
-    const matchesTerm = !term || productText.includes(term);
-    const matchesColor = state.productColor === "all" || matchesProductColor(productText, state.productColor);
-    return matchesCategory && matchesTerm && matchesColor;
   });
 }
 
@@ -208,53 +179,7 @@ function matchesProductColor(productText, color) {
 function selectProduct(product) {
   state.selectedProduct = product;
   loadPen(product.src);
-  applyProductProfile(product);
   renderProducts();
-}
-
-function applyProductProfile(product) {
-  const profile = getSavedProfiles()[product.src] || getDefaultProfile(product);
-  state.logoX = canvas.width * profile.logoX;
-  state.logoY = canvas.height * profile.logoY;
-  state.scale = profile.scale;
-  state.rotation = profile.rotation;
-  state.blend = profile.blend;
-  state.maskTolerance = profile.maskTolerance;
-  syncControlsFromState();
-}
-
-function getDefaultProfile(product) {
-  const category = normalizeText(product?.category || "");
-  const base = { logoX: 0.5, logoY: 0.52, scale: 0.26, rotation: -9, blend: 0.34, maskTolerance: 24 };
-
-  if (category.includes("lapis")) return { ...base, logoY: 0.5, scale: 0.22, rotation: -7, blend: 0.28 };
-  if (category.includes("marcador")) return { ...base, logoY: 0.5, scale: 0.3, rotation: -5, blend: 0.22, maskTolerance: 18 };
-  if (category.includes("estojo") || category.includes("porta")) return { ...base, logoY: 0.5, scale: 0.34, rotation: 0, blend: 0.12 };
-  if (category.includes("regua")) return { ...base, logoY: 0.49, scale: 0.28, rotation: 0, blend: 0.1 };
-  if (category.includes("bambu")) return { ...base, logoY: 0.52, scale: 0.24, rotation: -6, blend: 0.2, maskTolerance: 16 };
-  return base;
-}
-
-function getSavedProfiles() {
-  try {
-    return JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)) || {};
-  } catch {
-    return {};
-  }
-}
-
-function saveCurrentProfile() {
-  if (!state.selectedProduct) return;
-  const profiles = getSavedProfiles();
-  profiles[state.selectedProduct.src] = {
-    logoX: state.logoX / canvas.width,
-    logoY: state.logoY / canvas.height,
-    scale: state.scale,
-    rotation: state.rotation,
-    blend: state.blend,
-    maskTolerance: state.maskTolerance,
-  };
-  localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profiles));
 }
 
 function normalizeText(value) {
@@ -263,71 +188,6 @@ function normalizeText(value) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
-}
-
-function syncControlsFromState() {
-  penRotationControl.value = state.penRotation;
-  maskControl.value = state.maskTolerance;
-  scaleControl.value = Math.round(state.scale * 100);
-  rotationControl.value = state.rotation;
-  opacityControl.value = Math.round(state.opacity * 100);
-  logoCutoutControl.value = state.logoCutout;
-  blendControl.value = Math.round(state.blend * 100);
-  logoColorMode.value = state.logoColorMode;
-  logoColorInput.value = state.logoColor;
-  logoColorRow.classList.toggle("is-visible", state.logoColorMode === "custom");
-  updateValueLabels();
-}
-
-function updateValueLabels() {
-  penRotationValue.textContent = `${Math.round(state.penRotation)}°`;
-  maskValue.textContent = `${Math.round(state.maskTolerance)}`;
-  scaleValue.textContent = `${Math.round(state.scale * 100)}%`;
-  rotationValue.textContent = `${Math.round(state.rotation)}°`;
-  opacityValue.textContent = `${Math.round(state.opacity * 100)}%`;
-  logoCutoutValue.textContent = `${Math.round(state.logoCutout)}`;
-  blendValue.textContent = `${Math.round(state.blend * 100)}`;
-}
-
-function centerLogo() {
-  const profile = state.selectedProduct ? getSavedProfiles()[state.selectedProduct.src] || getDefaultProfile(state.selectedProduct) : null;
-  state.logoX = canvas.width * (profile?.logoX || 0.5);
-  state.logoY = canvas.height * (profile?.logoY || 0.52);
-  draw();
-}
-
-function resetLogoAdjustments() {
-  const profile = state.selectedProduct ? getDefaultProfile(state.selectedProduct) : getDefaultProfile(null);
-  state.logoX = canvas.width * profile.logoX;
-  state.logoY = canvas.height * profile.logoY;
-  state.scale = profile.scale;
-  state.rotation = profile.rotation;
-  state.blend = profile.blend;
-  state.maskTolerance = profile.maskTolerance;
-  state.opacity = 0.92;
-  state.logoCutout = 24;
-  state.logoColorMode = "original";
-  syncControlsFromState();
-  if (state.logoOriginal) state.logo = processLogoImage(state.logoOriginal);
-  draw();
-}
-
-function applyPreset(preset) {
-  const presets = {
-    subtle: { scale: 0.22, opacity: 0.72, blend: 0.48, colorMode: "original", rotation: state.rotation },
-    white: { scale: 0.26, opacity: 0.95, blend: 0.3, colorMode: "#ffffff", rotation: state.rotation },
-    black: { scale: 0.26, opacity: 0.9, blend: 0.34, colorMode: "#111111", rotation: state.rotation },
-    gold: { scale: 0.25, opacity: 0.88, blend: 0.38, colorMode: "#c79a2b", rotation: state.rotation },
-  };
-  const next = presets[preset];
-  if (!next) return;
-  state.scale = next.scale;
-  state.opacity = next.opacity;
-  state.blend = next.blend;
-  state.logoColorMode = next.colorMode;
-  state.rotation = next.rotation;
-  syncControlsFromState();
-  draw();
 }
 
 function draw() {
@@ -426,10 +286,6 @@ function drawEngravedLogo(targetCtx, width, height, logoX, logoY) {
   targetCtx.globalAlpha = state.opacity;
   targetCtx.globalCompositeOperation = "multiply";
   targetCtx.filter = `contrast(${1 + bend * 0.55}) saturate(${1 - bend * 0.42}) brightness(${1 - bend * 0.12})`;
-  targetCtx.shadowColor = "rgba(0, 0, 0, 0.26)";
-  targetCtx.shadowBlur = 1.4 + bend * 2;
-  targetCtx.shadowOffsetX = 0.8;
-  targetCtx.shadowOffsetY = 1.2;
 
   const columns = Math.max(80, Math.ceil(width));
   const sliceWidth = temp.width / columns;
@@ -455,15 +311,6 @@ function drawEngravedLogo(targetCtx, width, height, logoX, logoY) {
     );
   }
 
-  targetCtx.restore();
-
-  targetCtx.save();
-  targetCtx.translate(logoX, logoY);
-  targetCtx.rotate(((state.rotation + state.penRotation) * Math.PI) / 180);
-  targetCtx.globalAlpha = Math.min(0.18, state.opacity * 0.22);
-  targetCtx.globalCompositeOperation = "multiply";
-  targetCtx.fillStyle = "rgba(0,0,0,0.35)";
-  targetCtx.fillRect(-width / 2, height * 0.44, width, 1.6 + bend * 2);
   targetCtx.restore();
 
   targetCtx.save();
@@ -551,122 +398,40 @@ function exportImage() {
   sceneCanvas.width = canvas.width;
   sceneCanvas.height = canvas.height;
   renderScene(sceneCanvas.getContext("2d"), false);
-  const format = EXPORT_FORMATS[exportFormat.value] || EXPORT_FORMATS.standard;
-  triggerDownload(createExportCanvas(sceneCanvas, format), buildFilename(exportFormat.value));
-  draw();
-}
-
-function createExportCanvas(sceneCanvas, format) {
 
   const finalCanvas = document.createElement("canvas");
-  finalCanvas.width = format.width;
-  finalCanvas.height = format.height;
+  finalCanvas.width = 1200;
+  finalCanvas.height = 980;
   const finalCtx = finalCanvas.getContext("2d");
-  const padding = Math.round(format.width * 0.035);
-  const headerHeight = Math.max(88, Math.round(format.height * 0.13));
-  const footerHeight = Math.max(54, Math.round(format.height * 0.07));
-  const sceneHeight = format.height - headerHeight - footerHeight;
 
   finalCtx.fillStyle = "#ffffff";
   finalCtx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-  if (brandImage.complete) {
-    const logoWidth = Math.min(format.width * 0.32, 360);
-    finalCtx.drawImage(brandImage, padding, Math.round(headerHeight * 0.28), logoWidth, logoWidth * 0.205);
-  }
+  if (brandImage.complete) finalCtx.drawImage(brandImage, 42, 34, 360, 74);
 
   finalCtx.fillStyle = "#16191f";
-  finalCtx.font = `700 ${Math.max(20, Math.round(format.width * 0.025))}px Inter, system-ui, sans-serif`;
+  finalCtx.font = "700 30px Inter, system-ui, sans-serif";
   finalCtx.textAlign = "right";
-  finalCtx.fillText("Mockup de gravação", format.width - padding, Math.round(headerHeight * 0.45));
+  finalCtx.fillText("Mockup de gravação", 1158, 62);
   finalCtx.fillStyle = "#65707f";
-  finalCtx.font = `500 ${Math.max(14, Math.round(format.width * 0.014))}px Inter, system-ui, sans-serif`;
-  finalCtx.fillText(state.selectedProduct ? `${state.selectedProduct.category} - ${state.selectedProduct.name}` : "Produto personalizado", format.width - padding, Math.round(headerHeight * 0.72));
+  finalCtx.font = "500 17px Inter, system-ui, sans-serif";
+  finalCtx.fillText(state.selectedProduct ? `${state.selectedProduct.category} - ${state.selectedProduct.name}` : "Produto personalizado", 1158, 92);
 
-  const scale = Math.min(format.width / sceneCanvas.width, sceneHeight / sceneCanvas.height);
-  const drawWidth = sceneCanvas.width * scale;
-  const drawHeight = sceneCanvas.height * scale;
-  finalCtx.drawImage(sceneCanvas, (format.width - drawWidth) / 2, headerHeight + (sceneHeight - drawHeight) / 2, drawWidth, drawHeight);
+  finalCtx.drawImage(sceneCanvas, 0, 130, 1200, 760);
 
   finalCtx.fillStyle = "#f3f6fa";
-  finalCtx.fillRect(0, format.height - footerHeight, format.width, footerHeight);
+  finalCtx.fillRect(0, 910, 1200, 70);
   finalCtx.fillStyle = "#65707f";
-  finalCtx.font = `600 ${Math.max(12, Math.round(format.width * 0.013))}px Inter, system-ui, sans-serif`;
+  finalCtx.font = "600 16px Inter, system-ui, sans-serif";
   finalCtx.textAlign = "left";
-  finalCtx.fillText("Newpen Signature | Prévia visual para aprovação de gravação", padding, format.height - Math.round(footerHeight * 0.4));
+  finalCtx.fillText("Newpen Signature | Prévia visual para aprovação de gravação", 42, 952);
   finalCtx.textAlign = "right";
-  finalCtx.fillText(new Date().toLocaleDateString("pt-BR"), format.width - padding, format.height - Math.round(footerHeight * 0.4));
+  finalCtx.fillText(new Date().toLocaleDateString("pt-BR"), 1158, 952);
 
-  return finalCanvas;
-}
-
-function triggerDownload(canvasToSave, filename) {
   const link = document.createElement("a");
-  link.download = filename;
-  link.href = canvasToSave.toDataURL("image/png");
+  link.download = "mockup-logo-caneta.png";
+  link.href = finalCanvas.toDataURL("image/png");
   link.click();
-}
-
-function buildFilename(formatKey) {
-  const format = EXPORT_FORMATS[formatKey] || EXPORT_FORMATS.standard;
-  const productName = state.selectedProduct ? `${state.selectedProduct.category}-${state.selectedProduct.name}` : "produto-personalizado";
-  return `mockup-${slugify(productName)}-${format.label}.png`;
-}
-
-function slugify(value) {
-  return normalizeText(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "mockup";
-}
-
-async function batchDownloadFilteredProducts() {
-  if (!state.logo) {
-    alert("Envie um logo antes de baixar as cores filtradas.");
-    return;
-  }
-
-  const products = getFilteredProducts().slice(0, 30);
-  if (!products.length) return;
-  const previousProduct = state.selectedProduct;
-  const format = EXPORT_FORMATS[exportFormat.value] || EXPORT_FORMATS.standard;
-
-  batchDownloadBtn.disabled = true;
-  batchDownloadBtn.textContent = `Baixando ${products.length}...`;
-
-  for (const product of products) {
-    state.selectedProduct = product;
-    await loadPenAsync(product.src);
-    applyProductProfile(product);
-    const sceneCanvas = document.createElement("canvas");
-    sceneCanvas.width = canvas.width;
-    sceneCanvas.height = canvas.height;
-    renderScene(sceneCanvas.getContext("2d"), false);
-    triggerDownload(createExportCanvas(sceneCanvas, format), buildFilename(exportFormat.value));
-    await wait(260);
-  }
-
-  if (previousProduct) {
-    state.selectedProduct = previousProduct;
-    await loadPenAsync(previousProduct.src);
-    applyProductProfile(previousProduct);
-  }
-  renderProducts();
   draw();
-  batchDownloadBtn.disabled = false;
-  batchDownloadBtn.textContent = "Baixar cores filtradas";
-}
-
-function loadPenAsync(src) {
-  return new Promise((resolve) => {
-    const image = new Image();
-    image.crossOrigin = src.startsWith("data:") || src.startsWith("blob:") ? "" : "anonymous";
-    image.onload = () => {
-      state.pen = image;
-      resolve();
-    };
-    image.src = src;
-  });
-}
-
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function canvasPoint(event) {
@@ -745,38 +510,32 @@ logoUpload.addEventListener("change", (event) => {
 
 penRotationControl.addEventListener("input", () => {
   state.penRotation = Number(penRotationControl.value);
-  updateValueLabels();
   draw();
 });
 
 maskControl.addEventListener("input", () => {
   state.maskTolerance = Number(maskControl.value);
-  updateValueLabels();
   draw();
 });
 
 scaleControl.addEventListener("input", () => {
   state.scale = Number(scaleControl.value) / 100;
-  updateValueLabels();
   draw();
 });
 
 rotationControl.addEventListener("input", () => {
   state.rotation = Number(rotationControl.value);
-  updateValueLabels();
   draw();
 });
 
 opacityControl.addEventListener("input", () => {
   state.opacity = Number(opacityControl.value) / 100;
-  updateValueLabels();
   draw();
 });
 
 logoCutoutControl.addEventListener("input", () => {
   state.logoCutout = Number(logoCutoutControl.value);
   if (state.logoOriginal) state.logo = processLogoImage(state.logoOriginal);
-  updateValueLabels();
   draw();
 });
 
@@ -793,7 +552,6 @@ logoColorInput.addEventListener("input", () => {
 
 blendControl.addEventListener("input", () => {
   state.blend = Number(blendControl.value) / 100;
-  updateValueLabels();
   draw();
 });
 
@@ -804,50 +562,6 @@ fitButtons.forEach((button) => {
     state.fit = button.dataset.fit;
     draw();
   });
-});
-
-modeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    modeButtons.forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    document.body.classList.toggle("simple-mode", button.dataset.mode === "simple");
-  });
-});
-
-presetButtons.forEach((button) => {
-  button.addEventListener("click", () => applyPreset(button.dataset.preset));
-});
-
-nudgeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const step = 8;
-    const direction = button.dataset.nudge;
-    if (direction === "up") state.logoY -= step;
-    if (direction === "down") state.logoY += step;
-    if (direction === "left") state.logoX -= step;
-    if (direction === "right") state.logoX += step;
-    draw();
-  });
-});
-
-centerLogoBtn.addEventListener("click", centerLogo);
-resetLogoBtn.addEventListener("click", resetLogoAdjustments);
-
-saveProfileBtn.addEventListener("click", () => {
-  saveCurrentProfile();
-  saveProfileBtn.textContent = "Salvo";
-  setTimeout(() => {
-    saveProfileBtn.textContent = "Salvar padrão";
-  }, 1200);
-});
-
-resetProfileBtn.addEventListener("click", () => {
-  if (!state.selectedProduct) return;
-  const profiles = getSavedProfiles();
-  delete profiles[state.selectedProduct.src];
-  localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profiles));
-  applyProductProfile(state.selectedProduct);
-  draw();
 });
 
 canvas.addEventListener("pointerdown", handlePointerDown);
@@ -866,11 +580,8 @@ canvas.addEventListener(
       state.scale = clamp(state.scale + (event.deltaY > 0 ? -0.015 : 0.015), 0.08, 0.9);
       scaleControl.value = Math.round(state.scale * 100);
     }
-    updateValueLabels();
     draw();
   },
   { passive: false },
 );
 downloadBtn.addEventListener("click", exportImage);
-batchDownloadBtn.addEventListener("click", batchDownloadFilteredProducts);
-syncControlsFromState();
