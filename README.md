@@ -21,13 +21,18 @@ Funcionalidades:
 - enviar uma foto própria da caneta;
 - enviar logo em PNG, JPG, WebP ou SVG;
 - arrastar o logo na prévia;
+- centralizar, resetar e mover o logo com botões de precisão;
 - girar a caneta;
 - ajustar tamanho, rotação 360, opacidade e efeito de gravação do logo;
+- usar presets de logo para gravação discreta, branco, preto e dourado;
 - remover automaticamente fundo branco/claro do logo enviado;
 - aplicar cor original, preta, branca, dourada, prata ou personalizada ao logo;
 - ajustar o recorte da caneta para impedir que o logo apareça fora dela;
 - manter o logo limitado ao formato visível da caneta;
-- baixar o mockup final com apresentação Newpen Signature e dados do produto.
+- salvar um padrão de posicionamento por produto no navegador;
+- alternar entre modo Cliente e Admin;
+- baixar o mockup final em alta resolução, WhatsApp, Instagram post ou story;
+- baixar até 30 produtos filtrados de uma vez com o mesmo logo.
 
 As imagens da galeria ficam em `assets/products`, e o catálogo fica em `products.json`.
 
