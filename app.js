@@ -652,6 +652,8 @@ function detectLogoColors(sourceCanvas) {
 }
 
 function renderLogoColors() {
+  if (!detectedColors || !printColors || !summaryColors || !colorWarning) return;
+
   detectedColors.innerHTML = "";
   printColors.innerHTML = "";
   const colors = state.logoColors;
@@ -766,9 +768,7 @@ function exportImage() {
   const quantity = quantityInput?.value || "250";
   const reference = internalRef?.value?.trim() || "-";
   const notes = notesInput?.value?.trim() || "-";
-  const colorsText = state.logoColors.length
-    ? state.logoColors.map((color, index) => `Cor ${index + 1}: ${color.hex.toUpperCase()}`).join(" | ")
-    : "Nenhuma cor detectada";
+  const logoColorText = getLogoColor() ? `Cor aplicada: ${getLogoColor()}` : "Cor aplicada: original do arquivo";
 
   finalCtx.fillStyle = "#ffffff";
   finalCtx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
@@ -806,7 +806,7 @@ function exportImage() {
   finalCtx.fillText("Gravação", 42, 1046);
   finalCtx.fillText("Quantidade", 42, 1090);
   finalCtx.fillText("Referência", 620, 1002);
-  finalCtx.fillText("Cores detectadas", 620, 1046);
+  finalCtx.fillText("Logo", 620, 1046);
   finalCtx.fillText("Observações", 620, 1112);
 
   finalCtx.font = "500 16px Inter, system-ui, sans-serif";
@@ -815,7 +815,7 @@ function exportImage() {
   finalCtx.fillText(engravingIncluded ? `${technique} | ${area}` : "Sem gravação", 42, 1068);
   finalCtx.fillText(`${quantity} peças`, 42, 1112);
   drawWrappedText(finalCtx, reference, 620, 1024, 500, 20);
-  drawWrappedText(finalCtx, colorsText, 620, 1068, 500, 20);
+  drawWrappedText(finalCtx, logoColorText, 620, 1068, 500, 20);
   drawWrappedText(finalCtx, notes, 620, 1134, 500, 20);
 
   finalCtx.fillStyle = "#ffffff";

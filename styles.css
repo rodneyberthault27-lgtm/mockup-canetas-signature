@@ -462,6 +462,18 @@ textarea {
   padding: 14px;
 }
 
+.instruction-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  border-left: 4px solid var(--success);
+  background: #f8fafb;
+  padding: 12px 14px;
+  color: #53636f;
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
 .quick-actions {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -473,18 +485,40 @@ textarea {
 }
 
 .quick-actions button {
-  min-height: 38px;
+  min-height: 46px;
   border: 1px solid #cfd5da;
   border-radius: 2px;
   color: #39505f;
   background: #fff;
-  font-size: 0.8rem;
+  font-size: 0.86rem;
   font-weight: 800;
 }
 
 .quick-actions button:hover {
   border-color: var(--accent);
   color: var(--accent-dark);
+}
+
+.advanced-panel {
+  margin-top: 14px;
+  border: 1px solid #dfe4e8;
+  background: #fff;
+}
+
+.advanced-panel summary {
+  min-height: 44px;
+  padding: 12px 14px;
+  color: #28495d;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.advanced-panel[open] {
+  padding-bottom: 12px;
+}
+
+.advanced-panel .range-row {
+  margin: 0 14px;
 }
 
 .orientation-grid {
