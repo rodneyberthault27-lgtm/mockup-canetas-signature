@@ -114,6 +114,22 @@ function processLogoImage(image) {
     const imageData = logoCtx.getImageData(0, 0, logoCanvas.width, logoCanvas.height);
     const data = imageData.data;
     const tolerance = state.logoCutout;
+    let visiblePixels = 0;
+    let nonWhitePixels = 0;
+
+    for (let index = 0; index < data.length; index += 4) {
+      const red = data[index];
+      const green = data[index + 1];
+      const blue = data[index + 2];
+      const alpha = data[index + 3];
+      if (alpha < 20) continue;
+
+      visiblePixels += 1;
+      const nearWhite = red > 255 - tolerance && green > 255 - tolerance && blue > 255 - tolerance;
+      if (!nearWhite) nonWhitePixels += 1;
+    }
+
+    const hasEnoughNonWhiteInk = visiblePixels > 0 && nonWhitePixels / visiblePixels > 0.08;
 
     for (let index = 0; index < data.length; index += 4) {
       const red = data[index];
@@ -121,7 +137,7 @@ function processLogoImage(image) {
       const blue = data[index + 2];
       const alpha = data[index + 3];
       const nearWhite = red > 255 - tolerance && green > 255 - tolerance && blue > 255 - tolerance;
-      if (alpha > 0 && nearWhite) data[index + 3] = 0;
+      if (hasEnoughNonWhiteInk && alpha > 0 && nearWhite) data[index + 3] = 0;
     }
 
     logoCtx.putImageData(imageData, 0, 0);
@@ -343,8 +359,10 @@ function drawEngravedLogo(targetCtx, width, height, logoX, logoY) {
   targetCtx.translate(logoX, logoY);
   targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
   targetCtx.globalAlpha = state.opacity;
-  targetCtx.globalCompositeOperation = "multiply";
-  targetCtx.filter = `contrast(${1 + bend * 0.55}) saturate(${1 - bend * 0.42}) brightness(${1 - bend * 0.12})`;
+  targetCtx.globalCompositeOperation = isLightLogo() ? "screen" : "multiply";
+  targetCtx.filter = isLightLogo()
+    ? `contrast(${1 + bend * 0.42}) saturate(${1 - bend * 0.25}) brightness(${1 + bend * 0.08})`
+    : `contrast(${1 + bend * 0.55}) saturate(${1 - bend * 0.42}) brightness(${1 - bend * 0.12})`;
 
   const columns = Math.max(80, Math.ceil(width));
   const sliceWidth = temp.width / columns;
@@ -402,6 +420,28 @@ function getLogoColor() {
   if (state.logoColorMode === "original") return null;
   if (state.logoColorMode === "custom") return state.logoColor;
   return state.logoColorMode;
+}
+
+function isLightLogo() {
+  const forcedColor = getLogoColor();
+  if (forcedColor) return getColorBrightness(forcedColor) > 188;
+  if (!state.logoColors.length) return false;
+
+  const totalWeight = state.logoColors.reduce((total, color) => total + color.count, 0) || 1;
+  const averageBrightness = state.logoColors.reduce((total, color) => {
+    return total + getColorBrightness(color.hex) * color.count;
+  }, 0) / totalWeight;
+
+  return averageBrightness > 188;
+}
+
+function getColorBrightness(hex) {
+  const normalized = hex.replace("#", "");
+  if (normalized.length !== 6) return 0;
+  const red = parseInt(normalized.slice(0, 2), 16);
+  const green = parseInt(normalized.slice(2, 4), 16);
+  const blue = parseInt(normalized.slice(4, 6), 16);
+  return (red * 299 + green * 587 + blue * 114) / 1000;
 }
 
 function createPenMask(frame) {
@@ -513,6 +553,10 @@ function detectLogoColors(sourceCanvas) {
 
   const pixels = sampleCtx.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data;
   const buckets = new Map();
+  let whiteCount = 0;
+  let whiteRed = 0;
+  let whiteGreen = 0;
+  let whiteBlue = 0;
 
   for (let index = 0; index < pixels.length; index += 4) {
     const alpha = pixels[index + 3];
@@ -522,7 +566,13 @@ function detectLogoColors(sourceCanvas) {
     const green = pixels[index + 1];
     const blue = pixels[index + 2];
     const nearWhite = red > 245 && green > 245 && blue > 245;
-    if (nearWhite) continue;
+    if (nearWhite) {
+      whiteCount += 1;
+      whiteRed += red;
+      whiteGreen += green;
+      whiteBlue += blue;
+      continue;
+    }
 
     const key = [red, green, blue].map((value) => Math.round(value / 32) * 32).join(",");
     const bucket = buckets.get(key) || { count: 0, red: 0, green: 0, blue: 0 };
@@ -533,7 +583,7 @@ function detectLogoColors(sourceCanvas) {
     buckets.set(key, bucket);
   }
 
-  return [...buckets.values()]
+  const colors = [...buckets.values()]
     .sort((a, b) => b.count - a.count)
     .slice(0, 7)
     .map((bucket) => ({
@@ -544,6 +594,19 @@ function detectLogoColors(sourceCanvas) {
       ),
       count: bucket.count,
     }));
+
+  if (whiteCount > 0 && colors.length < 7) {
+    colors.unshift({
+      hex: rgbToHex(
+        Math.round(whiteRed / whiteCount),
+        Math.round(whiteGreen / whiteCount),
+        Math.round(whiteBlue / whiteCount),
+      ),
+      count: whiteCount,
+    });
+  }
+
+  return colors.slice(0, 7);
 }
 
 function renderLogoColors() {
