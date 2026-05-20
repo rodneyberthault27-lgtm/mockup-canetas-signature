@@ -732,9 +732,7 @@ function rgbToHex(red, green, blue) {
 }
 
 function updateControlLabels() {
-  syncLogoPositionControls();
-  if (logoXValue) logoXValue.textContent = `${Math.round((state.logoX / canvas.width) * 100)}%`;
-  if (logoYValue) logoYValue.textContent = `${Math.round((state.logoY / canvas.height) * 100)}%`;
+  updateLogoPositionLabels();
   if (scaleValue) scaleValue.textContent = `${Math.round(state.scale * 100)}%`;
   if (rotationValue) rotationValue.textContent = `${Math.round(state.rotation)}°`;
   if (opacityValue) opacityValue.textContent = `${Math.round(state.opacity * 100)}%`;
@@ -754,6 +752,20 @@ function syncLogoPositionControls(updateValues = true) {
   }
   if (logoXValue) logoXValue.textContent = `${xPercent}%`;
   if (logoYValue) logoYValue.textContent = `${yPercent}%`;
+}
+
+function updateLogoPositionLabels() {
+  if (!logoXControl || !logoYControl) return;
+  if (logoXValue) logoXValue.textContent = `${logoXControl.value}%`;
+  if (logoYValue) logoYValue.textContent = `${logoYControl.value}%`;
+}
+
+function updateLogoPositionFromControls() {
+  if (!logoXControl || !logoYControl) return;
+  state.logoX = (Number(logoXControl.value) / 100) * canvas.width;
+  state.logoY = (Number(logoYControl.value) / 100) * canvas.height;
+  updateLogoPositionLabels();
+  renderScene(ctx, true);
 }
 
 function updateEngravingSummary() {
@@ -932,6 +944,7 @@ function handlePointerMove(event) {
   const point = canvasPoint(event);
   state.logoX = point.x - state.dragOffsetX;
   state.logoY = point.y - state.dragOffsetY;
+  syncLogoPositionControls();
   draw();
 }
 
@@ -1059,14 +1072,15 @@ blendControl.addEventListener("input", () => {
 });
 
 logoXControl?.addEventListener("input", () => {
-  state.logoX = (Number(logoXControl.value) / 100) * canvas.width;
-  draw();
+  updateLogoPositionFromControls();
 });
 
 logoYControl?.addEventListener("input", () => {
-  state.logoY = (Number(logoYControl.value) / 100) * canvas.height;
-  draw();
+  updateLogoPositionFromControls();
 });
+
+logoXControl?.addEventListener("change", updateLogoPositionFromControls);
+logoYControl?.addEventListener("change", updateLogoPositionFromControls);
 
 logoActionButtons.forEach((button) => {
   button.addEventListener("click", () => {

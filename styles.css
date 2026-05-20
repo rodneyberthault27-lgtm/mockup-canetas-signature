@@ -344,14 +344,22 @@ textarea {
   line-height: 1.2;
 }
 
+.logo-upload-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
 .upload-zone {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  min-height: 150px;
-  border: 1px dashed #c7cdd2;
-  padding: 14px;
+  min-height: 190px;
+  border: 2px dashed rgba(12, 131, 185, 0.48);
+  border-radius: 4px;
+  padding: 18px;
   background:
     linear-gradient(45deg, #e7eaed 25%, transparent 25%),
     linear-gradient(-45deg, #e7eaed 25%, transparent 25%),
@@ -367,7 +375,8 @@ textarea {
 }
 
 .upload-zone span {
-  font-size: 0.86rem;
+  color: #213746;
+  font-size: 1rem;
   font-weight: 850;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -379,11 +388,12 @@ textarea {
   align-self: end;
   justify-self: end;
   width: max-content;
-  border-radius: 3px;
-  padding: 12px 20px;
+  border-radius: 4px;
+  padding: 15px 22px;
   color: #fff;
-  background: var(--accent);
-  font-size: 0.8rem;
+  background: linear-gradient(135deg, #0c83b9, #0f7a6c);
+  box-shadow: 0 12px 24px rgba(12, 131, 185, 0.24);
+  font-size: 0.9rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -540,18 +550,30 @@ textarea {
   color: var(--accent-dark);
 }
 
+.logo-color-card {
+  border: 1px solid #dfe4e8;
+  border-radius: 4px;
+  background: #f8fafb;
+  padding: 16px;
+}
+
+.logo-color-card p {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
 .logo-color-strip {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 8px;
-  margin-top: 14px;
 }
 
 .logo-color-strip button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 38px;
+  min-height: 40px;
   border: 1px solid #cfd5da;
   border-radius: 2px;
   padding: 0 12px;
@@ -826,6 +848,7 @@ input[type="range"] {
 
   .stepper,
   .product-tools,
+  .logo-upload-layout,
   .color-mapper,
   .orientation-grid,
   .quick-actions,

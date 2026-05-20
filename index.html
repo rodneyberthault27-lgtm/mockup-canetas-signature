@@ -97,19 +97,25 @@
           <section class="panel-section">
             <h2>3. Envie seu logo</h2>
             <p class="hint">Ao enviar, o logo aparece aqui e entra automaticamente na caneta.</p>
-            <label id="logoUploadZone" class="upload-zone logo-upload-zone">
-              <span id="logoUploadTitle">Enviar logo</span>
-              <img id="logoPreviewImage" class="logo-preview-image" alt="Prévia do logo enviado" />
-              <small id="logoUploadHint">PNG transparente costuma dar o melhor resultado.</small>
-              <strong>Upload</strong>
-              <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
-            </label>
-            <div class="logo-color-strip" aria-label="Escolher cor do logo">
-              <button type="button" data-logo-color="original" class="is-active">Original</button>
-              <button type="button" data-logo-color="#111111" style="--chip: #111111">Preto</button>
-              <button type="button" data-logo-color="#ffffff" style="--chip: #ffffff">Branco</button>
-              <button type="button" data-logo-color="#c79a2b" style="--chip: #c79a2b">Dourado</button>
-              <button type="button" data-logo-color="#9aa3ad" style="--chip: #9aa3ad">Prata</button>
+            <div class="logo-upload-layout">
+              <label id="logoUploadZone" class="upload-zone logo-upload-zone">
+                <span id="logoUploadTitle">Enviar logo agora</span>
+                <img id="logoPreviewImage" class="logo-preview-image" alt="Prévia do logo enviado" />
+                <small id="logoUploadHint">Clique no botão para ver sua marca aplicada na caneta.</small>
+                <strong>Escolher arquivo</strong>
+                <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
+              </label>
+              <div class="logo-color-card">
+                <h3>Cor do logo</h3>
+                <p>Troque a cor e veja o contraste na hora.</p>
+                <div class="logo-color-strip" aria-label="Escolher cor do logo">
+                  <button type="button" data-logo-color="original" class="is-active">Original</button>
+                  <button type="button" data-logo-color="#111111" style="--chip: #111111">Preto</button>
+                  <button type="button" data-logo-color="#ffffff" style="--chip: #ffffff">Branco</button>
+                  <button type="button" data-logo-color="#c79a2b" style="--chip: #c79a2b">Dourado</button>
+                  <button type="button" data-logo-color="#9aa3ad" style="--chip: #9aa3ad">Prata</button>
+                </div>
+              </div>
             </div>
             <p class="trust-note">Dica: escolha uma cor com alto contraste para a aprovação ficar mais convincente.</p>
           </section>
@@ -126,12 +132,12 @@
             <div class="sub-panel">
               <h3>Posição e encaixe</h3>
               <label class="range-row">
-                <span>Posição horizontal</span>
+                <span>Esquerda / direita</span>
                 <input id="logoXControl" type="range" min="0" max="100" value="50" />
                 <output id="logoXValue">50%</output>
               </label>
               <label class="range-row">
-                <span>Posição vertical</span>
+                <span>Subir / descer</span>
                 <input id="logoYControl" type="range" min="0" max="100" value="50" />
                 <output id="logoYValue">50%</output>
               </label>
