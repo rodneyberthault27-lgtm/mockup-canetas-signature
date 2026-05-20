@@ -755,8 +755,20 @@ function exportImage() {
 
   const finalCanvas = document.createElement("canvas");
   finalCanvas.width = 1200;
-  finalCanvas.height = 980;
+  finalCanvas.height = 1260;
   const finalCtx = finalCanvas.getContext("2d");
+  const productLabel = state.selectedProduct
+    ? `${state.selectedProduct.category} - ${state.selectedProduct.name}`
+    : "Produto personalizado";
+  const engravingIncluded = engravingEnabled?.checked ?? true;
+  const technique = engravingTechnique?.value || "Serigrafia";
+  const area = engravingArea?.value || "50mm x 20mm";
+  const quantity = quantityInput?.value || "250";
+  const reference = internalRef?.value?.trim() || "-";
+  const notes = notesInput?.value?.trim() || "-";
+  const colorsText = state.logoColors.length
+    ? state.logoColors.map((color, index) => `Cor ${index + 1}: ${color.hex.toUpperCase()}`).join(" | ")
+    : "Nenhuma cor detectada";
 
   finalCtx.fillStyle = "#ffffff";
   finalCtx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
@@ -768,12 +780,12 @@ function exportImage() {
   finalCtx.fillText("Mockup de gravação", 1158, 62);
   finalCtx.fillStyle = "#65707f";
   finalCtx.font = "500 17px Inter, system-ui, sans-serif";
-  finalCtx.fillText(state.selectedProduct ? `${state.selectedProduct.category} - ${state.selectedProduct.name}` : "Produto personalizado", 1158, 92);
+  finalCtx.fillText(productLabel, 1158, 92);
 
   finalCtx.drawImage(sceneCanvas, 0, 130, 1200, 760);
 
   finalCtx.fillStyle = "#f3f6fa";
-  finalCtx.fillRect(0, 910, 1200, 70);
+  finalCtx.fillRect(0, 910, 1200, 310);
   finalCtx.fillStyle = "#65707f";
   finalCtx.font = "600 16px Inter, system-ui, sans-serif";
   finalCtx.textAlign = "left";
@@ -781,11 +793,64 @@ function exportImage() {
   finalCtx.textAlign = "right";
   finalCtx.fillText(new Date().toLocaleDateString("pt-BR"), 1158, 952);
 
+  finalCtx.fillStyle = "#f3f6fa";
+  finalCtx.fillRect(0, 910, 1200, 310);
+  finalCtx.fillStyle = "#213746";
+  finalCtx.font = "800 24px Inter, system-ui, sans-serif";
+  finalCtx.textAlign = "left";
+  finalCtx.fillText("Ficha da gravação", 42, 956);
+
+  finalCtx.font = "700 15px Inter, system-ui, sans-serif";
+  finalCtx.fillStyle = "#213746";
+  finalCtx.fillText("Produto", 42, 1002);
+  finalCtx.fillText("Gravação", 42, 1046);
+  finalCtx.fillText("Quantidade", 42, 1090);
+  finalCtx.fillText("Referência", 620, 1002);
+  finalCtx.fillText("Cores detectadas", 620, 1046);
+  finalCtx.fillText("Observações", 620, 1112);
+
+  finalCtx.font = "500 16px Inter, system-ui, sans-serif";
+  finalCtx.fillStyle = "#53636f";
+  drawWrappedText(finalCtx, productLabel, 42, 1024, 500, 20);
+  finalCtx.fillText(engravingIncluded ? `${technique} | ${area}` : "Sem gravação", 42, 1068);
+  finalCtx.fillText(`${quantity} peças`, 42, 1112);
+  drawWrappedText(finalCtx, reference, 620, 1024, 500, 20);
+  drawWrappedText(finalCtx, colorsText, 620, 1068, 500, 20);
+  drawWrappedText(finalCtx, notes, 620, 1134, 500, 20);
+
+  finalCtx.fillStyle = "#ffffff";
+  finalCtx.fillRect(0, 1220, 1200, 40);
+  finalCtx.fillStyle = "#65707f";
+  finalCtx.font = "600 14px Inter, system-ui, sans-serif";
+  finalCtx.fillText("Newpen Signature | Prévia visual para aprovação", 42, 1246);
+  finalCtx.textAlign = "right";
+  finalCtx.fillText(new Date().toLocaleDateString("pt-BR"), 1158, 1246);
+
   const link = document.createElement("a");
   link.download = "mockup-logo-caneta.png";
   link.href = finalCanvas.toDataURL("image/png");
   link.click();
   draw();
+}
+
+function drawWrappedText(targetCtx, text, x, y, maxWidth, lineHeight) {
+  const words = `${text}`.split(/\s+/);
+  let line = "";
+  let currentY = y;
+
+  words.forEach((word) => {
+    const testLine = line ? `${line} ${word}` : word;
+    if (targetCtx.measureText(testLine).width > maxWidth && line) {
+      targetCtx.fillText(line, x, currentY);
+      line = word;
+      currentY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  });
+
+  if (line) targetCtx.fillText(line, x, currentY);
+  return currentY;
 }
 
 function canvasPoint(event) {
