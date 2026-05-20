@@ -11,9 +11,9 @@
       <header class="app-header">
         <img class="brand-logo" src="./assets/newpen-signature.png" alt="Newpen Signature" />
         <div class="stepper" aria-label="Etapas">
-          <span class="is-done">1 - Escolha a caneta</span>
-          <span class="is-active">2 - Ajuste o logo</span>
-          <span>3 - Baixe a ficha</span>
+          <span class="is-done">1 - Caneta</span>
+          <span class="is-active">2 - Logo</span>
+          <span>3 - Ficha</span>
         </div>
       </header>
 
@@ -23,7 +23,7 @@
             <canvas id="mockupCanvas" width="1200" height="760" aria-label="Prévia do mockup"></canvas>
             <div id="emptyState" class="empty-state">
               <strong>Envie um logo</strong>
-              <span>Depois use os botões do painel ou arraste sobre a caneta.</span>
+              <span>Ele entrará automaticamente no centro da caneta.</span>
             </div>
           </div>
 
@@ -31,7 +31,7 @@
             <p class="eyebrow">Cor selecionada</p>
             <span id="selectedColorSwatch" class="selected-swatch"></span>
             <h1 id="selectedProductTitle">Logo em canetas</h1>
-            <p id="selectedProductDescription">Escolha uma caneta, envie o logo e ajuste a personalização.</p>
+            <p id="selectedProductDescription">Escolha uma caneta, envie o logo e baixe a ficha técnica.</p>
           </div>
         </aside>
 
@@ -42,8 +42,8 @@
           </div>
 
           <section class="panel-section">
-            <h2>1. Escolha a caneta</h2>
-            <p class="hint">Busque pelo nome, linha ou cor. Clique em uma miniatura para trocar a caneta da prévia.</p>
+            <h2>1. Escolha sua caneta</h2>
+            <p class="hint">Busque pelo nome, linha ou cor. Clique em uma miniatura para trocar a caneta.</p>
             <div class="product-tools">
               <input id="productSearch" type="search" placeholder="Buscar produto ou cor" aria-label="Buscar produto ou cor" />
               <select id="categoryFilter" aria-label="Filtrar linha">
@@ -71,18 +71,46 @@
           </section>
 
           <section class="panel-section">
-            <h2>2. Envie e ajuste o logo</h2>
-            <p class="hint">Para a maioria dos casos, basta enviar o logo, centralizar e ajustar o tamanho.</p>
+            <h2>2. Ajuste da caneta</h2>
+            <p class="hint">A caneta fica sempre na horizontal. Use apenas se precisar inclinar pouco ou melhorar o recorte.</p>
+            <label class="file-drop">
+              <span>Usar foto própria da caneta</span>
+              <input id="penUpload" type="file" accept="image/*" />
+            </label>
+            <div class="status-strip">Posição padrão: horizontal</div>
+            <label class="range-row">
+              <span>Inclinação leve</span>
+              <input id="penRotationControl" type="range" min="-12" max="12" value="0" />
+              <output id="penRotationValue">0°</output>
+            </label>
+            <label class="range-row">
+              <span>Recorte caneta</span>
+              <input id="maskControl" type="range" min="0" max="80" value="24" />
+              <output id="maskValue">24</output>
+            </label>
+            <div class="segmented">
+              <button type="button" data-fit="cover">Preencher</button>
+              <button class="is-active" type="button" data-fit="contain">Inteira</button>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <h2>3. Envie seu logo</h2>
+            <p class="hint">Ao enviar, o logo será colocado automaticamente no centro da caneta.</p>
             <label class="upload-zone">
               <span>Enviar logo</span>
               <strong>Upload</strong>
               <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
             </label>
+          </section>
 
+          <section class="panel-section">
+            <h2>4. Ajuste seu logo</h2>
+            <p class="hint">Use os botões grandes. Se quiser, também pode arrastar o logo direto na caneta.</p>
             <div class="instruction-list">
-              <span>1. Clique em Upload e escolha o logo.</span>
-              <span>2. Use os botões de posição ou arraste o logo na caneta.</span>
-              <span>3. Ajuste tamanho, rotação e cor somente se precisar.</span>
+              <span>1. Centralizar resolve a maioria dos casos.</span>
+              <span>2. Aumentar e diminuir ajustam o tamanho sem mexer no resto.</span>
+              <span>3. Os ajustes finos ficam recolhidos para uso avançado.</span>
             </div>
 
             <div class="sub-panel">
@@ -116,8 +144,8 @@
               </label>
               <label class="range-row">
                 <span>Rotação logo</span>
-                <input id="rotationControl" type="range" min="-360" max="360" value="-9" />
-                <output id="rotationValue">-9°</output>
+                <input id="rotationControl" type="range" min="-360" max="360" value="-90" />
+                <output id="rotationValue">-90°</output>
               </label>
               <label class="range-row">
                 <span>Opacidade</span>
@@ -153,36 +181,7 @@
           </section>
 
           <section class="panel-section">
-            <h2>3. Ajustes da caneta</h2>
-            <p class="hint">Use somente se a foto da caneta precisar girar, ficar inteira ou trocar o recorte do logo.</p>
-            <label class="file-drop">
-              <span>Usar foto própria da caneta</span>
-              <input id="penUpload" type="file" accept="image/*" />
-            </label>
-            <div class="orientation-grid" aria-label="Orientação da caneta">
-              <button class="is-active" type="button" data-orientation="0">Vertical</button>
-              <button type="button" data-orientation="90">Horizontal</button>
-              <button type="button" data-orientation="180">Vertical 2</button>
-              <button type="button" data-orientation="270">Horizontal 2</button>
-            </div>
-            <label class="range-row">
-              <span>Ajuste fino</span>
-              <input id="penRotationControl" type="range" min="-12" max="12" value="0" />
-              <output id="penRotationValue">0°</output>
-            </label>
-            <label class="range-row">
-              <span>Recorte caneta</span>
-              <input id="maskControl" type="range" min="0" max="80" value="24" />
-              <output id="maskValue">24</output>
-            </label>
-            <div class="segmented">
-              <button type="button" data-fit="cover">Preencher</button>
-              <button class="is-active" type="button" data-fit="contain">Inteira</button>
-            </div>
-          </section>
-
-          <section class="panel-section">
-            <h2>4. Dados para a ficha</h2>
+            <h2>5. Dados da ficha técnica</h2>
             <p class="hint">Essas informações vão junto na imagem baixada para facilitar aprovação e conferência.</p>
             <label class="check-card">
               <input id="engravingEnabled" type="checkbox" checked />
@@ -197,13 +196,8 @@
                 <input id="quantityInput" type="number" min="1" value="250" />
               </label>
               <label>
-                <span>Técnica</span>
-                <select id="engravingTechnique">
-                  <option value="Serigrafia">Serigrafia</option>
-                  <option value="Digital">Digital</option>
-                  <option value="Laser">Laser</option>
-                  <option value="Transfer">Transfer</option>
-                </select>
+                <span>Nome do cliente</span>
+                <input id="clientNameInput" type="text" placeholder="Ex.: Empresa ABC" />
               </label>
               <label>
                 <span>Área sugerida</span>
@@ -211,9 +205,27 @@
               </label>
               <label>
                 <span>Referência interna</span>
-                <input id="internalRef" type="text" placeholder="Ex.: Cliente / campanha" />
+                <input id="internalRef" type="text" placeholder="Ex.: campanha, pedido ou vendedor" />
               </label>
             </div>
+
+            <div class="choice-group">
+              <h3>É para evento?</h3>
+              <label><input id="eventYes" type="checkbox" /> Sim, é para evento</label>
+            </div>
+
+            <div class="choice-group">
+              <h3>Técnicas desejadas</h3>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" name="technique" value="Serigrafia" checked /> Serigrafia</label>
+                <label><input type="checkbox" name="technique" value="Digital" /> Digital</label>
+                <label><input type="checkbox" name="technique" value="Laser" /> Laser</label>
+                <label><input type="checkbox" name="technique" value="Transfer" /> Transfer</label>
+                <label><input type="checkbox" name="technique" value="Emborrachado" /> Emborrachado</label>
+                <label><input type="checkbox" name="technique" value="Pantone especial" /> Pantone especial</label>
+              </div>
+            </div>
+
             <label class="notes-field">
               <span>Observações</span>
               <textarea id="notesInput" rows="4" placeholder="Ex.: logo centralizado no corpo, gravação em branco, aprovar antes de produzir"></textarea>

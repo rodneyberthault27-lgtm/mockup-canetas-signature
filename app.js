@@ -41,10 +41,12 @@ const penRotationValue = document.querySelector("#penRotationValue");
 const maskValue = document.querySelector("#maskValue");
 const engravingEnabled = document.querySelector("#engravingEnabled");
 const quantityInput = document.querySelector("#quantityInput");
-const engravingTechnique = document.querySelector("#engravingTechnique");
 const engravingArea = document.querySelector("#engravingArea");
+const clientNameInput = document.querySelector("#clientNameInput");
 const internalRef = document.querySelector("#internalRef");
+const eventYes = document.querySelector("#eventYes");
 const notesInput = document.querySelector("#notesInput");
+const techniqueCheckboxes = document.querySelectorAll('input[name="technique"]');
 const brandImage = new Image();
 brandImage.src = "./assets/newpen-signature.png";
 
@@ -57,7 +59,7 @@ const state = {
   selectedProduct: null,
   productColor: "all",
   fit: "contain",
-  penOrientation: 0,
+  penOrientation: 90,
   penTilt: Number(penRotationControl.value),
   maskTolerance: Number(maskControl.value),
   logoX: canvas.width * 0.5,
@@ -113,12 +115,24 @@ function loadLogo(src) {
     state.logo = processLogoImage(image);
     state.logoColors = detectLogoColors(state.logo);
     renderLogoColors();
-    state.logoX = canvas.width * 0.5;
-    state.logoY = canvas.height * 0.52;
+    autoPlaceLogo();
     emptyState.classList.add("is-hidden");
     draw();
   };
   image.src = src;
+}
+
+function autoPlaceLogo() {
+  state.logoX = canvas.width * 0.5;
+  state.logoY = canvas.height * 0.5;
+  state.scale = 0.24;
+  state.rotation = -getPenRotation();
+  state.opacity = 0.92;
+  state.blend = 0.34;
+  scaleControl.value = Math.round(state.scale * 100);
+  rotationControl.value = Math.round(state.rotation);
+  opacityControl.value = Math.round(state.opacity * 100);
+  blendControl.value = Math.round(state.blend * 100);
 }
 
 function processLogoImage(image) {
@@ -244,7 +258,7 @@ function updateProductDetails(product) {
 }
 
 function updateEngravingDefaults(product) {
-  if (!engravingArea || !engravingTechnique) return;
+  if (!engravingArea) return;
   const text = normalizeText(`${product.category} ${product.name}`);
 
   if (text.includes("clic")) {
@@ -253,15 +267,20 @@ function updateEngravingDefaults(product) {
     engravingArea.value = "45mm x 20mm";
   } else if (text.includes("metal") || text.includes("chromo") || text.includes("galaxy")) {
     engravingArea.value = "50mm x 20mm";
-    engravingTechnique.value = "Digital";
+    setTechniqueChecked("Digital", true);
   } else if (text.includes("lapis")) {
     engravingArea.value = "50mm x 20mm";
-    engravingTechnique.value = "Transfer";
+    setTechniqueChecked("Transfer", true);
   } else {
     engravingArea.value = "50mm x 20mm";
   }
 
   updateEngravingSummary();
+}
+
+function setTechniqueChecked(value, checked) {
+  const checkbox = [...techniqueCheckboxes].find((item) => item.value === value);
+  if (checkbox) checkbox.checked = checked;
 }
 
 function getProductColorHex(product) {
@@ -706,13 +725,20 @@ function updateControlLabels() {
 function updateEngravingSummary() {
   if (!summaryCustomization || !summaryEngraving) return;
 
-  const technique = engravingTechnique?.value || "Serigrafia";
+  const technique = getSelectedTechniques();
   const area = engravingArea?.value || "50mm x 20mm";
   const quantity = quantityInput?.value || "250";
   const enabled = engravingEnabled?.checked ?? true;
+  const client = clientNameInput?.value?.trim();
+  const eventText = eventYes?.checked ? " | Evento" : "";
 
   summaryCustomization.textContent = `Corpo | ${technique} | ${area}`;
-  summaryEngraving.textContent = enabled ? `Incluída | ${quantity} peças` : "Sem gravação";
+  summaryEngraving.textContent = enabled ? `Incluída | ${quantity} peças${client ? ` | ${client}` : ""}${eventText}` : "Sem gravação";
+}
+
+function getSelectedTechniques() {
+  const selected = [...techniqueCheckboxes].filter((item) => item.checked).map((item) => item.value);
+  return selected.length ? selected.join(", ") : "Não informado";
 }
 
 function handleLogoAction(action) {
@@ -734,12 +760,7 @@ function handleLogoAction(action) {
   if (action === "rotate-left") state.rotation = clamp(state.rotation - 5, -360, 360);
   if (action === "rotate-right") state.rotation = clamp(state.rotation + 5, -360, 360);
   if (action === "reset") {
-    state.logoX = canvas.width * 0.5;
-    state.logoY = canvas.height * 0.52;
-    state.scale = 0.26;
-    state.rotation = -9;
-    state.opacity = 0.92;
-    state.blend = 0.34;
+    autoPlaceLogo();
   }
 
   scaleControl.value = Math.round(state.scale * 100);
@@ -763,10 +784,12 @@ function exportImage() {
     ? `${state.selectedProduct.category} - ${state.selectedProduct.name}`
     : "Produto personalizado";
   const engravingIncluded = engravingEnabled?.checked ?? true;
-  const technique = engravingTechnique?.value || "Serigrafia";
+  const technique = getSelectedTechniques();
   const area = engravingArea?.value || "50mm x 20mm";
   const quantity = quantityInput?.value || "250";
+  const client = clientNameInput?.value?.trim() || "-";
   const reference = internalRef?.value?.trim() || "-";
+  const eventText = eventYes?.checked ? "Sim" : "Não";
   const notes = notesInput?.value?.trim() || "-";
   const logoColorText = getLogoColor() ? `Cor aplicada: ${getLogoColor()}` : "Cor aplicada: original do arquivo";
 
@@ -805,8 +828,8 @@ function exportImage() {
   finalCtx.fillText("Produto", 42, 1002);
   finalCtx.fillText("Gravação", 42, 1046);
   finalCtx.fillText("Quantidade", 42, 1090);
-  finalCtx.fillText("Referência", 620, 1002);
-  finalCtx.fillText("Logo", 620, 1046);
+  finalCtx.fillText("Cliente", 620, 1002);
+  finalCtx.fillText("Referência / Evento", 620, 1046);
   finalCtx.fillText("Observações", 620, 1112);
 
   finalCtx.font = "500 16px Inter, system-ui, sans-serif";
@@ -814,8 +837,8 @@ function exportImage() {
   drawWrappedText(finalCtx, productLabel, 42, 1024, 500, 20);
   finalCtx.fillText(engravingIncluded ? `${technique} | ${area}` : "Sem gravação", 42, 1068);
   finalCtx.fillText(`${quantity} peças`, 42, 1112);
-  drawWrappedText(finalCtx, reference, 620, 1024, 500, 20);
-  drawWrappedText(finalCtx, logoColorText, 620, 1068, 500, 20);
+  drawWrappedText(finalCtx, client, 620, 1024, 500, 20);
+  drawWrappedText(finalCtx, `${reference} | Evento: ${eventText} | ${logoColorText}`, 620, 1068, 500, 20);
   drawWrappedText(finalCtx, notes, 620, 1134, 500, 20);
 
   finalCtx.fillStyle = "#ffffff";
@@ -934,6 +957,10 @@ logoUpload.addEventListener("change", (event) => {
 
 penRotationControl.addEventListener("input", () => {
   state.penTilt = Number(penRotationControl.value);
+  if (state.logo) {
+    state.rotation = -getPenRotation();
+    rotationControl.value = Math.round(state.rotation);
+  }
   draw();
 });
 
@@ -942,6 +969,10 @@ orientationButtons.forEach((button) => {
     orientationButtons.forEach((item) => item.classList.remove("is-active"));
     button.classList.add("is-active");
     state.penOrientation = Number(button.dataset.orientation);
+    if (state.logo) {
+      state.rotation = -getPenRotation();
+      rotationControl.value = Math.round(state.rotation);
+    }
     draw();
   });
 });
@@ -998,9 +1029,13 @@ logoActionButtons.forEach((button) => {
   });
 });
 
-[engravingEnabled, quantityInput, engravingTechnique, engravingArea, internalRef, notesInput].forEach((field) => {
+[engravingEnabled, quantityInput, engravingArea, clientNameInput, internalRef, eventYes, notesInput].forEach((field) => {
   field?.addEventListener("input", updateEngravingSummary);
   field?.addEventListener("change", updateEngravingSummary);
+});
+
+techniqueCheckboxes.forEach((field) => {
+  field.addEventListener("change", updateEngravingSummary);
 });
 
 fitButtons.forEach((button) => {
