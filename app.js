@@ -29,6 +29,22 @@ const printColors = document.querySelector("#printColors");
 const colorWarning = document.querySelector("#colorWarning");
 const summaryProduct = document.querySelector("#summaryProduct");
 const summaryColors = document.querySelector("#summaryColors");
+const summaryCustomization = document.querySelector("#summaryCustomization");
+const summaryEngraving = document.querySelector("#summaryEngraving");
+const logoActionButtons = document.querySelectorAll("[data-logo-action]");
+const scaleValue = document.querySelector("#scaleValue");
+const rotationValue = document.querySelector("#rotationValue");
+const opacityValue = document.querySelector("#opacityValue");
+const logoCutoutValue = document.querySelector("#logoCutoutValue");
+const blendValue = document.querySelector("#blendValue");
+const penRotationValue = document.querySelector("#penRotationValue");
+const maskValue = document.querySelector("#maskValue");
+const engravingEnabled = document.querySelector("#engravingEnabled");
+const quantityInput = document.querySelector("#quantityInput");
+const engravingTechnique = document.querySelector("#engravingTechnique");
+const engravingArea = document.querySelector("#engravingArea");
+const internalRef = document.querySelector("#internalRef");
+const notesInput = document.querySelector("#notesInput");
 const brandImage = new Image();
 brandImage.src = "./assets/newpen-signature.png";
 
@@ -60,6 +76,8 @@ const state = {
 };
 
 state.pen.crossOrigin = "anonymous";
+updateControlLabels();
+updateEngravingSummary();
 loadProducts();
 
 async function loadProducts() {
@@ -211,6 +229,7 @@ function selectProduct(product) {
   state.selectedProduct = product;
   loadPen(product.src);
   updateProductDetails(product);
+  updateEngravingDefaults(product);
   renderProducts();
 }
 
@@ -222,6 +241,27 @@ function updateProductDetails(product) {
     "Caneta selecionada para simulacao visual. Envie o logo, ajuste a posicao e baixe a previa para aprovacao.";
   selectedColorSwatch.style.background = colorHex;
   summaryProduct.textContent = productLabel;
+}
+
+function updateEngravingDefaults(product) {
+  if (!engravingArea || !engravingTechnique) return;
+  const text = normalizeText(`${product.category} ${product.name}`);
+
+  if (text.includes("clic")) {
+    engravingArea.value = "35mm x 08mm";
+  } else if (text.includes("newpop")) {
+    engravingArea.value = "45mm x 20mm";
+  } else if (text.includes("metal") || text.includes("chromo") || text.includes("galaxy")) {
+    engravingArea.value = "50mm x 20mm";
+    engravingTechnique.value = "Digital";
+  } else if (text.includes("lapis")) {
+    engravingArea.value = "50mm x 20mm";
+    engravingTechnique.value = "Transfer";
+  } else {
+    engravingArea.value = "50mm x 20mm";
+  }
+
+  updateEngravingSummary();
 }
 
 function getProductColorHex(product) {
@@ -259,6 +299,8 @@ function normalizeText(value) {
 
 function draw() {
   renderScene(ctx, true);
+  updateControlLabels();
+  updateEngravingSummary();
 }
 
 function renderScene(targetCtx, includeSelection) {
@@ -649,6 +691,62 @@ function rgbToHex(red, green, blue) {
   return `#${[red, green, blue].map((value) => value.toString(16).padStart(2, "0")).join("")}`;
 }
 
+function updateControlLabels() {
+  if (scaleValue) scaleValue.textContent = `${Math.round(state.scale * 100)}%`;
+  if (rotationValue) rotationValue.textContent = `${Math.round(state.rotation)}°`;
+  if (opacityValue) opacityValue.textContent = `${Math.round(state.opacity * 100)}%`;
+  if (logoCutoutValue) logoCutoutValue.textContent = `${state.logoCutout}`;
+  if (blendValue) blendValue.textContent = `${Math.round(state.blend * 100)}%`;
+  if (penRotationValue) penRotationValue.textContent = `${state.penTilt}°`;
+  if (maskValue) maskValue.textContent = `${state.maskTolerance}`;
+}
+
+function updateEngravingSummary() {
+  if (!summaryCustomization || !summaryEngraving) return;
+
+  const technique = engravingTechnique?.value || "Serigrafia";
+  const area = engravingArea?.value || "50mm x 20mm";
+  const quantity = quantityInput?.value || "250";
+  const enabled = engravingEnabled?.checked ?? true;
+
+  summaryCustomization.textContent = `Corpo | ${technique} | ${area}`;
+  summaryEngraving.textContent = enabled ? `Incluída | ${quantity} peças` : "Sem gravação";
+}
+
+function handleLogoAction(action) {
+  if (!state.logo && action !== "center" && action !== "reset") return;
+
+  const moveStep = 22;
+  const scaleStep = 0.035;
+
+  if (action === "up") state.logoY -= moveStep;
+  if (action === "down") state.logoY += moveStep;
+  if (action === "left") state.logoX -= moveStep;
+  if (action === "right") state.logoX += moveStep;
+  if (action === "center") {
+    state.logoX = canvas.width * 0.5;
+    state.logoY = canvas.height * 0.52;
+  }
+  if (action === "smaller") state.scale = clamp(state.scale - scaleStep, 0.08, 0.9);
+  if (action === "bigger") state.scale = clamp(state.scale + scaleStep, 0.08, 0.9);
+  if (action === "rotate-left") state.rotation = clamp(state.rotation - 5, -360, 360);
+  if (action === "rotate-right") state.rotation = clamp(state.rotation + 5, -360, 360);
+  if (action === "reset") {
+    state.logoX = canvas.width * 0.5;
+    state.logoY = canvas.height * 0.52;
+    state.scale = 0.26;
+    state.rotation = -9;
+    state.opacity = 0.92;
+    state.blend = 0.34;
+  }
+
+  scaleControl.value = Math.round(state.scale * 100);
+  rotationControl.value = Math.round(state.rotation);
+  opacityControl.value = Math.round(state.opacity * 100);
+  blendControl.value = Math.round(state.blend * 100);
+  draw();
+}
+
 function exportImage() {
   const sceneCanvas = document.createElement("canvas");
   sceneCanvas.width = canvas.width;
@@ -747,6 +845,8 @@ penUpload.addEventListener("change", (event) => {
     selectedProductTitle.textContent = "Caneta personalizada";
     selectedProductDescription.textContent = "Foto propria enviada para simulacao.";
     summaryProduct.textContent = "Caneta personalizada";
+    engravingArea.value = "50mm x 20mm";
+    updateEngravingSummary();
     loadPen(src);
   });
 });
@@ -825,6 +925,17 @@ logoColorInput.addEventListener("input", () => {
 blendControl.addEventListener("input", () => {
   state.blend = Number(blendControl.value) / 100;
   draw();
+});
+
+logoActionButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    handleLogoAction(button.dataset.logoAction);
+  });
+});
+
+[engravingEnabled, quantityInput, engravingTechnique, engravingArea, internalRef, notesInput].forEach((field) => {
+  field?.addEventListener("input", updateEngravingSummary);
+  field?.addEventListener("change", updateEngravingSummary);
 });
 
 fitButtons.forEach((button) => {

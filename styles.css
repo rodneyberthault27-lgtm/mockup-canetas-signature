@@ -24,7 +24,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -243,8 +244,11 @@ h3 {
 }
 
 input[type="search"],
+input[type="number"],
+input[type="text"],
 select,
-input[type="color"] {
+input[type="color"],
+textarea {
   width: 100%;
   min-height: 40px;
   border: 1px solid #cfd5da;
@@ -252,6 +256,12 @@ input[type="color"] {
   padding: 0 12px;
   color: var(--ink);
   background: #fff;
+}
+
+textarea {
+  min-height: 92px;
+  padding: 12px;
+  resize: vertical;
 }
 
 .color-filter {
@@ -386,6 +396,7 @@ input[type="color"] {
 .file-drop {
   display: inline-flex;
   margin-top: 10px;
+  margin-bottom: 14px;
   border: 1px solid var(--line);
   padding: 10px 12px;
   background: #fff;
@@ -443,6 +454,39 @@ input[type="color"] {
   min-height: 34px;
 }
 
+.sub-panel {
+  margin-top: 16px;
+  margin-bottom: 18px;
+  border: 1px solid #dfe4e8;
+  background: #f8fafb;
+  padding: 14px;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.quick-actions + .quick-actions {
+  margin-top: 8px;
+}
+
+.quick-actions button {
+  min-height: 38px;
+  border: 1px solid #cfd5da;
+  border-radius: 2px;
+  color: #39505f;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.quick-actions button:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
 .orientation-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -468,13 +512,20 @@ input[type="color"] {
 
 .range-row {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
+  grid-template-columns: 130px minmax(0, 1fr) 54px;
   align-items: center;
   gap: 12px;
   min-height: 40px;
   color: #53636f;
   font-size: 0.86rem;
   font-weight: 750;
+}
+
+.range-row output {
+  color: #28495d;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-align: right;
 }
 
 input[type="range"] {
@@ -519,6 +570,69 @@ input[type="range"] {
   color: #53636f;
 }
 
+.check-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 12px;
+  border: 1px solid #dbe2e7;
+  background: #f8fafb;
+  padding: 14px;
+}
+
+.check-card input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.check-card span {
+  display: grid;
+  gap: 2px;
+}
+
+.check-card small {
+  color: var(--muted);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.form-grid label,
+.notes-field {
+  display: grid;
+  gap: 6px;
+  color: #53636f;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.notes-field {
+  margin-top: 12px;
+}
+
+.catalog-tips {
+  margin-top: 16px;
+  border-left: 4px solid var(--accent);
+  background: #f8fafb;
+  padding: 14px 16px;
+}
+
+.catalog-tips ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+  color: #53636f;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
 @media (max-width: 1100px) {
   .app-header,
   .configurator {
@@ -546,8 +660,18 @@ input[type="range"] {
   .product-tools,
   .color-mapper,
   .orientation-grid,
+  .quick-actions,
+  .form-grid,
   .summary-box div {
     grid-template-columns: 1fr;
+  }
+
+  .range-row {
+    grid-template-columns: 1fr;
+  }
+
+  .range-row output {
+    text-align: left;
   }
 
   .panel-section,
