@@ -346,9 +346,10 @@ textarea {
 
 .upload-zone {
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  min-height: 132px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 150px;
   border: 1px dashed #c7cdd2;
   padding: 14px;
   background:
@@ -366,7 +367,6 @@ textarea {
 }
 
 .upload-zone span {
-  align-self: end;
   font-size: 0.86rem;
   font-weight: 850;
   letter-spacing: 0.05em;
@@ -374,7 +374,11 @@ textarea {
 }
 
 .upload-zone strong {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   align-self: end;
+  justify-self: end;
+  width: max-content;
   border-radius: 3px;
   padding: 12px 20px;
   color: #fff;
@@ -382,6 +386,43 @@ textarea {
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.upload-zone small {
+  grid-column: 1 / -1;
+  color: #6d7580;
+  font-weight: 750;
+}
+
+.logo-preview-image {
+  display: none;
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: min(360px, 80%);
+  max-height: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(23, 32, 42, 0.12));
+}
+
+.logo-upload-zone.has-logo {
+  min-height: 220px;
+  border-style: solid;
+  background:
+    linear-gradient(45deg, #edf1f4 25%, transparent 25%),
+    linear-gradient(-45deg, #edf1f4 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #edf1f4 75%),
+    linear-gradient(-45deg, transparent 75%, #edf1f4 75%);
+  background-color: #fff;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0;
+  background-size: 20px 20px;
+}
+
+.logo-upload-zone.has-logo .logo-preview-image {
+  display: block;
 }
 
 .upload-zone input,
@@ -497,6 +538,57 @@ textarea {
 .quick-actions button:hover {
   border-color: var(--accent);
   color: var(--accent-dark);
+}
+
+.logo-color-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.logo-color-strip button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  border: 1px solid #cfd5da;
+  border-radius: 2px;
+  padding: 0 12px;
+  color: #39505f;
+  background: #fff;
+  font-weight: 850;
+}
+
+.logo-color-strip button::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: var(--chip, linear-gradient(135deg, #111 0 50%, #fff 50%));
+}
+
+.logo-color-strip button.is-active {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: 0 0 0 2px rgba(12, 131, 185, 0.12);
+}
+
+.trust-note {
+  margin: 10px 0 0;
+  color: #53636f;
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
+.secondary-button {
+  min-height: 40px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: 0 14px;
+  color: var(--accent-dark);
+  background: #fff;
+  font-weight: 850;
 }
 
 .advanced-panel {

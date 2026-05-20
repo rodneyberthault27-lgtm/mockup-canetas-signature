@@ -96,57 +96,60 @@
 
           <section class="panel-section">
             <h2>3. Envie seu logo</h2>
-            <p class="hint">Ao enviar, o logo será colocado automaticamente no centro da caneta.</p>
-            <label class="upload-zone">
-              <span>Enviar logo</span>
+            <p class="hint">Ao enviar, o logo aparece aqui e entra automaticamente na caneta.</p>
+            <label id="logoUploadZone" class="upload-zone logo-upload-zone">
+              <span id="logoUploadTitle">Enviar logo</span>
+              <img id="logoPreviewImage" class="logo-preview-image" alt="Prévia do logo enviado" />
+              <small id="logoUploadHint">PNG transparente costuma dar o melhor resultado.</small>
               <strong>Upload</strong>
               <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
             </label>
+            <div class="logo-color-strip" aria-label="Escolher cor do logo">
+              <button type="button" data-logo-color="original" class="is-active">Original</button>
+              <button type="button" data-logo-color="#111111" style="--chip: #111111">Preto</button>
+              <button type="button" data-logo-color="#ffffff" style="--chip: #ffffff">Branco</button>
+              <button type="button" data-logo-color="#c79a2b" style="--chip: #c79a2b">Dourado</button>
+              <button type="button" data-logo-color="#9aa3ad" style="--chip: #9aa3ad">Prata</button>
+            </div>
+            <p class="trust-note">Dica: escolha uma cor com alto contraste para a aprovação ficar mais convincente.</p>
           </section>
 
           <section class="panel-section">
             <h2>4. Ajuste seu logo</h2>
-            <p class="hint">Use os botões grandes. Se quiser, também pode arrastar o logo direto na caneta.</p>
+            <p class="hint">Use sliders. A mudança aparece na caneta na mesma hora.</p>
             <div class="instruction-list">
-              <span>1. Centralizar resolve a maioria dos casos.</span>
-              <span>2. Aumentar e diminuir ajustam o tamanho sem mexer no resto.</span>
-              <span>3. Os ajustes finos ficam recolhidos para uso avançado.</span>
+              <span>1. Posição horizontal move o logo para esquerda ou direita.</span>
+              <span>2. Posição vertical sobe ou desce o logo na área da caneta.</span>
+              <span>3. Tamanho e giro ajudam a encaixar a marca no corpo da caneta.</span>
             </div>
 
             <div class="sub-panel">
-              <h3>Mover o logo</h3>
-              <div class="quick-actions" aria-label="Mover logo">
-                <button type="button" data-logo-action="up">Subir</button>
-                <button type="button" data-logo-action="left">Esquerda</button>
-                <button type="button" data-logo-action="center">Centralizar</button>
-                <button type="button" data-logo-action="right">Direita</button>
-                <button type="button" data-logo-action="down">Descer</button>
-              </div>
-            </div>
-
-            <div class="sub-panel">
-              <h3>Tamanho e giro</h3>
-              <div class="quick-actions two-row" aria-label="Ajustar logo">
-                <button type="button" data-logo-action="smaller">Diminuir</button>
-                <button type="button" data-logo-action="bigger">Aumentar</button>
-                <button type="button" data-logo-action="rotate-left">Girar -5°</button>
-                <button type="button" data-logo-action="rotate-right">Girar +5°</button>
-                <button type="button" data-logo-action="reset">Resetar logo</button>
-              </div>
-            </div>
-
-            <details class="advanced-panel">
-              <summary>Ajustes finos do logo</summary>
+              <h3>Posição e encaixe</h3>
               <label class="range-row">
-                <span>Tamanho</span>
-                <input id="scaleControl" type="range" min="8" max="90" value="26" />
-                <output id="scaleValue">26%</output>
+                <span>Posição horizontal</span>
+                <input id="logoXControl" type="range" min="0" max="100" value="50" />
+                <output id="logoXValue">50%</output>
               </label>
               <label class="range-row">
-                <span>Rotação logo</span>
+                <span>Posição vertical</span>
+                <input id="logoYControl" type="range" min="0" max="100" value="50" />
+                <output id="logoYValue">50%</output>
+              </label>
+              <label class="range-row">
+                <span>Tamanho</span>
+                <input id="scaleControl" type="range" min="8" max="90" value="24" />
+                <output id="scaleValue">24%</output>
+              </label>
+              <label class="range-row">
+                <span>Giro</span>
                 <input id="rotationControl" type="range" min="-360" max="360" value="-90" />
                 <output id="rotationValue">-90°</output>
               </label>
+              <button class="secondary-button" type="button" data-logo-action="reset">Voltar ao encaixe automático</button>
+            </div>
+
+            <details class="advanced-panel">
+              <summary>Ajustes avançados</summary>
               <label class="range-row">
                 <span>Opacidade</span>
                 <input id="opacityControl" type="range" min="20" max="100" value="92" />
@@ -157,8 +160,8 @@
                 <input id="logoCutoutControl" type="range" min="0" max="90" value="24" />
                 <output id="logoCutoutValue">24</output>
               </label>
-              <label class="range-row">
-                <span>Cor do logo</span>
+              <label class="range-row visually-kept">
+                <span>Cor personalizada</span>
                 <select id="logoColorMode">
                   <option value="original">Original</option>
                   <option value="#111111">Preto</option>

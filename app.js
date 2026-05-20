@@ -14,6 +14,8 @@ const logoColorMode = document.querySelector("#logoColorMode");
 const logoColorInput = document.querySelector("#logoColorInput");
 const logoColorRow = document.querySelector(".color-row");
 const blendControl = document.querySelector("#blendControl");
+const logoXControl = document.querySelector("#logoXControl");
+const logoYControl = document.querySelector("#logoYControl");
 const penGrid = document.querySelector("#penGrid");
 const productSearch = document.querySelector("#productSearch");
 const categoryFilter = document.querySelector("#categoryFilter");
@@ -32,6 +34,13 @@ const summaryColors = document.querySelector("#summaryColors");
 const summaryCustomization = document.querySelector("#summaryCustomization");
 const summaryEngraving = document.querySelector("#summaryEngraving");
 const logoActionButtons = document.querySelectorAll("[data-logo-action]");
+const logoColorButtons = document.querySelectorAll("[data-logo-color]");
+const logoUploadZone = document.querySelector("#logoUploadZone");
+const logoPreviewImage = document.querySelector("#logoPreviewImage");
+const logoUploadTitle = document.querySelector("#logoUploadTitle");
+const logoUploadHint = document.querySelector("#logoUploadHint");
+const logoXValue = document.querySelector("#logoXValue");
+const logoYValue = document.querySelector("#logoYValue");
 const scaleValue = document.querySelector("#scaleValue");
 const rotationValue = document.querySelector("#rotationValue");
 const opacityValue = document.querySelector("#opacityValue");
@@ -115,11 +124,20 @@ function loadLogo(src) {
     state.logo = processLogoImage(image);
     state.logoColors = detectLogoColors(state.logo);
     renderLogoColors();
+    updateLogoUploadPreview(src);
     autoPlaceLogo();
     emptyState.classList.add("is-hidden");
     draw();
   };
   image.src = src;
+}
+
+function updateLogoUploadPreview(src) {
+  if (!logoPreviewImage || !logoUploadZone) return;
+  logoPreviewImage.src = src;
+  logoUploadZone.classList.add("has-logo");
+  if (logoUploadTitle) logoUploadTitle.textContent = "Logo carregado";
+  if (logoUploadHint) logoUploadHint.textContent = "Você pode trocar a cor abaixo ou reenviar outro arquivo.";
 }
 
 function autoPlaceLogo() {
@@ -133,6 +151,7 @@ function autoPlaceLogo() {
   rotationControl.value = Math.round(state.rotation);
   opacityControl.value = Math.round(state.opacity * 100);
   blendControl.value = Math.round(state.blend * 100);
+  syncLogoPositionControls();
 }
 
 function processLogoImage(image) {
@@ -713,6 +732,9 @@ function rgbToHex(red, green, blue) {
 }
 
 function updateControlLabels() {
+  syncLogoPositionControls();
+  if (logoXValue) logoXValue.textContent = `${Math.round((state.logoX / canvas.width) * 100)}%`;
+  if (logoYValue) logoYValue.textContent = `${Math.round((state.logoY / canvas.height) * 100)}%`;
   if (scaleValue) scaleValue.textContent = `${Math.round(state.scale * 100)}%`;
   if (rotationValue) rotationValue.textContent = `${Math.round(state.rotation)}°`;
   if (opacityValue) opacityValue.textContent = `${Math.round(state.opacity * 100)}%`;
@@ -720,6 +742,18 @@ function updateControlLabels() {
   if (blendValue) blendValue.textContent = `${Math.round(state.blend * 100)}%`;
   if (penRotationValue) penRotationValue.textContent = `${state.penTilt}°`;
   if (maskValue) maskValue.textContent = `${state.maskTolerance}`;
+}
+
+function syncLogoPositionControls(updateValues = true) {
+  if (!logoXControl || !logoYControl) return;
+  const xPercent = Math.round((state.logoX / canvas.width) * 100);
+  const yPercent = Math.round((state.logoY / canvas.height) * 100);
+  if (updateValues) {
+    logoXControl.value = xPercent;
+    logoYControl.value = yPercent;
+  }
+  if (logoXValue) logoXValue.textContent = `${xPercent}%`;
+  if (logoYValue) logoYValue.textContent = `${yPercent}%`;
 }
 
 function updateEngravingSummary() {
@@ -1010,6 +1044,7 @@ logoCutoutControl.addEventListener("input", () => {
 logoColorMode.addEventListener("change", () => {
   state.logoColorMode = logoColorMode.value;
   logoColorRow.classList.toggle("is-visible", state.logoColorMode === "custom");
+  updateLogoColorButtons();
   draw();
 });
 
@@ -1023,11 +1058,40 @@ blendControl.addEventListener("input", () => {
   draw();
 });
 
+logoXControl?.addEventListener("input", () => {
+  state.logoX = (Number(logoXControl.value) / 100) * canvas.width;
+  draw();
+});
+
+logoYControl?.addEventListener("input", () => {
+  state.logoY = (Number(logoYControl.value) / 100) * canvas.height;
+  draw();
+});
+
 logoActionButtons.forEach((button) => {
   button.addEventListener("click", () => {
     handleLogoAction(button.dataset.logoAction);
   });
 });
+
+logoColorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const color = button.dataset.logoColor;
+    logoColorMode.value = color === "original" ? "original" : color;
+    state.logoColorMode = logoColorMode.value;
+    logoColorRow.classList.remove("is-visible");
+    updateLogoColorButtons();
+    draw();
+  });
+});
+
+function updateLogoColorButtons() {
+  logoColorButtons.forEach((button) => {
+    const color = button.dataset.logoColor;
+    const active = color === "original" ? state.logoColorMode === "original" : state.logoColorMode === color;
+    button.classList.toggle("is-active", active);
+  });
+}
 
 [engravingEnabled, quantityInput, engravingArea, clientNameInput, internalRef, eventYes, notesInput].forEach((field) => {
   field?.addEventListener("input", updateEngravingSummary);
