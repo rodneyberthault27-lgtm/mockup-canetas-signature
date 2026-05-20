@@ -20,18 +20,29 @@ const categoryFilter = document.querySelector("#categoryFilter");
 const productCount = document.querySelector("#productCount");
 const fitButtons = document.querySelectorAll("[data-fit]");
 const productColorButtons = document.querySelectorAll("[data-product-color]");
+const orientationButtons = document.querySelectorAll("[data-orientation]");
+const selectedProductTitle = document.querySelector("#selectedProductTitle");
+const selectedProductDescription = document.querySelector("#selectedProductDescription");
+const selectedColorSwatch = document.querySelector("#selectedColorSwatch");
+const detectedColors = document.querySelector("#detectedColors");
+const printColors = document.querySelector("#printColors");
+const colorWarning = document.querySelector("#colorWarning");
+const summaryProduct = document.querySelector("#summaryProduct");
+const summaryColors = document.querySelector("#summaryColors");
 const brandImage = new Image();
 brandImage.src = "./assets/newpen-signature.png";
 
 const state = {
   pen: new Image(),
+  penBounds: null,
   logo: null,
   logoOriginal: null,
   products: [],
   selectedProduct: null,
   productColor: "all",
   fit: "contain",
-  penRotation: Number(penRotationControl.value),
+  penOrientation: 0,
+  penTilt: Number(penRotationControl.value),
   maskTolerance: Number(maskControl.value),
   logoX: canvas.width * 0.5,
   logoY: canvas.height * 0.52,
@@ -42,6 +53,7 @@ const state = {
   logoColorMode: logoColorMode.value,
   logoColor: logoColorInput.value,
   blend: Number(blendControl.value) / 100,
+  logoColors: [],
   isDragging: false,
   dragOffsetX: 0,
   dragOffsetY: 0,
@@ -70,6 +82,7 @@ function loadPen(src) {
   image.crossOrigin = src.startsWith("data:") || src.startsWith("blob:") ? "" : "anonymous";
   image.onload = () => {
     state.pen = image;
+    state.penBounds = detectImageBounds(image);
     draw();
   };
   image.src = src;
@@ -80,6 +93,8 @@ function loadLogo(src) {
   image.onload = () => {
     state.logoOriginal = image;
     state.logo = processLogoImage(image);
+    state.logoColors = detectLogoColors(state.logo);
+    renderLogoColors();
     state.logoX = canvas.width * 0.5;
     state.logoY = canvas.height * 0.52;
     emptyState.classList.add("is-hidden");
@@ -179,7 +194,43 @@ function matchesProductColor(productText, color) {
 function selectProduct(product) {
   state.selectedProduct = product;
   loadPen(product.src);
+  updateProductDetails(product);
   renderProducts();
+}
+
+function updateProductDetails(product) {
+  const productLabel = `${product.category} - ${product.name}`;
+  const colorHex = getProductColorHex(product);
+  selectedProductTitle.textContent = productLabel;
+  selectedProductDescription.textContent =
+    "Caneta selecionada para simulacao visual. Envie o logo, ajuste a posicao e baixe a previa para aprovacao.";
+  selectedColorSwatch.style.background = colorHex;
+  summaryProduct.textContent = productLabel;
+}
+
+function getProductColorHex(product) {
+  const text = normalizeText(`${product.category} ${product.name}`);
+  const colors = [
+    ["preta", "#1f2933"],
+    ["preto", "#1f2933"],
+    ["branca", "#f8fafc"],
+    ["branco", "#f8fafc"],
+    ["azul", "#27496d"],
+    ["vermelha", "#b4232f"],
+    ["vermelho", "#b4232f"],
+    ["verde", "#2f6f4f"],
+    ["amarela", "#e2b83b"],
+    ["amarelo", "#e2b83b"],
+    ["rosa", "#d65a8a"],
+    ["roxo", "#6d4fb3"],
+    ["roxa", "#6d4fb3"],
+    ["laranja", "#df7b2d"],
+    ["dourada", "#c79a2b"],
+    ["dourado", "#c79a2b"],
+    ["prata", "#9aa3ad"],
+  ];
+  const match = colors.find(([term]) => text.includes(term));
+  return match ? match[1] : "#27496d";
 }
 
 function normalizeText(value) {
@@ -217,8 +268,9 @@ function getViewFrame(side) {
 function drawPen(targetCtx, frame) {
   if (!state.pen.complete || state.pen.naturalWidth === 0) return;
 
-  const size = getFitSize(state.pen, state.fit, frame.width, frame.height);
-  const angle = (state.penRotation * Math.PI) / 180;
+  const bounds = state.penBounds || { x: 0, y: 0, width: state.pen.width, height: state.pen.height };
+  const size = getFitSize(bounds, state.fit, frame.width, frame.height);
+  const angle = (getPenRotation() * Math.PI) / 180;
   const rotatedWidth = Math.abs(size.width * Math.cos(angle)) + Math.abs(size.height * Math.sin(angle));
   const rotatedHeight = Math.abs(size.width * Math.sin(angle)) + Math.abs(size.height * Math.cos(angle));
   const rotationScale =
@@ -229,6 +281,10 @@ function drawPen(targetCtx, frame) {
   targetCtx.rotate(angle);
   targetCtx.drawImage(
     state.pen,
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
     (-size.width * rotationScale) / 2,
     (-size.height * rotationScale) / 2,
     size.width * rotationScale,
@@ -238,10 +294,13 @@ function drawPen(targetCtx, frame) {
 }
 
 function getFitSize(image, mode, targetWidth = canvas.width, targetHeight = canvas.height) {
-  if (!image.complete || image.naturalWidth === 0) return { width: 0, height: 0 };
+  const sourceWidth = image.width || image.naturalWidth || 0;
+  const sourceHeight = image.height || image.naturalHeight || 0;
+  const isDrawable = image.complete === undefined || image.complete;
+  if (!isDrawable || sourceWidth === 0 || sourceHeight === 0) return { width: 0, height: 0 };
 
   const canvasRatio = targetWidth / targetHeight;
-  const imageRatio = image.width / image.height;
+  const imageRatio = sourceWidth / sourceHeight;
 
   if ((mode === "cover" && imageRatio > canvasRatio) || (mode === "contain" && imageRatio < canvasRatio)) {
     const height = targetHeight;
@@ -282,7 +341,7 @@ function drawEngravedLogo(targetCtx, width, height, logoX, logoY) {
 
   targetCtx.save();
   targetCtx.translate(logoX, logoY);
-  targetCtx.rotate(((state.rotation + state.penRotation) * Math.PI) / 180);
+  targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
   targetCtx.globalAlpha = state.opacity;
   targetCtx.globalCompositeOperation = "multiply";
   targetCtx.filter = `contrast(${1 + bend * 0.55}) saturate(${1 - bend * 0.42}) brightness(${1 - bend * 0.12})`;
@@ -315,7 +374,7 @@ function drawEngravedLogo(targetCtx, width, height, logoX, logoY) {
 
   targetCtx.save();
   targetCtx.translate(logoX, logoY);
-  targetCtx.rotate(((state.rotation + state.penRotation) * Math.PI) / 180);
+  targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
   targetCtx.globalAlpha = Math.min(0.28, state.opacity * 0.32);
   targetCtx.globalCompositeOperation = "screen";
   const shine = targetCtx.createLinearGradient(-width / 2, 0, width / 2, 0);
@@ -385,12 +444,146 @@ function createPenMask(frame) {
 function drawSelection(targetCtx, width, height, logoX, logoY) {
   targetCtx.save();
   targetCtx.translate(logoX, logoY);
-  targetCtx.rotate(((state.rotation + state.penRotation) * Math.PI) / 180);
+  targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
   targetCtx.strokeStyle = "rgba(242, 188, 75, 0.95)";
   targetCtx.lineWidth = 2;
   targetCtx.setLineDash([8, 6]);
   targetCtx.strokeRect(-width / 2, -height / 2, width, height);
   targetCtx.restore();
+}
+
+function getPenRotation() {
+  return state.penOrientation + state.penTilt;
+}
+
+function detectImageBounds(image) {
+  const sampleCanvas = document.createElement("canvas");
+  const maxSide = 520;
+  const ratio = Math.min(1, maxSide / Math.max(image.width, image.height));
+  sampleCanvas.width = Math.max(1, Math.round(image.width * ratio));
+  sampleCanvas.height = Math.max(1, Math.round(image.height * ratio));
+
+  const sampleCtx = sampleCanvas.getContext("2d", { willReadFrequently: true });
+  sampleCtx.drawImage(image, 0, 0, sampleCanvas.width, sampleCanvas.height);
+  const pixels = sampleCtx.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data;
+
+  let minX = sampleCanvas.width;
+  let minY = sampleCanvas.height;
+  let maxX = 0;
+  let maxY = 0;
+
+  for (let y = 0; y < sampleCanvas.height; y += 1) {
+    for (let x = 0; x < sampleCanvas.width; x += 1) {
+      const index = (y * sampleCanvas.width + x) * 4;
+      const red = pixels[index];
+      const green = pixels[index + 1];
+      const blue = pixels[index + 2];
+      const alpha = pixels[index + 3];
+      const isInk = alpha > 30 && !(red > 245 && green > 245 && blue > 245);
+
+      if (isInk) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  if (minX >= maxX || minY >= maxY) return { x: 0, y: 0, width: image.width, height: image.height };
+
+  const padding = 10;
+  const scale = 1 / ratio;
+  return {
+    x: Math.max(0, Math.floor((minX - padding) * scale)),
+    y: Math.max(0, Math.floor((minY - padding) * scale)),
+    width: Math.min(image.width, Math.ceil((maxX - minX + padding * 2) * scale)),
+    height: Math.min(image.height, Math.ceil((maxY - minY + padding * 2) * scale)),
+  };
+}
+
+function detectLogoColors(sourceCanvas) {
+  const sampleCanvas = document.createElement("canvas");
+  const maxSide = 160;
+  const ratio = Math.min(1, maxSide / Math.max(sourceCanvas.width, sourceCanvas.height));
+  sampleCanvas.width = Math.max(1, Math.round(sourceCanvas.width * ratio));
+  sampleCanvas.height = Math.max(1, Math.round(sourceCanvas.height * ratio));
+  const sampleCtx = sampleCanvas.getContext("2d", { willReadFrequently: true });
+  sampleCtx.drawImage(sourceCanvas, 0, 0, sampleCanvas.width, sampleCanvas.height);
+
+  const pixels = sampleCtx.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data;
+  const buckets = new Map();
+
+  for (let index = 0; index < pixels.length; index += 4) {
+    const alpha = pixels[index + 3];
+    if (alpha < 40) continue;
+
+    const red = pixels[index];
+    const green = pixels[index + 1];
+    const blue = pixels[index + 2];
+    const nearWhite = red > 245 && green > 245 && blue > 245;
+    if (nearWhite) continue;
+
+    const key = [red, green, blue].map((value) => Math.round(value / 32) * 32).join(",");
+    const bucket = buckets.get(key) || { count: 0, red: 0, green: 0, blue: 0 };
+    bucket.count += 1;
+    bucket.red += red;
+    bucket.green += green;
+    bucket.blue += blue;
+    buckets.set(key, bucket);
+  }
+
+  return [...buckets.values()]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 7)
+    .map((bucket) => ({
+      hex: rgbToHex(
+        Math.round(bucket.red / bucket.count),
+        Math.round(bucket.green / bucket.count),
+        Math.round(bucket.blue / bucket.count),
+      ),
+      count: bucket.count,
+    }));
+}
+
+function renderLogoColors() {
+  detectedColors.innerHTML = "";
+  printColors.innerHTML = "";
+  const colors = state.logoColors;
+
+  if (!colors.length) {
+    detectedColors.innerHTML = '<p class="hint">Nenhuma cor detectada ainda.</p>';
+    printColors.innerHTML = '<p class="hint">Envie um logo para ver as cores.</p>';
+    summaryColors.textContent = "0";
+    colorWarning.classList.add("is-hidden");
+    return;
+  }
+
+  colors.forEach((color, index) => {
+    const colorItem = document.createElement("div");
+    colorItem.className = "color-item";
+    colorItem.innerHTML = `<span class="color-chip" style="--chip: ${color.hex}"></span><span>Cor ${index + 1}</span>`;
+    detectedColors.appendChild(colorItem);
+
+    const printItem = document.createElement("label");
+    printItem.className = "print-item";
+    printItem.innerHTML = `
+      <span class="color-chip" style="--chip: ${color.hex}"></span>
+      <select aria-label="Cor de impressao ${index + 1}">
+        <option>Pantone aprox. ${color.hex.toUpperCase()}</option>
+        <option>Sem cor</option>
+        <option>Manter original</option>
+      </select>
+    `;
+    printColors.appendChild(printItem);
+  });
+
+  summaryColors.textContent = `${colors.length}`;
+  colorWarning.classList.toggle("is-hidden", colors.length <= 4);
+}
+
+function rgbToHex(red, green, blue) {
+  return `#${[red, green, blue].map((value) => value.toString(16).padStart(2, "0")).join("")}`;
 }
 
 function exportImage() {
@@ -488,6 +681,9 @@ penUpload.addEventListener("change", (event) => {
   readFileAsDataUrl(event.target.files[0], (src) => {
     document.querySelectorAll(".pen-option").forEach((item) => item.classList.remove("is-active"));
     state.selectedProduct = null;
+    selectedProductTitle.textContent = "Caneta personalizada";
+    selectedProductDescription.textContent = "Foto propria enviada para simulacao.";
+    summaryProduct.textContent = "Caneta personalizada";
     loadPen(src);
   });
 });
@@ -509,8 +705,17 @@ logoUpload.addEventListener("change", (event) => {
 });
 
 penRotationControl.addEventListener("input", () => {
-  state.penRotation = Number(penRotationControl.value);
+  state.penTilt = Number(penRotationControl.value);
   draw();
+});
+
+orientationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    orientationButtons.forEach((item) => item.classList.remove("is-active"));
+    button.classList.add("is-active");
+    state.penOrientation = Number(button.dataset.orientation);
+    draw();
+  });
 });
 
 maskControl.addEventListener("input", () => {
@@ -535,7 +740,11 @@ opacityControl.addEventListener("input", () => {
 
 logoCutoutControl.addEventListener("input", () => {
   state.logoCutout = Number(logoCutoutControl.value);
-  if (state.logoOriginal) state.logo = processLogoImage(state.logoOriginal);
+  if (state.logoOriginal) {
+    state.logo = processLogoImage(state.logoOriginal);
+    state.logoColors = detectLogoColors(state.logo);
+    renderLogoColors();
+  }
   draw();
 });
 
