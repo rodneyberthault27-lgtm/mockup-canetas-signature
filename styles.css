@@ -1318,3 +1318,243 @@ input[type="range"] {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 900px) {
+  :root {
+    --phone-header: 52px;
+    --phone-preview: 42dvh;
+    --phone-sheet-top: calc(var(--phone-header) + var(--phone-preview) - 20px);
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    background: #eef1f3;
+  }
+
+  .app-shell {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .app-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    height: var(--phone-header);
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(216, 221, 226, 0.8);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 6px 18px rgba(24, 36, 46, 0.1);
+  }
+
+  .brand-logo {
+    width: min(158px, 50vw);
+  }
+
+  .header-copy {
+    display: none;
+  }
+
+  .header-action {
+    min-height: 34px;
+    border-color: #d7dde2;
+    padding: 0 10px;
+    font-size: 0.66rem;
+    white-space: nowrap;
+  }
+
+  .configurator {
+    display: block;
+    min-height: 100dvh;
+  }
+
+  .product-column {
+    position: fixed;
+    top: var(--phone-header);
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    height: var(--phone-preview);
+    overflow: hidden;
+    border: 0;
+    background:
+      linear-gradient(180deg, #ffffff 0%, #f6f8f9 100%);
+  }
+
+  .product-preview {
+    height: 100%;
+    min-height: 0;
+    padding: 2px 8px 48px;
+  }
+
+  canvas {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .empty-state {
+    top: 8px;
+    left: 10px;
+    width: auto;
+    max-width: calc(100% - 20px);
+    border-radius: 999px;
+    padding: 7px 12px;
+    background: rgba(31, 52, 66, 0.78);
+    text-align: left;
+  }
+
+  .empty-state strong {
+    font-size: 0.72rem;
+  }
+
+  .empty-state span {
+    display: none;
+  }
+
+  .product-meta {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 5px 9px;
+    align-items: center;
+    border: 1px solid rgba(216, 221, 226, 0.85);
+    border-radius: 10px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 8px 20px rgba(24, 36, 46, 0.1);
+    backdrop-filter: blur(8px);
+  }
+
+  .product-meta .eyebrow {
+    display: none;
+  }
+
+  .selected-swatch {
+    width: 22px;
+    height: 22px;
+  }
+
+  h1 {
+    margin: 0;
+    overflow: hidden;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-meta p:not(.eyebrow) {
+    grid-column: 1 / -1;
+    margin: 0;
+    overflow: hidden;
+    color: #6d7580;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .editor-column {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--phone-sheet-top);
+    bottom: 0;
+    z-index: 20;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 20px 20px 0 0;
+    background: #f6f7f8;
+    box-shadow: 0 -16px 34px rgba(22, 35, 46, 0.22);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .editor-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: grid;
+    gap: 6px;
+    min-height: 0;
+    border-radius: 20px 20px 0 0;
+    padding: 14px 14px 10px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+  }
+
+  .editor-topbar::before {
+    content: "";
+    justify-self: center;
+    width: 48px;
+    height: 5px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+    background: #c5cdd4;
+  }
+
+  .editor-topbar strong {
+    font-size: 0.92rem;
+  }
+
+  .editor-topbar span {
+    color: #71808b;
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+
+  .panel-section,
+  .summary-box {
+    margin: 8px;
+    border-radius: 10px;
+    padding: 13px;
+  }
+
+  .product-tools,
+  .logo-upload-layout,
+  .color-mapper,
+  .orientation-grid,
+  .quick-actions,
+  .form-grid,
+  .checkbox-grid,
+  .summary-box div {
+    grid-template-columns: 1fr;
+  }
+
+  .pen-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 260px;
+  }
+
+  .range-row {
+    grid-template-columns: 1fr;
+  }
+
+  .range-row output {
+    text-align: left;
+  }
+
+  .final-actions,
+  .final-actions .primary-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 720px) {
+  :root {
+    --phone-preview: 38dvh;
+  }
+
+  .product-preview {
+    padding-bottom: 42px;
+  }
+}
