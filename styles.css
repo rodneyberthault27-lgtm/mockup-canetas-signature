@@ -907,16 +907,33 @@ input[type="range"] {
 }
 
 @media (max-width: 680px) {
+  :root {
+    --mobile-header: 58px;
+    --mobile-preview: 36dvh;
+    --mobile-panel-top: calc(var(--mobile-header) + var(--mobile-preview) - 16px);
+  }
+
+  html,
   body {
+    height: 100%;
+    overflow: hidden;
     background: #eef1f3;
   }
 
+  .app-shell {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
   .app-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 10;
     grid-template-columns: 1fr auto;
     gap: 10px 14px;
+    height: var(--mobile-header);
     padding: 10px 12px;
     box-shadow: 0 8px 22px rgba(24, 36, 46, 0.08);
   }
@@ -926,15 +943,6 @@ input[type="range"] {
   }
 
   .header-copy {
-    grid-column: 1 / -1;
-    order: 3;
-  }
-
-  .header-copy strong {
-    font-size: 0.9rem;
-  }
-
-  .header-copy span {
     display: none;
   }
 
@@ -946,23 +954,36 @@ input[type="range"] {
   }
 
   .configurator {
-    min-height: 0;
+    display: block;
+    min-height: 100dvh;
   }
 
   .product-column {
-    background: #f8f9fa;
+    position: fixed;
+    top: var(--mobile-header);
+    left: 0;
+    right: 0;
+    z-index: 7;
+    display: block;
+    height: var(--mobile-preview);
+    overflow: hidden;
+    border-bottom: 0;
+    background:
+      radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.96), rgba(245, 247, 248, 0.9) 58%),
+      #eef1f3;
   }
 
   .product-preview {
-    min-height: 250px;
-    padding: 10px 8px 6px;
+    height: 100%;
+    min-height: 0;
+    padding: 8px 8px 48px;
   }
 
   canvas {
     width: 100%;
-    max-height: 260px;
+    max-height: 100%;
     border-radius: 6px;
-    background: #fff;
+    background: transparent;
   }
 
   .empty-state {
@@ -974,19 +995,31 @@ input[type="range"] {
   }
 
   .product-meta {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 8px 12px;
+    grid-template-columns: auto 1fr auto;
+    gap: 6px 10px;
     align-items: center;
-    padding: 12px 16px 16px;
-    border-top: 1px solid #e3e7ea;
-    background: #fff;
+    border: 1px solid rgba(216, 221, 226, 0.78);
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 24px rgba(24, 36, 46, 0.08);
+    backdrop-filter: blur(8px);
   }
 
   .product-meta .eyebrow {
-    grid-column: 1 / -1;
+    grid-column: 1;
     margin: 0;
-    font-size: 0.68rem;
+    font-size: 0;
+  }
+
+  .product-meta .eyebrow::after {
+    content: "Cor";
+    font-size: 0.65rem;
   }
 
   .selected-swatch {
@@ -997,25 +1030,49 @@ input[type="range"] {
   h1 {
     margin: 0;
     font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .product-meta p:not(.eyebrow) {
-    grid-column: 1 / -1;
-    margin: 0;
-    font-size: 0.8rem;
+    display: none;
   }
 
   .editor-column {
-    overflow: visible;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--mobile-panel-top);
+    bottom: 0;
+    z-index: 8;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 18px 18px 0 0;
+    background: #f6f7f8;
+    box-shadow: 0 -14px 32px rgba(22, 35, 46, 0.18);
+    -webkit-overflow-scrolling: touch;
   }
 
   .editor-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 3;
     align-items: flex-start;
     flex-direction: column;
-    position: static;
     min-height: 0;
-    padding: 14px 16px;
+    padding: 20px 16px 12px;
+    border-radius: 18px 18px 0 0;
     background: #fff;
+  }
+
+  .editor-topbar::before {
+    content: "";
+    align-self: center;
+    width: 46px;
+    height: 5px;
+    border-radius: 999px;
+    background: #c9d0d6;
   }
 
   .editor-topbar strong {
@@ -1220,6 +1277,21 @@ input[type="range"] {
 
   .final-actions .primary-button {
     min-height: 50px;
+  }
+}
+
+@media (max-width: 680px) and (max-height: 720px) {
+  :root {
+    --mobile-preview: 32dvh;
+  }
+
+  .product-preview {
+    padding-bottom: 40px;
+  }
+
+  .product-meta {
+    bottom: 6px;
+    padding: 6px 8px;
   }
 }
 

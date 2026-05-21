@@ -42,6 +42,8 @@ const logoUploadTitle = document.querySelector("#logoUploadTitle");
 const logoUploadHint = document.querySelector("#logoUploadHint");
 const logoXValue = document.querySelector("#logoXValue");
 const logoYValue = document.querySelector("#logoYValue");
+const approvalSummary = document.querySelector("#approvalSummary");
+const headerAction = document.querySelector(".header-action");
 const scaleValue = document.querySelector("#scaleValue");
 const rotationValue = document.querySelector("#rotationValue");
 const opacityValue = document.querySelector("#opacityValue");
@@ -1156,3 +1158,9 @@ canvas.addEventListener(
   { passive: false },
 );
 downloadBtn.addEventListener("click", exportImage);
+
+headerAction?.addEventListener("click", (event) => {
+  if (!approvalSummary) return;
+  event.preventDefault();
+  approvalSummary.scrollIntoView({ behavior: "smooth", block: "start" });
+});
