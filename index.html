@@ -10,11 +10,11 @@
     <main class="app-shell">
       <header class="app-header">
         <img class="brand-logo" src="./assets/newpen-signature.png" alt="Newpen Signature" />
-        <div class="stepper" aria-label="Etapas">
-          <span class="is-done">1 - Caneta</span>
-          <span class="is-active">2 - Logo</span>
-          <span>3 - Ficha</span>
+        <div class="header-copy">
+          <strong>Studio de aprovação visual</strong>
+          <span>Escolha a caneta, aplique o logo e baixe uma ficha pronta para aprovação.</span>
         </div>
+        <a class="header-action" href="#approvalSummary">Ir para ficha</a>
       </header>
 
       <section class="configurator">
@@ -37,8 +37,8 @@
 
         <section class="editor-column" aria-label="Personalização">
           <div class="editor-topbar">
-            <strong>Editor de mockup</strong>
-            <button id="downloadBtn" class="primary-button" type="button">Baixar ficha</button>
+            <strong>Monte a aprovação do cliente</strong>
+            <span>O resultado aparece em tempo real na caneta ao lado.</span>
           </div>
 
           <section class="panel-section">
@@ -114,7 +114,12 @@
                   <button type="button" data-logo-color="#ffffff" style="--chip: #ffffff">Branco</button>
                   <button type="button" data-logo-color="#c79a2b" style="--chip: #c79a2b">Dourado</button>
                   <button type="button" data-logo-color="#9aa3ad" style="--chip: #9aa3ad">Prata</button>
+                  <button type="button" data-logo-color="custom" style="--chip: linear-gradient(135deg, #ffcf33, #0c83b9, #111111)">Personalizar</button>
                 </div>
+                <label class="custom-logo-color" id="customLogoColorPicker">
+                  <span>Escolha qualquer cor</span>
+                  <input id="logoColorInput" type="color" value="#111111" />
+                </label>
               </div>
             </div>
             <p class="trust-note">Dica: escolha uma cor com alto contraste para a aprovação ficar mais convincente.</p>
@@ -176,10 +181,6 @@
                   <option value="#9aa3ad">Prata</option>
                   <option value="custom">Personalizada</option>
                 </select>
-              </label>
-              <label class="range-row color-row">
-                <span>Tom</span>
-                <input id="logoColorInput" type="color" value="#111111" />
               </label>
               <label class="range-row">
                 <span>Curvar na caneta</span>
@@ -249,13 +250,16 @@
             </div>
           </section>
 
-          <section class="summary-box">
+          <section class="summary-box" id="approvalSummary">
             <h2>Resumo</h2>
             <dl>
               <div><dt>Produto</dt><dd id="summaryProduct">-</dd></div>
               <div><dt>Personalização</dt><dd id="summaryCustomization">Corpo | Serigrafia</dd></div>
               <div><dt>Gravação</dt><dd id="summaryEngraving">Incluída | 250 peças</dd></div>
             </dl>
+            <div class="final-actions">
+              <button id="downloadBtn" class="primary-button" type="button">Baixar ficha de aprovação</button>
+            </div>
           </section>
         </section>
       </section>

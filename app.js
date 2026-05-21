@@ -13,6 +13,7 @@ const logoCutoutControl = document.querySelector("#logoCutoutControl");
 const logoColorMode = document.querySelector("#logoColorMode");
 const logoColorInput = document.querySelector("#logoColorInput");
 const logoColorRow = document.querySelector(".color-row");
+const customLogoColorPicker = document.querySelector("#customLogoColorPicker");
 const blendControl = document.querySelector("#blendControl");
 const logoXControl = document.querySelector("#logoXControl");
 const logoYControl = document.querySelector("#logoYControl");
@@ -1056,13 +1057,17 @@ logoCutoutControl.addEventListener("input", () => {
 
 logoColorMode.addEventListener("change", () => {
   state.logoColorMode = logoColorMode.value;
-  logoColorRow.classList.toggle("is-visible", state.logoColorMode === "custom");
+  logoColorRow?.classList.toggle("is-visible", state.logoColorMode === "custom");
+  customLogoColorPicker?.classList.toggle("is-visible", state.logoColorMode === "custom");
   updateLogoColorButtons();
   draw();
 });
 
 logoColorInput.addEventListener("input", () => {
   state.logoColor = logoColorInput.value;
+  if (state.logoColorMode === "custom") {
+    updateLogoColorButtons();
+  }
   draw();
 });
 
@@ -1091,9 +1096,14 @@ logoActionButtons.forEach((button) => {
 logoColorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const color = button.dataset.logoColor;
-    logoColorMode.value = color === "original" ? "original" : color;
+    logoColorMode.value = color;
     state.logoColorMode = logoColorMode.value;
-    logoColorRow.classList.remove("is-visible");
+    logoColorRow?.classList.toggle("is-visible", color === "custom");
+    customLogoColorPicker?.classList.toggle("is-visible", color === "custom");
+    if (color === "custom") {
+      state.logoColor = logoColorInput.value;
+      logoColorInput.focus();
+    }
     updateLogoColorButtons();
     draw();
   });
