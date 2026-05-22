@@ -276,7 +276,7 @@ function updateProductDetails(product) {
   selectedProductDescription.textContent =
     "Caneta selecionada para simulacao visual. Envie o logo, ajuste a posicao e baixe a previa para aprovacao.";
   selectedColorSwatch.style.background = colorHex;
-  summaryProduct.textContent = productLabel;
+  if (summaryProduct) summaryProduct.textContent = productLabel;
 }
 
 function updateEngravingDefaults(product) {
@@ -832,13 +832,6 @@ function exportImage() {
   const productLabel = state.selectedProduct
     ? `${state.selectedProduct.category} - ${state.selectedProduct.name}`
     : "Produto personalizado";
-  const engravingIncluded = engravingEnabled?.checked ?? true;
-  const technique = getSelectedTechniques();
-  const area = engravingArea?.value || "50mm x 20mm";
-  const quantity = quantityInput?.value || "250";
-  const client = clientNameInput?.value?.trim() || "-";
-  const reference = internalRef?.value?.trim() || "-";
-  const eventText = eventYes?.checked ? "Sim" : "Não";
   const notes = notesInput?.value?.trim() || "-";
   const logoColorText = getLogoColor() ? `Cor aplicada: ${getLogoColor()}` : "Cor aplicada: original do arquivo";
 
@@ -870,25 +863,19 @@ function exportImage() {
   finalCtx.fillStyle = "#213746";
   finalCtx.font = "800 24px Inter, system-ui, sans-serif";
   finalCtx.textAlign = "left";
-  finalCtx.fillText("Ficha da gravação", 42, 956);
+  finalCtx.fillText("Ficha de aprovação", 42, 956);
 
   finalCtx.font = "700 15px Inter, system-ui, sans-serif";
   finalCtx.fillStyle = "#213746";
   finalCtx.fillText("Produto", 42, 1002);
-  finalCtx.fillText("Gravação", 42, 1046);
-  finalCtx.fillText("Quantidade", 42, 1090);
-  finalCtx.fillText("Cliente", 620, 1002);
-  finalCtx.fillText("Referência / Evento", 620, 1046);
-  finalCtx.fillText("Observações", 620, 1112);
+  finalCtx.fillText("Logo", 42, 1066);
+  finalCtx.fillText("Observações", 620, 1002);
 
   finalCtx.font = "500 16px Inter, system-ui, sans-serif";
   finalCtx.fillStyle = "#53636f";
   drawWrappedText(finalCtx, productLabel, 42, 1024, 500, 20);
-  finalCtx.fillText(engravingIncluded ? `${technique} | ${area}` : "Sem gravação", 42, 1068);
-  finalCtx.fillText(`${quantity} peças`, 42, 1112);
-  drawWrappedText(finalCtx, client, 620, 1024, 500, 20);
-  drawWrappedText(finalCtx, `${reference} | Evento: ${eventText} | ${logoColorText}`, 620, 1068, 500, 20);
-  drawWrappedText(finalCtx, notes, 620, 1134, 500, 20);
+  drawWrappedText(finalCtx, logoColorText, 42, 1088, 500, 20);
+  drawWrappedText(finalCtx, notes, 620, 1024, 500, 20);
 
   finalCtx.fillStyle = "#ffffff";
   finalCtx.fillRect(0, 1220, 1200, 40);
@@ -982,8 +969,8 @@ penUpload.addEventListener("change", (event) => {
     state.selectedProduct = null;
     selectedProductTitle.textContent = "Caneta personalizada";
     selectedProductDescription.textContent = "Foto propria enviada para simulacao.";
-    summaryProduct.textContent = "Caneta personalizada";
-    engravingArea.value = "50mm x 20mm";
+    if (summaryProduct) summaryProduct.textContent = "Caneta personalizada";
+    if (engravingArea) engravingArea.value = "50mm x 20mm";
     updateEngravingSummary();
     loadPen(src);
   });

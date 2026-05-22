@@ -14,7 +14,7 @@
           <strong>Studio de aprovação visual</strong>
           <span>Escolha a caneta, aplique o logo e baixe uma ficha pronta para aprovação.</span>
         </div>
-        <a class="header-action" href="#approvalSummary">Ir para ficha</a>
+        <a class="header-action" href="#approvalSummary">Observações</a>
       </header>
 
       <section class="configurator">
@@ -190,73 +190,13 @@
             </details>
           </section>
 
-          <section class="panel-section">
-            <h2>5. Dados da ficha técnica</h2>
-            <p class="hint">Essas informações vão junto na imagem baixada para facilitar aprovação e conferência.</p>
-            <label class="check-card">
-              <input id="engravingEnabled" type="checkbox" checked />
-              <span>
-                <strong>Incluir gravação no pedido</strong>
-                <small>Desmarque apenas se quiser baixar o mockup sem gravação.</small>
-              </span>
-            </label>
-            <div class="form-grid">
-              <label>
-                <span>Quantidade</span>
-                <input id="quantityInput" type="number" min="1" value="250" />
-              </label>
-              <label>
-                <span>Nome do cliente</span>
-                <input id="clientNameInput" type="text" placeholder="Ex.: Empresa ABC" />
-              </label>
-              <label>
-                <span>Área sugerida</span>
-                <input id="engravingArea" type="text" value="50mm x 20mm" />
-              </label>
-              <label>
-                <span>Referência interna</span>
-                <input id="internalRef" type="text" placeholder="Ex.: campanha, pedido ou vendedor" />
-              </label>
-            </div>
-
-            <div class="choice-group">
-              <h3>É para evento?</h3>
-              <label><input id="eventYes" type="checkbox" /> Sim, é para evento</label>
-            </div>
-
-            <div class="choice-group">
-              <h3>Técnicas desejadas</h3>
-              <div class="checkbox-grid">
-                <label><input type="checkbox" name="technique" value="Serigrafia" checked /> Serigrafia</label>
-                <label><input type="checkbox" name="technique" value="Digital" /> Digital</label>
-                <label><input type="checkbox" name="technique" value="Laser" /> Laser</label>
-                <label><input type="checkbox" name="technique" value="Transfer" /> Transfer</label>
-                <label><input type="checkbox" name="technique" value="Emborrachado" /> Emborrachado</label>
-                <label><input type="checkbox" name="technique" value="Pantone especial" /> Pantone especial</label>
-              </div>
-            </div>
-
+          <section class="panel-section" id="approvalSummary">
+            <h2>5. Observações</h2>
+            <p class="hint">Use este campo apenas se quiser registrar uma orientação para a aprovação.</p>
             <label class="notes-field">
               <span>Observações</span>
               <textarea id="notesInput" rows="4" placeholder="Ex.: logo centralizado no corpo, gravação em branco, aprovar antes de produzir"></textarea>
             </label>
-            <div class="catalog-tips">
-              <h3>Dicas do catálogo</h3>
-              <ul>
-                <li>Arquivos recomendados para impressão: AI, EPS, CDR ou PDF vetorizado.</li>
-                <li>Fonte mínima sugerida: 2mm, com traço fino acima de 0.5pt.</li>
-                <li>Áreas comuns: 50mm x 20mm, 45mm x 20mm, 35mm x 08mm e clipe 20mm x 06mm.</li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="summary-box" id="approvalSummary">
-            <h2>Resumo</h2>
-            <dl>
-              <div><dt>Produto</dt><dd id="summaryProduct">-</dd></div>
-              <div><dt>Personalização</dt><dd id="summaryCustomization">Corpo | Serigrafia</dd></div>
-              <div><dt>Gravação</dt><dd id="summaryEngraving">Incluída | 250 peças</dd></div>
-            </dl>
             <div class="final-actions">
               <button id="downloadBtn" class="primary-button" type="button">Baixar ficha de aprovação</button>
             </div>
