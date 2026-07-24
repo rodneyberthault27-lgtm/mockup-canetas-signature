@@ -1722,6 +1722,15 @@ body:not(.has-logo) .canvas-toolbar {
   gap: 12px;
 }
 
+/* ---- Palco: zoom da caneta fica contido no palco ---------------------- */
+.product-preview {
+  overflow: hidden;
+}
+
+#mockupCanvas {
+  transition: transform 0.15s ease;
+}
+
 /* ---- Polish premium: títulos, respiro e palco -------------------------- */
 .panel-section {
   padding: 22px 22px 24px;
@@ -1855,12 +1864,12 @@ body:not(.has-logo) .canvas-toolbar {
               <strong>Envie um logo</strong>
               <span>Ele entra automaticamente no centro da caneta.</span>
             </div>
-            <div id="canvasHint" class="canvas-hint">Arraste para mover. Pontas para redimensionar. Alça de cima para girar.</div>
-            <div class="canvas-toolbar" role="group" aria-label="Ajuste rápido do logo">
-              <button type="button" data-canvas-action="smaller" title="Diminuir" aria-label="Diminuir">−</button>
-              <button type="button" data-canvas-action="bigger" title="Aumentar" aria-label="Aumentar">+</button>
-              <button type="button" data-canvas-action="rotate" title="Girar 90°" aria-label="Girar 90 graus">⟳</button>
-              <button type="button" data-canvas-action="reset" title="Reposicionar" aria-label="Reposicionar">↺</button>
+            <div id="canvasHint" class="canvas-hint">Use + e − para aumentar a caneta. Arraste o logo para mover, pontas para redimensionar, alça de cima para girar.</div>
+            <div class="canvas-toolbar" role="group" aria-label="Zoom da caneta e ajuste do logo">
+              <button type="button" data-canvas-action="smaller" title="Diminuir caneta" aria-label="Diminuir caneta">−</button>
+              <button type="button" data-canvas-action="bigger" title="Aumentar caneta" aria-label="Aumentar caneta">+</button>
+              <button type="button" data-canvas-action="rotate" title="Girar logo 90°" aria-label="Girar logo 90 graus">⟳</button>
+              <button type="button" data-canvas-action="reset" title="Reposicionar tudo" aria-label="Reposicionar tudo">↺</button>
             </div>
           </div>
 
@@ -2093,7 +2102,8 @@ const state = {
   selectedProduct: null,
   productColor: "all",
   fit: "contain",
-  penZoom: 1.32,
+  penZoom: 1.55,
+  viewZoom: 1,
   penOrientation: 90,
   penTilt: Number(penRotationControl?.value || 0),
   maskTolerance: Number(maskControl?.value || 24),
@@ -2126,6 +2136,7 @@ let startLogo = { x: 0, y: 0 };
 
 updateControlLabels();
 setMode("simple");
+applyViewZoom();
 loadProducts();
 
 /* ---- Carregamento ------------------------------------------------------ */
@@ -2165,7 +2176,7 @@ function loadLogo(src) {
     autoPlaceLogo();
     emptyState.classList.add("is-hidden");
     document.body.classList.add("has-logo");
-    showHint("Arraste para mover. Pontas para redimensionar. Alça de cima para girar.", true);
+    showHint("Arraste o logo para mover, pontas para redimensionar, alça de cima para girar. Use + e − para aumentar a caneta.", true);
     draw();
   };
   image.src = src;
@@ -2801,13 +2812,32 @@ function handleLogoAction(action) {
   }
 }
 
+function applyViewZoom() {
+  canvas.style.transformOrigin = "center center";
+  canvas.style.transform = `scale(${state.viewZoom})`;
+}
+
 function handleCanvasAction(action) {
+  // + e - dao zoom na caneta na tela (funciona mesmo sem logo)
+  if (action === "bigger") {
+    state.viewZoom = clamp(state.viewZoom + 0.2, 0.6, 2.8);
+    applyViewZoom();
+    return;
+  }
+  if (action === "smaller") {
+    state.viewZoom = clamp(state.viewZoom - 0.2, 0.6, 2.8);
+    applyViewZoom();
+    return;
+  }
+  if (action === "reset") {
+    state.viewZoom = 1;
+    applyViewZoom();
+    if (state.logo) autoPlaceLogo();
+    draw();
+    return;
+  }
   if (!state.logo) return;
-  const scaleStep = 0.04;
-  if (action === "bigger") state.scale = clamp(state.scale + scaleStep, 0.08, 0.9);
-  if (action === "smaller") state.scale = clamp(state.scale - scaleStep, 0.08, 0.9);
   if (action === "rotate") state.rotation = clamp(state.rotation + 90, -360, 360);
-  if (action === "reset") { autoPlaceLogo(); }
   syncAllControls();
   draw();
 }
@@ -2870,11 +2900,49 @@ function exportImage() {
   finalCtx.textAlign = "right";
   finalCtx.fillText(new Date().toLocaleDateString("pt-BR"), 1158, 1246);
 
-  const link = document.createElement("a");
-  link.download = "mockup-logo-caneta.png";
-  link.href = finalCanvas.toDataURL("image/png");
-  link.click();
+  saveCanvasImage(finalCanvas, "mockup-logo-caneta.png");
   draw();
+}
+
+function saveCanvasImage(sourceCanvas, filename) {
+  const inIframe = window.self !== window.top;
+
+  const finish = (url, isObjectUrl) => {
+    if (inIframe) {
+      // Dentro de um iframe (ex.: Wix) o download automatico costuma ser
+      // bloqueado. Abrimos a imagem em nova aba para o usuario salvar.
+      const opened = window.open(url, "_blank");
+      if (!opened) {
+        // Se popup tambem foi bloqueado, tenta o download direto.
+        triggerDownload(url, filename);
+      }
+    } else {
+      triggerDownload(url, filename);
+    }
+    if (isObjectUrl) setTimeout(() => URL.revokeObjectURL(url), 20000);
+  };
+
+  if (sourceCanvas.toBlob) {
+    sourceCanvas.toBlob((blob) => {
+      if (!blob) {
+        finish(sourceCanvas.toDataURL("image/png"), false);
+        return;
+      }
+      finish(URL.createObjectURL(blob), true);
+    }, "image/png");
+  } else {
+    finish(sourceCanvas.toDataURL("image/png"), false);
+  }
+}
+
+function triggerDownload(url, filename) {
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.rel = "noopener";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
 }
 
 function drawWrappedText(targetCtx, text, x, y, maxWidth, lineHeight) {
