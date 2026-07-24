@@ -1,20 +1,1802 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mockup de Logo em Canetas</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mockup de Logo em Canetas</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #213746;
+  --muted: #788691;
+  --line: #d8dde2;
+  --soft: #f5f6f7;
+  --surface: #ffffff;
+  --accent: #e11d2a;
+  --accent-dark: #b3121d;
+  --success: #58c779;
+  --danger: #ef5748;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #f2f2f2;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-header {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 28px;
+  background: #fff;
+}
+
+.brand-logo {
+  width: 220px;
+  height: auto;
+}
+
+.header-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.header-copy strong {
+  color: #1f3442;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.header-copy span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.header-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border: 1px solid #1f3442;
+  border-radius: 3px;
+  padding: 0 16px;
+  color: #1f3442;
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.header-action:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.configurator {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  align-items: start;
+  min-height: calc(100vh - 78px);
+}
+
+.product-column {
+  position: sticky;
+  top: 78px;
+  display: grid;
+  grid-template-rows: minmax(380px, 1fr) auto;
+  height: calc(100vh - 78px);
+  border-right: 1px solid var(--line);
+  background: #fff;
+}
+
+.product-preview {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+  padding: 24px;
+}
+
+canvas {
+  display: block;
+  width: min(100%, 900px);
+  max-height: calc(100vh - 280px);
+  aspect-ratio: 1200 / 760;
+  background: #fff;
+  touch-action: none;
+}
+
+.empty-state {
+  position: absolute;
+  left: 24px;
+  top: 18px;
+  display: grid;
+  gap: 2px;
+  width: min(260px, calc(100% - 48px));
+  border-radius: 4px;
+  padding: 12px 14px;
+  color: #fff;
+  background: rgba(13, 20, 28, 0.64);
+  text-align: center;
+}
+
+.empty-state span {
+  font-size: 0.88rem;
+}
+
+.empty-state.is-hidden {
+  display: none;
+}
+
+.product-meta {
+  padding: 26px 32px 34px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #6d7580;
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.selected-swatch {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #fff;
+  outline: 1px solid #51606d;
+  background: #244572;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin: 28px 0 8px;
+  font-size: 0.95rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+}
+
+h3 {
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-meta p:not(.eyebrow) {
+  max-width: 540px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.editor-column {
+  overflow-y: auto;
+  background: #f5f5f5;
+}
+
+.editor-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 10px 24px;
+  color: #28495d;
+  border-bottom: 1px solid #d9e0e5;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+}
+
+.editor-topbar span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.primary-button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 3px;
+  padding: 0 22px;
+  color: #fff;
+  background: #1f3442;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 24px rgba(31, 52, 66, 0.16);
+}
+
+.primary-button:hover {
+  background: var(--accent-dark);
+}
+
+.panel-section,
+.summary-box {
+  margin: 18px 24px;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 20px;
+}
+
+.product-tools {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 10px;
+}
+
+input[type="search"],
+input[type="number"],
+input[type="text"],
+select,
+input[type="color"],
+textarea {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid #cfd5da;
+  border-radius: 2px;
+  padding: 0 12px;
+  color: var(--ink);
+  background: #fff;
+}
+
+textarea {
+  min-height: 92px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.color-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.color-filter button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0 9px;
+  color: var(--muted);
+  background: #fff;
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.color-filter button::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: var(--swatch, linear-gradient(135deg, #111 0 30%, #fff 30% 60%, #0f7a6c 60%));
+}
+
+.color-filter button.is-active {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.count,
+.hint {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.pen-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.pen-option {
+  display: grid;
+  grid-template-rows: 88px auto;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid transparent;
+  padding: 0;
+  background: #f8f9fa;
+  text-align: left;
+}
+
+.pen-option.is-active {
+  border-color: #1f3544;
+}
+
+.pen-option img {
+  width: 100%;
+  height: 88px;
+  object-fit: contain;
+  background: #fff;
+}
+
+.pen-option span {
+  min-height: 42px;
+  padding: 7px;
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.logo-upload-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.upload-zone {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 190px;
+  border: 2px dashed rgba(12, 131, 185, 0.48);
+  border-radius: 4px;
+  padding: 18px;
+  background:
+    linear-gradient(45deg, #e7eaed 25%, transparent 25%),
+    linear-gradient(-45deg, #e7eaed 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e7eaed 75%),
+    linear-gradient(-45deg, transparent 75%, #e7eaed 75%);
+  background-color: #fff;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0;
+  background-size: 20px 20px;
+}
+
+.upload-zone span {
+  color: #213746;
+  font-size: 1rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.upload-zone strong {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: end;
+  justify-self: end;
+  width: max-content;
+  border-radius: 4px;
+  padding: 15px 22px;
+  color: #fff;
+  background: linear-gradient(135deg, #0c83b9, #0f7a6c);
+  box-shadow: 0 12px 24px rgba(12, 131, 185, 0.24);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.upload-zone small {
+  grid-column: 1 / -1;
+  color: #6d7580;
+  font-weight: 750;
+}
+
+.logo-preview-image {
+  display: none;
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: min(360px, 80%);
+  max-height: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(23, 32, 42, 0.12));
+}
+
+.logo-upload-zone.has-logo {
+  min-height: 220px;
+  border-style: solid;
+  background:
+    linear-gradient(45deg, #edf1f4 25%, transparent 25%),
+    linear-gradient(-45deg, #edf1f4 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #edf1f4 75%),
+    linear-gradient(-45deg, transparent 75%, #edf1f4 75%);
+  background-color: #fff;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0;
+  background-size: 20px 20px;
+}
+
+.logo-upload-zone.has-logo .logo-preview-image {
+  display: block;
+}
+
+.upload-zone input,
+.file-drop input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.file-drop {
+  display: inline-flex;
+  margin-top: 10px;
+  margin-bottom: 14px;
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--accent-dark);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.warning {
+  margin-top: 12px;
+  border-radius: 3px;
+  padding: 10px 12px;
+  color: #fff;
+  background: var(--danger);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.warning.is-hidden {
+  display: none;
+}
+
+.color-mapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-top: 24px;
+}
+
+.color-list,
+.print-list {
+  display: grid;
+  gap: 10px;
+}
+
+.color-item,
+.print-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  color: #4d5b66;
+  font-size: 0.86rem;
+}
+
+.color-chip {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #c7cdd2;
+  background: var(--chip);
+}
+
+.print-item select {
+  min-height: 34px;
+}
+
+.sub-panel {
+  margin-top: 16px;
+  margin-bottom: 18px;
+  border: 1px solid #dfe4e8;
+  background: #f8fafb;
+  padding: 14px;
+}
+
+.instruction-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  border-left: 4px solid var(--success);
+  background: #f8fafb;
+  padding: 12px 14px;
+  color: #53636f;
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.quick-actions + .quick-actions {
+  margin-top: 8px;
+}
+
+.quick-actions button {
+  min-height: 46px;
+  border: 1px solid #cfd5da;
+  border-radius: 2px;
+  color: #39505f;
+  background: #fff;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.quick-actions button:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.logo-color-card {
+  border: 1px solid #dfe4e8;
+  border-radius: 4px;
+  background: #f8fafb;
+  padding: 16px;
+}
+
+.logo-color-card p {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.logo-color-strip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.logo-color-strip button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  border: 1px solid #cfd5da;
+  border-radius: 2px;
+  padding: 0 12px;
+  color: #39505f;
+  background: #fff;
+  font-weight: 850;
+}
+
+.logo-color-strip button::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: var(--chip, linear-gradient(135deg, #111 0 50%, #fff 50%));
+}
+
+.logo-color-strip button.is-active {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: 0 0 0 2px rgba(12, 131, 185, 0.12);
+}
+
+.custom-logo-color {
+  display: none;
+  grid-template-columns: 1fr 58px;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  border: 1px solid #d8dde2;
+  background: #fff;
+  padding: 10px 12px;
+  color: #39505f;
+  font-size: 0.84rem;
+  font-weight: 850;
+}
+
+.custom-logo-color.is-visible {
+  display: grid;
+}
+
+.custom-logo-color input {
+  min-height: 38px;
+  padding: 3px;
+}
+
+.trust-note {
+  margin: 10px 0 0;
+  color: #53636f;
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
+.secondary-button {
+  min-height: 40px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: 0 14px;
+  color: var(--accent-dark);
+  background: #fff;
+  font-weight: 850;
+}
+
+.advanced-panel {
+  margin-top: 14px;
+  border: 1px solid #dfe4e8;
+  background: #fff;
+}
+
+.advanced-panel summary {
+  min-height: 44px;
+  padding: 12px 14px;
+  color: #28495d;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.advanced-panel[open] {
+  padding-bottom: 12px;
+}
+
+.advanced-panel .range-row {
+  margin: 0 14px;
+}
+
+.orientation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.orientation-grid button,
+.segmented button {
+  min-height: 42px;
+  border: 1px solid #cfd5da;
+  border-radius: 2px;
+  color: #5e6b75;
+  background: #fff;
+  font-weight: 800;
+}
+
+.orientation-grid button.is-active,
+.segmented button.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.range-row {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr) 54px;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  color: #53636f;
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
+.range-row output {
+  color: #28495d;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-align: right;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.color-row {
+  display: none;
+}
+
+.color-row.is-visible {
+  display: grid;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.summary-box dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.summary-box div {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 20px;
+}
+
+.summary-box dt {
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.summary-box dd {
+  margin: 0;
+  color: #53636f;
+}
+
+.final-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.check-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 12px;
+  border: 1px solid #dbe2e7;
+  background: #f8fafb;
+  padding: 14px;
+}
+
+.check-card input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.check-card span {
+  display: grid;
+  gap: 2px;
+}
+
+.check-card small {
+  color: var(--muted);
+}
+
+.status-strip {
+  margin: 0 0 14px;
+  border-left: 4px solid var(--success);
+  background: #f8fafb;
+  padding: 11px 13px;
+  color: #39505f;
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.form-grid label,
+.notes-field {
+  display: grid;
+  gap: 6px;
+  color: #53636f;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.notes-field {
+  margin-top: 12px;
+}
+
+.choice-group {
+  margin-top: 16px;
+}
+
+.choice-group h3 {
+  margin-bottom: 8px;
+}
+
+.choice-group label,
+.checkbox-grid label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  color: #53636f;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.choice-group input,
+.checkbox-grid input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 14px;
+}
+
+.catalog-tips {
+  margin-top: 16px;
+  border-left: 4px solid var(--accent);
+  background: #f8fafb;
+  padding: 14px 16px;
+}
+
+.catalog-tips ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+  color: #53636f;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1100px) {
+  .app-header,
+  .configurator {
+    grid-template-columns: 1fr;
+  }
+
+  .product-column {
+    position: static;
+    grid-template-rows: auto auto;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .product-preview {
+    min-height: 360px;
+  }
+
+  canvas {
+    max-height: 420px;
+  }
+
+  .pen-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --mobile-header: 58px;
+    --mobile-preview: 36dvh;
+    --mobile-panel-top: calc(var(--mobile-header) + var(--mobile-preview) - 16px);
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    background: #eef1f3;
+  }
+
+  .app-shell {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    grid-template-columns: 1fr auto;
+    gap: 10px 14px;
+    height: var(--mobile-header);
+    padding: 10px 12px;
+    box-shadow: 0 8px 22px rgba(24, 36, 46, 0.08);
+  }
+
+  .brand-logo {
+    width: min(180px, 52vw);
+  }
+
+  .header-copy {
+    display: none;
+  }
+
+  .header-action {
+    min-height: 36px;
+    padding: 0 11px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .configurator {
+    display: block;
+    min-height: 100dvh;
+  }
+
+  .product-column {
+    position: fixed;
+    top: var(--mobile-header);
+    left: 0;
+    right: 0;
+    z-index: 7;
+    display: block;
+    height: var(--mobile-preview);
+    overflow: hidden;
+    border-bottom: 0;
+    background:
+      radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.96), rgba(245, 247, 248, 0.9) 58%),
+      #eef1f3;
+  }
+
+  .product-preview {
+    height: 100%;
+    min-height: 0;
+    padding: 8px 8px 48px;
+  }
+
+  canvas {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    background: transparent;
+  }
+
+  .empty-state {
+    left: 12px;
+    top: 12px;
+    width: calc(100% - 24px);
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  .product-meta {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 6px 10px;
+    align-items: center;
+    border: 1px solid rgba(216, 221, 226, 0.78);
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 24px rgba(24, 36, 46, 0.08);
+    backdrop-filter: blur(8px);
+  }
+
+  .product-meta .eyebrow {
+    grid-column: 1;
+    margin: 0;
+    font-size: 0;
+  }
+
+  .product-meta .eyebrow::after {
+    content: "Cor";
+    font-size: 0.65rem;
+  }
+
+  .selected-swatch {
+    width: 24px;
+    height: 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-meta p:not(.eyebrow) {
+    display: none;
+  }
+
+  .editor-column {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--mobile-panel-top);
+    bottom: 0;
+    z-index: 8;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 18px 18px 0 0;
+    background: #f6f7f8;
+    box-shadow: 0 -14px 32px rgba(22, 35, 46, 0.18);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .editor-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 0;
+    padding: 20px 16px 12px;
+    border-radius: 18px 18px 0 0;
+    background: #fff;
+  }
+
+  .editor-topbar::before {
+    content: "";
+    align-self: center;
+    width: 46px;
+    height: 5px;
+    border-radius: 999px;
+    background: #c9d0d6;
+  }
+
+  .editor-topbar strong {
+    font-size: 0.96rem;
+  }
+
+  .editor-topbar span {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .product-tools,
+  .logo-upload-layout,
+  .color-mapper,
+  .orientation-grid,
+  .quick-actions,
+  .form-grid,
+  .checkbox-grid,
+  .summary-box div {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-section,
+  .summary-box {
+    margin: 10px;
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  h2 {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-size: 0.76rem;
+  }
+
+  .hint,
+  .count,
+  .trust-note {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  input[type="search"],
+  input[type="number"],
+  input[type="text"],
+  select,
+  textarea {
+    min-height: 46px;
+    font-size: 16px;
+  }
+
+  textarea {
+    min-height: 110px;
+  }
+
+  .color-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: -14px;
+    padding: 0 14px 4px 0;
+    scrollbar-width: none;
+  }
+
+  .color-filter::-webkit-scrollbar {
+    display: none;
+  }
+
+  .color-filter button {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 0.78rem;
+  }
+
+  .pen-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 330px;
+    gap: 8px;
+  }
+
+  .pen-option {
+    grid-template-rows: 96px auto;
+    border-color: #e2e6ea;
+    border-radius: 6px;
+  }
+
+  .pen-option img {
+    height: 96px;
+  }
+
+  .pen-option span {
+    min-height: 48px;
+    padding: 8px;
+    font-size: 0.68rem;
+  }
+
+  .upload-zone {
+    grid-template-columns: 1fr;
+    min-height: 210px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .upload-zone strong {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: stretch;
+    width: 100%;
+    min-height: 48px;
+    padding: 15px 18px;
+    text-align: center;
+  }
+
+  .upload-zone small {
+    grid-column: 1;
+  }
+
+  .logo-preview-image {
+    max-width: 92%;
+    max-height: 120px;
+  }
+
+  .logo-color-card {
+    padding: 14px;
+  }
+
+  .logo-color-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .logo-color-strip button {
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .custom-logo-color {
+    grid-template-columns: 1fr auto;
+  }
+
+  .sub-panel,
+  .advanced-panel,
+  .catalog-tips,
+  .instruction-list,
+  .check-card {
+    border-radius: 6px;
+  }
+
+  .range-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    min-height: 0;
+    margin-bottom: 14px;
+    font-size: 0.82rem;
+  }
+
+  .advanced-panel .range-row {
+    margin: 0 12px 14px;
+  }
+
+  .range-row output {
+    text-align: left;
+  }
+
+  input[type="range"] {
+    min-height: 34px;
+  }
+
+  .secondary-button,
+  .file-drop,
+  .segmented button,
+  .orientation-grid button,
+  .quick-actions button {
+    min-height: 46px;
+  }
+
+  .checkbox-grid {
+    gap: 6px;
+  }
+
+  .choice-group label,
+  .checkbox-grid label,
+  .check-card {
+    min-height: 44px;
+  }
+
+  .summary-box dl {
+    gap: 14px;
+  }
+
+  .summary-box div {
+    gap: 4px;
+  }
+
+  .final-actions,
+  .final-actions .primary-button {
+    width: 100%;
+  }
+
+  .final-actions .primary-button {
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 680px) and (max-height: 720px) {
+  :root {
+    --mobile-preview: 32dvh;
+  }
+
+  .product-preview {
+    padding-bottom: 40px;
+  }
+
+  .product-meta {
+    bottom: 6px;
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .panel-section,
+  .summary-box {
+    margin: 8px;
+    padding: 12px;
+  }
+
+  .product-preview {
+    min-height: 220px;
+  }
+
+  canvas {
+    max-height: 230px;
+  }
+
+  .pen-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .logo-color-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --phone-header: 52px;
+    --phone-preview: 42dvh;
+    --phone-sheet-top: calc(var(--phone-header) + var(--phone-preview) - 20px);
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    background: #eef1f3;
+  }
+
+  .app-shell {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .app-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    height: var(--phone-header);
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(216, 221, 226, 0.8);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 6px 18px rgba(24, 36, 46, 0.1);
+  }
+
+  .brand-logo {
+    width: min(158px, 50vw);
+  }
+
+  .header-copy {
+    display: none;
+  }
+
+  .header-action {
+    min-height: 34px;
+    border-color: #d7dde2;
+    padding: 0 10px;
+    font-size: 0.66rem;
+    white-space: nowrap;
+  }
+
+  .configurator {
+    display: block;
+    min-height: 100dvh;
+  }
+
+  .product-column {
+    position: fixed;
+    top: var(--phone-header);
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    height: var(--phone-preview);
+    overflow: hidden;
+    border: 0;
+    background:
+      linear-gradient(180deg, #ffffff 0%, #f6f8f9 100%);
+  }
+
+  .product-preview {
+    height: 100%;
+    min-height: 0;
+    padding: 2px 8px 48px;
+  }
+
+  canvas {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .empty-state {
+    top: 8px;
+    left: 10px;
+    width: auto;
+    max-width: calc(100% - 20px);
+    border-radius: 999px;
+    padding: 7px 12px;
+    background: rgba(31, 52, 66, 0.78);
+    text-align: left;
+  }
+
+  .empty-state strong {
+    font-size: 0.72rem;
+  }
+
+  .empty-state span {
+    display: none;
+  }
+
+  .product-meta {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 5px 9px;
+    align-items: center;
+    border: 1px solid rgba(216, 221, 226, 0.85);
+    border-radius: 10px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 8px 20px rgba(24, 36, 46, 0.1);
+    backdrop-filter: blur(8px);
+  }
+
+  .product-meta .eyebrow {
+    display: none;
+  }
+
+  .selected-swatch {
+    width: 22px;
+    height: 22px;
+  }
+
+  h1 {
+    margin: 0;
+    overflow: hidden;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-meta p:not(.eyebrow) {
+    grid-column: 1 / -1;
+    margin: 0;
+    overflow: hidden;
+    color: #6d7580;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .editor-column {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--phone-sheet-top);
+    bottom: 0;
+    z-index: 20;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 20px 20px 0 0;
+    background: #f6f7f8;
+    box-shadow: 0 -16px 34px rgba(22, 35, 46, 0.22);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .editor-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: grid;
+    gap: 6px;
+    min-height: 0;
+    border-radius: 20px 20px 0 0;
+    padding: 14px 14px 10px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+  }
+
+  .editor-topbar::before {
+    content: "";
+    justify-self: center;
+    width: 48px;
+    height: 5px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+    background: #c5cdd4;
+  }
+
+  .editor-topbar strong {
+    font-size: 0.92rem;
+  }
+
+  .editor-topbar span {
+    color: #71808b;
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+
+  .panel-section,
+  .summary-box {
+    margin: 8px;
+    border-radius: 10px;
+    padding: 13px;
+  }
+
+  .product-tools,
+  .logo-upload-layout,
+  .color-mapper,
+  .orientation-grid,
+  .quick-actions,
+  .form-grid,
+  .checkbox-grid,
+  .summary-box div {
+    grid-template-columns: 1fr;
+  }
+
+  .pen-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 260px;
+  }
+
+  .range-row {
+    grid-template-columns: 1fr;
+  }
+
+  .range-row output {
+    text-align: left;
+  }
+
+  .final-actions,
+  .final-actions .primary-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 720px) {
+  :root {
+    --phone-preview: 38dvh;
+  }
+
+  .product-preview {
+    padding-bottom: 42px;
+  }
+}
+
+/* ---- enhancements ---- */
+/* ==========================================================================
+   enhancements.css — camada nova sobre styles.css (não substitui o original)
+   Modo Simples/Avançado, alças no canvas, toolbar rápida e ajustes mobile.
+   ========================================================================== */
+
+/* ---- Controles do header ---------------------------------------------- */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mode-toggle button {
+  min-height: 38px;
+  border: 0;
+  padding: 0 16px;
+  color: var(--muted);
+  background: #fff;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.mode-toggle button + button {
+  border-left: 1px solid var(--line);
+}
+
+.mode-toggle button.is-active {
+  color: #fff;
+  background: var(--accent);
+}
+
+/* ---- Visibilidade por modo -------------------------------------------- */
+body.mode-simple .advanced-only {
+  display: none;
+}
+
+.step-notes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.optional {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.size-quick {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+/* ---- Dica flutuante no canvas ----------------------------------------- */
+.canvas-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translate(-50%, 8px);
+  max-width: min(92%, 460px);
+  border-radius: 999px;
+  padding: 8px 16px;
+  color: #fff;
+  background: rgba(13, 20, 28, 0.82);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.canvas-hint.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---- Toolbar rápida sobre o canvas ------------------------------------ */
+.canvas-toolbar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  gap: 8px;
+  z-index: 2;
+}
+
+.canvas-toolbar button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 16px rgba(24, 36, 46, 0.12);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+  backdrop-filter: blur(6px);
+}
+
+.canvas-toolbar button:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.canvas-toolbar button:active {
+  transform: scale(0.94);
+}
+
+/* Esconde a toolbar enquanto não há logo aplicado */
+body:not(.has-logo) .canvas-toolbar {
+  opacity: 0.55;
+}
+
+/* ---- Tema vermelho: unifica botões principais ------------------------- */
+.primary-button {
+  background: var(--accent);
+  box-shadow: 0 12px 24px rgba(225, 29, 42, 0.22);
+}
+
+.primary-button:hover {
+  background: var(--accent-dark);
+}
+
+.selected-swatch {
+  outline-color: var(--accent-dark);
+}
+
+/* ---- Ajustes finos de layout ------------------------------------------ */
+.editor-topbar {
+  gap: 12px;
+}
+
+/* ---- Mobile (herda o comportamento de bottom-sheet do styles.css) ----- */
+@media (max-width: 900px) {
+  .header-controls {
+    gap: 8px;
+  }
+
+  .mode-toggle button {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 0.66rem;
+  }
+
+  #downloadBtnTop {
+    display: none; /* no mobile o download fica no botão fixo inferior */
+  }
+
+  .canvas-toolbar {
+    top: 10px;
+    right: 10px;
+    gap: 6px;
+  }
+
+  .canvas-toolbar button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .canvas-hint {
+    bottom: 10px;
+    font-size: 0.74rem;
+    padding: 7px 13px;
+  }
+
+  /* Botão de baixar sempre acessível: fixo no rodapé da folha */
+  .final-actions {
+    position: sticky;
+    bottom: 0;
+    margin-top: 16px;
+    padding: 12px 0 14px;
+    background: linear-gradient(180deg, rgba(246, 247, 248, 0), #f6f7f8 30%);
+  }
+
+  .final-actions .primary-button {
+    min-height: 52px;
+    box-shadow: 0 10px 24px rgba(31, 52, 66, 0.22);
+  }
+}
+
+@media (max-width: 680px) {
+  #downloadBtnTop {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .mode-toggle button {
+    padding: 0 9px;
+    font-size: 0.62rem;
+  }
+}
+  </style>
+</head>
+  <body class="mode-simple">
     <main class="app-shell">
       <header class="app-header">
         <img class="brand-logo" src="./assets/newpen-signature.png" alt="Newpen Signature" />
         <div class="header-copy">
           <strong>Studio de aprovação visual</strong>
-          <span>Escolha a caneta, aplique o logo e baixe uma ficha pronta para aprovação.</span>
+          <span>Escolha a caneta, aplique o logo e baixe a ficha de aprovação.</span>
         </div>
-        <a class="header-action" href="#approvalSummary">Observações</a>
+        <div class="header-controls">
+          <div class="mode-toggle" role="group" aria-label="Modo de edição">
+            <button type="button" data-mode="simple" class="is-active">Simples</button>
+            <button type="button" data-mode="advanced">Avançado</button>
+          </div>
+          <button id="downloadBtnTop" class="primary-button" type="button">Baixar aprovação</button>
+        </div>
       </header>
 
       <section class="configurator">
@@ -23,7 +1805,14 @@
             <canvas id="mockupCanvas" width="1200" height="760" aria-label="Prévia do mockup"></canvas>
             <div id="emptyState" class="empty-state">
               <strong>Envie um logo</strong>
-              <span>Ele entrará automaticamente no centro da caneta.</span>
+              <span>Ele entra automaticamente no centro da caneta.</span>
+            </div>
+            <div id="canvasHint" class="canvas-hint">Arraste para mover. Pontas para redimensionar. Alça de cima para girar.</div>
+            <div class="canvas-toolbar" role="group" aria-label="Ajuste rápido do logo">
+              <button type="button" data-canvas-action="smaller" title="Diminuir" aria-label="Diminuir">−</button>
+              <button type="button" data-canvas-action="bigger" title="Aumentar" aria-label="Aumentar">+</button>
+              <button type="button" data-canvas-action="rotate" title="Girar 90°" aria-label="Girar 90 graus">⟳</button>
+              <button type="button" data-canvas-action="reset" title="Reposicionar" aria-label="Reposicionar">↺</button>
             </div>
           </div>
 
@@ -71,13 +1860,48 @@
           </section>
 
           <section class="panel-section">
-            <h2>2. Ajuste da caneta</h2>
-            <p class="hint">A caneta fica sempre na horizontal. Use apenas se precisar inclinar pouco ou melhorar o recorte.</p>
+            <h2>2. Envie seu logo</h2>
+            <p class="hint">Ao enviar, o logo entra automaticamente na caneta. Depois é só arrastar para ajustar.</p>
+            <label id="logoUploadZone" class="upload-zone logo-upload-zone">
+              <span id="logoUploadTitle">Enviar logo agora</span>
+              <img id="logoPreviewImage" class="logo-preview-image" alt="Prévia do logo enviado" />
+              <small id="logoUploadHint">Clique no botão para ver sua marca aplicada na caneta.</small>
+              <strong>Escolher arquivo</strong>
+              <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
+            </label>
+
+            <div class="logo-color-card">
+              <h3>Cor do logo</h3>
+              <p>Troque a cor e veja o contraste na hora.</p>
+              <div class="logo-color-strip" aria-label="Escolher cor do logo">
+                <button type="button" data-logo-color="original" class="is-active">Original</button>
+                <button type="button" data-logo-color="#111111" style="--chip: #111111">Preto</button>
+                <button type="button" data-logo-color="#ffffff" style="--chip: #ffffff">Branco</button>
+                <button type="button" data-logo-color="#c79a2b" style="--chip: #c79a2b">Dourado</button>
+                <button type="button" data-logo-color="#9aa3ad" style="--chip: #9aa3ad">Prata</button>
+                <button type="button" data-logo-color="custom" style="--chip: linear-gradient(135deg, #ffcf33, #0c83b9, #111111)">Personalizar</button>
+              </div>
+              <label class="custom-logo-color" id="customLogoColorPicker">
+                <span>Escolha qualquer cor</span>
+                <input id="logoColorInput" type="color" value="#111111" />
+              </label>
+            </div>
+
+            <label class="range-row size-quick">
+              <span>Tamanho</span>
+              <input id="scaleControl" type="range" min="8" max="90" value="24" />
+              <output id="scaleValue">24%</output>
+            </label>
+            <button class="secondary-button" type="button" data-logo-action="reset">Reposicionar no centro</button>
+          </section>
+
+          <section class="panel-section advanced-only">
+            <h2>3. Ajuste fino da caneta</h2>
+            <p class="hint">Só se precisar. A caneta já entra na horizontal.</p>
             <label class="file-drop">
               <span>Usar foto própria da caneta</span>
               <input id="penUpload" type="file" accept="image/*" />
             </label>
-            <div class="status-strip">Posição padrão: horizontal</div>
             <label class="range-row">
               <span>Inclinação leve</span>
               <input id="penRotationControl" type="range" min="-12" max="12" value="0" />
@@ -94,48 +1918,10 @@
             </div>
           </section>
 
-          <section class="panel-section">
-            <h2>3. Envie seu logo</h2>
-            <p class="hint">Ao enviar, o logo aparece aqui e entra automaticamente na caneta.</p>
-            <div class="logo-upload-layout">
-              <label id="logoUploadZone" class="upload-zone logo-upload-zone">
-                <span id="logoUploadTitle">Enviar logo agora</span>
-                <img id="logoPreviewImage" class="logo-preview-image" alt="Prévia do logo enviado" />
-                <small id="logoUploadHint">Clique no botão para ver sua marca aplicada na caneta.</small>
-                <strong>Escolher arquivo</strong>
-                <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
-              </label>
-              <div class="logo-color-card">
-                <h3>Cor do logo</h3>
-                <p>Troque a cor e veja o contraste na hora.</p>
-                <div class="logo-color-strip" aria-label="Escolher cor do logo">
-                  <button type="button" data-logo-color="original" class="is-active">Original</button>
-                  <button type="button" data-logo-color="#111111" style="--chip: #111111">Preto</button>
-                  <button type="button" data-logo-color="#ffffff" style="--chip: #ffffff">Branco</button>
-                  <button type="button" data-logo-color="#c79a2b" style="--chip: #c79a2b">Dourado</button>
-                  <button type="button" data-logo-color="#9aa3ad" style="--chip: #9aa3ad">Prata</button>
-                  <button type="button" data-logo-color="custom" style="--chip: linear-gradient(135deg, #ffcf33, #0c83b9, #111111)">Personalizar</button>
-                </div>
-                <label class="custom-logo-color" id="customLogoColorPicker">
-                  <span>Escolha qualquer cor</span>
-                  <input id="logoColorInput" type="color" value="#111111" />
-                </label>
-              </div>
-            </div>
-            <p class="trust-note">Dica: escolha uma cor com alto contraste para a aprovação ficar mais convincente.</p>
-          </section>
-
-          <section class="panel-section">
-            <h2>4. Ajuste seu logo</h2>
-            <p class="hint">Use sliders. A mudança aparece na caneta na mesma hora.</p>
-            <div class="instruction-list">
-              <span>1. Posição horizontal move o logo para esquerda ou direita.</span>
-              <span>2. Posição vertical sobe ou desce o logo na área da caneta.</span>
-              <span>3. Tamanho e giro ajudam a encaixar a marca no corpo da caneta.</span>
-            </div>
-
+          <section class="panel-section advanced-only">
+            <h2>4. Ajuste fino do logo</h2>
+            <p class="hint">Sliders precisos. A mudança aparece na caneta na mesma hora.</p>
             <div class="sub-panel">
-              <h3>Posição e encaixe</h3>
               <label class="range-row">
                 <span>Esquerda / direita</span>
                 <input id="logoXControl" type="range" min="0" max="100" value="50" />
@@ -147,20 +1933,10 @@
                 <output id="logoYValue">50%</output>
               </label>
               <label class="range-row">
-                <span>Tamanho</span>
-                <input id="scaleControl" type="range" min="8" max="90" value="24" />
-                <output id="scaleValue">24%</output>
-              </label>
-              <label class="range-row">
                 <span>Giro</span>
                 <input id="rotationControl" type="range" min="-360" max="360" value="-90" />
                 <output id="rotationValue">-90°</output>
               </label>
-              <button class="secondary-button" type="button" data-logo-action="reset">Voltar ao encaixe automático</button>
-            </div>
-
-            <details class="advanced-panel">
-              <summary>Ajustes avançados</summary>
               <label class="range-row">
                 <span>Opacidade</span>
                 <input id="opacityControl" type="range" min="20" max="100" value="92" />
@@ -171,31 +1947,20 @@
                 <input id="logoCutoutControl" type="range" min="0" max="90" value="24" />
                 <output id="logoCutoutValue">24</output>
               </label>
-              <label class="range-row visually-kept">
-                <span>Cor personalizada</span>
-                <select id="logoColorMode">
-                  <option value="original">Original</option>
-                  <option value="#111111">Preto</option>
-                  <option value="#ffffff">Branco</option>
-                  <option value="#c79a2b">Dourado</option>
-                  <option value="#9aa3ad">Prata</option>
-                  <option value="custom">Personalizada</option>
-                </select>
-              </label>
               <label class="range-row">
                 <span>Curvar na caneta</span>
                 <input id="blendControl" type="range" min="0" max="70" value="34" />
                 <output id="blendValue">34%</output>
               </label>
-            </details>
+            </div>
           </section>
 
           <section class="panel-section" id="approvalSummary">
-            <h2>5. Observações</h2>
-            <p class="hint">Use este campo apenas se quiser registrar uma orientação para a aprovação.</p>
+            <h2 class="step-notes">Observações <span class="optional">opcional</span></h2>
+            <p class="hint">Registre uma orientação para a aprovação, se quiser.</p>
             <label class="notes-field">
               <span>Observações</span>
-              <textarea id="notesInput" rows="4" placeholder="Ex.: logo centralizado no corpo, gravação em branco, aprovar antes de produzir"></textarea>
+              <textarea id="notesInput" rows="3" placeholder="Ex.: logo centralizado no corpo, gravação em branco, aprovar antes de produzir"></textarea>
             </label>
             <div class="final-actions">
               <button id="downloadBtn" class="primary-button" type="button">Baixar ficha de aprovação</button>
@@ -205,6 +1970,1154 @@
       </section>
     </main>
 
-    <script src="./app.js"></script>
   </body>
+<script>
+/* ==========================================================================
+   Mockup de Logo em Canetas — Newpen Signature
+   Motor de renderização preservado + nova camada de interação direta.
+   O cliente pode arrastar, redimensionar e girar o logo direto na caneta.
+   ========================================================================== */
+
+const canvas = document.querySelector("#mockupCanvas");
+const ctx = canvas.getContext("2d");
+const emptyState = document.querySelector("#emptyState");
+const canvasHint = document.querySelector("#canvasHint");
+
+const downloadBtn = document.querySelector("#downloadBtn");
+const downloadBtnTop = document.querySelector("#downloadBtnTop");
+
+const logoUpload = document.querySelector("#logoUpload");
+const penUpload = document.querySelector("#penUpload");
+
+const penRotationControl = document.querySelector("#penRotationControl");
+const maskControl = document.querySelector("#maskControl");
+const scaleControl = document.querySelector("#scaleControl");
+const rotationControl = document.querySelector("#rotationControl");
+const opacityControl = document.querySelector("#opacityControl");
+const logoCutoutControl = document.querySelector("#logoCutoutControl");
+const logoColorInput = document.querySelector("#logoColorInput");
+const customLogoColorPicker = document.querySelector("#customLogoColorPicker");
+const blendControl = document.querySelector("#blendControl");
+const logoXControl = document.querySelector("#logoXControl");
+const logoYControl = document.querySelector("#logoYControl");
+
+const penGrid = document.querySelector("#penGrid");
+const productSearch = document.querySelector("#productSearch");
+const categoryFilter = document.querySelector("#categoryFilter");
+const productCount = document.querySelector("#productCount");
+const fitButtons = document.querySelectorAll("[data-fit]");
+const productColorButtons = document.querySelectorAll("[data-product-color]");
+const modeButtons = document.querySelectorAll("[data-mode]");
+const canvasActionButtons = document.querySelectorAll("[data-canvas-action]");
+
+const selectedProductTitle = document.querySelector("#selectedProductTitle");
+const selectedProductDescription = document.querySelector("#selectedProductDescription");
+const selectedColorSwatch = document.querySelector("#selectedColorSwatch");
+
+const logoActionButtons = document.querySelectorAll("[data-logo-action]");
+const logoColorButtons = document.querySelectorAll("[data-logo-color]");
+const logoUploadZone = document.querySelector("#logoUploadZone");
+const logoPreviewImage = document.querySelector("#logoPreviewImage");
+const logoUploadTitle = document.querySelector("#logoUploadTitle");
+const logoUploadHint = document.querySelector("#logoUploadHint");
+
+const logoXValue = document.querySelector("#logoXValue");
+const logoYValue = document.querySelector("#logoYValue");
+const scaleValue = document.querySelector("#scaleValue");
+const rotationValue = document.querySelector("#rotationValue");
+const opacityValue = document.querySelector("#opacityValue");
+const logoCutoutValue = document.querySelector("#logoCutoutValue");
+const blendValue = document.querySelector("#blendValue");
+const penRotationValue = document.querySelector("#penRotationValue");
+const maskValue = document.querySelector("#maskValue");
+
+const notesInput = document.querySelector("#notesInput");
+
+const brandImage = new Image();
+brandImage.src = "./assets/newpen-signature.png";
+
+const state = {
+  pen: new Image(),
+  penBounds: null,
+  logo: null,
+  logoOriginal: null,
+  products: [],
+  selectedProduct: null,
+  productColor: "all",
+  fit: "contain",
+  penZoom: 1.32,
+  penOrientation: 90,
+  penTilt: Number(penRotationControl?.value || 0),
+  maskTolerance: Number(maskControl?.value || 24),
+  logoX: canvas.width * 0.5,
+  logoY: canvas.height * 0.52,
+  scale: Number(scaleControl?.value || 24) / 100,
+  rotation: Number(rotationControl?.value || -90),
+  opacity: Number(opacityControl?.value || 92) / 100,
+  logoCutout: Number(logoCutoutControl?.value || 24),
+  logoColorMode: "original",
+  logoColor: logoColorInput?.value || "#111111",
+  blend: Number(blendControl?.value || 34) / 100,
+  logoColors: [],
+};
+
+state.pen.crossOrigin = "anonymous";
+
+/* ---- Interação direta no canvas ---------------------------------------- */
+const HANDLE_HIT = 30; // tolerância em px do canvas
+const pointers = new Map();
+let activeMode = null; // move | resize | rotate | pinch
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+let startDist = 1;
+let startScale = 0.24;
+let startAngle = 0;
+let startRotation = 0;
+let startMid = { x: 0, y: 0 };
+let startLogo = { x: 0, y: 0 };
+
+updateControlLabels();
+setMode("simple");
+loadProducts();
+
+/* ---- Carregamento ------------------------------------------------------ */
+async function loadProducts() {
+  try {
+    const response = await fetch("./products.json");
+    if (!response.ok) throw new Error("Nao foi possivel carregar products.json");
+    state.products = await response.json();
+    renderCategoryOptions();
+    renderProducts();
+    if (state.products[0]) selectProduct(state.products[0]);
+  } catch (error) {
+    if (productCount) productCount.textContent = "Nao foi possivel carregar a galeria.";
+    penGrid.innerHTML = '<p class="hint">Abra pelo servidor local ou publique no GitHub Pages para carregar o catalogo.</p>';
+    console.error(error);
+  }
+}
+
+function loadPen(src) {
+  const image = new Image();
+  image.crossOrigin = src.startsWith("data:") || src.startsWith("blob:") ? "" : "anonymous";
+  image.onload = () => {
+    state.pen = image;
+    state.penBounds = detectImageBounds(image);
+    draw();
+  };
+  image.src = src;
+}
+
+function loadLogo(src) {
+  const image = new Image();
+  image.onload = () => {
+    state.logoOriginal = image;
+    state.logo = processLogoImage(image);
+    state.logoColors = detectLogoColors(state.logo);
+    updateLogoUploadPreview(src);
+    autoPlaceLogo();
+    emptyState.classList.add("is-hidden");
+    document.body.classList.add("has-logo");
+    showHint("Arraste para mover. Pontas para redimensionar. Alça de cima para girar.", true);
+    draw();
+  };
+  image.src = src;
+}
+
+function updateLogoUploadPreview(src) {
+  if (!logoPreviewImage || !logoUploadZone) return;
+  logoPreviewImage.src = src;
+  logoUploadZone.classList.add("has-logo");
+  if (logoUploadTitle) logoUploadTitle.textContent = "Logo carregado";
+  if (logoUploadHint) logoUploadHint.textContent = "Ajuste direto na caneta ou troque a cor abaixo.";
+}
+
+function autoPlaceLogo() {
+  state.logoX = canvas.width * 0.5;
+  state.logoY = canvas.height * 0.44;
+  state.scale = 0.24;
+  state.rotation = -getPenRotation();
+  state.opacity = 0.92;
+  state.blend = 0.34;
+  syncAllControls();
+}
+
+/* ---- Processamento de imagem ------------------------------------------- */
+function processLogoImage(image) {
+  const logoCanvas = document.createElement("canvas");
+  logoCanvas.width = image.width;
+  logoCanvas.height = image.height;
+  const logoCtx = logoCanvas.getContext("2d");
+  logoCtx.drawImage(image, 0, 0);
+
+  if (state.logoCutout > 0) {
+    const imageData = logoCtx.getImageData(0, 0, logoCanvas.width, logoCanvas.height);
+    const data = imageData.data;
+    const tolerance = state.logoCutout;
+    let visiblePixels = 0;
+    let nonWhitePixels = 0;
+
+    for (let index = 0; index < data.length; index += 4) {
+      const red = data[index];
+      const green = data[index + 1];
+      const blue = data[index + 2];
+      const alpha = data[index + 3];
+      if (alpha < 20) continue;
+      visiblePixels += 1;
+      const nearWhite = red > 255 - tolerance && green > 255 - tolerance && blue > 255 - tolerance;
+      if (!nearWhite) nonWhitePixels += 1;
+    }
+
+    const hasEnoughNonWhiteInk = visiblePixels > 0 && nonWhitePixels / visiblePixels > 0.08;
+
+    for (let index = 0; index < data.length; index += 4) {
+      const red = data[index];
+      const green = data[index + 1];
+      const blue = data[index + 2];
+      const alpha = data[index + 3];
+      const nearWhite = red > 255 - tolerance && green > 255 - tolerance && blue > 255 - tolerance;
+      if (hasEnoughNonWhiteInk && alpha > 0 && nearWhite) data[index + 3] = 0;
+    }
+
+    logoCtx.putImageData(imageData, 0, 0);
+  }
+
+  return logoCanvas;
+}
+
+/* ---- Catálogo ---------------------------------------------------------- */
+function renderCategoryOptions() {
+  if (!categoryFilter) return;
+  const categories = [...new Set(state.products.map((product) => product.category))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+  categoryFilter.innerHTML = '<option value="all">Todas as linhas</option>';
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryFilter.appendChild(option);
+  });
+}
+
+function renderProducts() {
+  const term = normalizeText(productSearch?.value || "");
+  const category = categoryFilter?.value || "all";
+  const filtered = state.products.filter((product) => {
+    const productText = normalizeText(`${product.category} ${product.name}`);
+    const matchesCategory = category === "all" || product.category === category;
+    const matchesTerm = !term || productText.includes(term);
+    const matchesColor = state.productColor === "all" || matchesProductColor(productText, state.productColor);
+    return matchesCategory && matchesTerm && matchesColor;
+  });
+
+  if (productCount) productCount.textContent = `${filtered.length} produto${filtered.length === 1 ? "" : "s"}`;
+  penGrid.innerHTML = "";
+
+  if (!filtered.length) {
+    penGrid.innerHTML = '<p class="hint">Nenhum produto encontrado.</p>';
+    return;
+  }
+
+  filtered.forEach((product) => {
+    const button = document.createElement("button");
+    button.className = `pen-option${state.selectedProduct?.src === product.src ? " is-active" : ""}`;
+    button.type = "button";
+    button.dataset.src = product.src;
+    button.innerHTML = `
+      <img src="${product.src}" alt="${product.category} ${product.name}" loading="lazy" />
+      <span>${product.category}<br>${product.name}</span>
+    `;
+    penGrid.appendChild(button);
+  });
+}
+
+function matchesProductColor(productText, color) {
+  const colorTerms = {
+    preta: ["preta", "preto", "black", "all black"],
+    branca: ["branca", "branco", "white"],
+    azul: ["azul", "blue"],
+    vermelha: ["vermelha", "vermelho", "red"],
+    verde: ["verde", "green"],
+    amarela: ["amarela", "amarelo", "yellow"],
+    rosa: ["rosa", "rose", "pink"],
+    roxo: ["roxo", "roxa", "lilas", "purple"],
+    laranja: ["laranja", "orange"],
+    dourada: ["dourada", "dourado", "gold"],
+    prata: ["prata", "silver"],
+  };
+  return (colorTerms[color] || [color]).some((term) => productText.includes(term));
+}
+
+function selectProduct(product) {
+  state.selectedProduct = product;
+  loadPen(product.src);
+  updateProductDetails(product);
+  renderProducts();
+}
+
+function updateProductDetails(product) {
+  const productLabel = `${product.category} - ${product.name}`;
+  const colorHex = getProductColorHex(product);
+  if (selectedProductTitle) selectedProductTitle.textContent = productLabel;
+  if (selectedProductDescription) {
+    selectedProductDescription.textContent =
+      "Caneta selecionada. Envie o logo, ajuste direto na caneta e baixe a previa para aprovacao.";
+  }
+  if (selectedColorSwatch) selectedColorSwatch.style.background = colorHex;
+}
+
+function getProductColorHex(product) {
+  const text = normalizeText(`${product.category} ${product.name}`);
+  const colors = [
+    ["preta", "#1f2933"], ["preto", "#1f2933"],
+    ["branca", "#f8fafc"], ["branco", "#f8fafc"],
+    ["azul", "#27496d"], ["vermelha", "#b4232f"], ["vermelho", "#b4232f"],
+    ["verde", "#2f6f4f"], ["amarela", "#e2b83b"], ["amarelo", "#e2b83b"],
+    ["rosa", "#d65a8a"], ["roxo", "#6d4fb3"], ["roxa", "#6d4fb3"],
+    ["laranja", "#df7b2d"], ["dourada", "#c79a2b"], ["dourado", "#c79a2b"],
+    ["prata", "#9aa3ad"],
+  ];
+  const match = colors.find(([term]) => text.includes(term));
+  return match ? match[1] : "#27496d";
+}
+
+function normalizeText(value) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .trim();
+}
+
+/* ---- Render ------------------------------------------------------------ */
+function draw() {
+  renderScene(ctx, true);
+  updateControlLabels();
+}
+
+function renderScene(targetCtx, includeSelection) {
+  targetCtx.clearRect(0, 0, canvas.width, canvas.height);
+  targetCtx.fillStyle = "#ffffff";
+  targetCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const single = getViewFrame("single");
+  drawPen(targetCtx, single);
+
+  if (!state.logo) return;
+
+  const logoWidth = Math.max(60, canvas.width * state.scale);
+  const logoHeight = logoWidth * (state.logo.height / state.logo.width);
+  drawLogoClippedToPen(targetCtx, logoWidth, logoHeight, single, state.logoX, state.logoY);
+  if (includeSelection) drawSelection(targetCtx, logoWidth, logoHeight, state.logoX, state.logoY);
+}
+
+function getViewFrame() {
+  return { centerX: canvas.width / 2, centerY: canvas.height / 2, width: canvas.width, height: canvas.height };
+}
+
+function drawPen(targetCtx, frame) {
+  if (!state.pen.complete || state.pen.naturalWidth === 0) return;
+
+  const bounds = state.penBounds || { x: 0, y: 0, width: state.pen.width, height: state.pen.height };
+  const size = getFitSize(bounds, state.fit, frame.width, frame.height);
+  const angle = (getPenRotation() * Math.PI) / 180;
+  const rotatedWidth = Math.abs(size.width * Math.cos(angle)) + Math.abs(size.height * Math.sin(angle));
+  const rotatedHeight = Math.abs(size.width * Math.sin(angle)) + Math.abs(size.height * Math.cos(angle));
+  const rotationScale =
+    state.fit === "contain" ? Math.min(1, frame.width / rotatedWidth, frame.height / rotatedHeight) : 1;
+  const zoom = state.penZoom || 1;
+  const drawWidth = size.width * rotationScale * zoom;
+  const drawHeight = size.height * rotationScale * zoom;
+
+  targetCtx.save();
+  targetCtx.translate(frame.centerX, frame.centerY);
+  targetCtx.rotate(angle);
+  targetCtx.drawImage(
+    state.pen,
+    bounds.x, bounds.y, bounds.width, bounds.height,
+    -drawWidth / 2,
+    -drawHeight / 2,
+    drawWidth,
+    drawHeight,
+  );
+  targetCtx.restore();
+}
+
+function getFitSize(image, mode, targetWidth = canvas.width, targetHeight = canvas.height) {
+  const sourceWidth = image.width || image.naturalWidth || 0;
+  const sourceHeight = image.height || image.naturalHeight || 0;
+  const isDrawable = image.complete === undefined || image.complete;
+  if (!isDrawable || sourceWidth === 0 || sourceHeight === 0) return { width: 0, height: 0 };
+
+  const canvasRatio = targetWidth / targetHeight;
+  const imageRatio = sourceWidth / sourceHeight;
+
+  if ((mode === "cover" && imageRatio > canvasRatio) || (mode === "contain" && imageRatio < canvasRatio)) {
+    const height = targetHeight;
+    return { width: height * imageRatio, height };
+  }
+  const width = targetWidth;
+  return { width, height: width / imageRatio };
+}
+
+function drawLogoClippedToPen(targetCtx, width, height, frame, logoX, logoY, wrapOffset = 0) {
+  const logoLayer = document.createElement("canvas");
+  logoLayer.width = canvas.width;
+  logoLayer.height = canvas.height;
+  const logoCtx = logoLayer.getContext("2d");
+
+  drawEngravedLogo(logoCtx, width, height, logoX + wrapOffset, logoY);
+
+  logoCtx.save();
+  logoCtx.globalCompositeOperation = "destination-in";
+  logoCtx.drawImage(createPenMask(frame), 0, 0);
+  logoCtx.restore();
+
+  targetCtx.drawImage(logoLayer, 0, 0);
+}
+
+function drawEngravedLogo(targetCtx, width, height, logoX, logoY) {
+  const bend = state.blend;
+  const temp = document.createElement("canvas");
+  const tempCtx = temp.getContext("2d");
+  const padding = Math.ceil(height * 0.45);
+  temp.width = Math.ceil(width);
+  temp.height = Math.ceil(height + padding * 2);
+
+  tempCtx.clearRect(0, 0, temp.width, temp.height);
+  tempCtx.drawImage(state.logo, 0, padding, width, height);
+  applyLogoColor(tempCtx, temp.width, temp.height);
+
+  targetCtx.save();
+  targetCtx.translate(logoX, logoY);
+  targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
+  targetCtx.globalAlpha = state.opacity;
+  targetCtx.globalCompositeOperation = isLightLogo() ? "screen" : "multiply";
+  targetCtx.filter = isLightLogo()
+    ? `contrast(${1 + bend * 0.42}) saturate(${1 - bend * 0.25}) brightness(${1 + bend * 0.08})`
+    : `contrast(${1 + bend * 0.55}) saturate(${1 - bend * 0.42}) brightness(${1 - bend * 0.12})`;
+
+  const columns = Math.max(80, Math.ceil(width));
+  const sliceWidth = temp.width / columns;
+  for (let index = 0; index < columns; index += 1) {
+    const progress = index / (columns - 1 || 1);
+    const centered = progress * 2 - 1;
+    const curve = Math.sqrt(Math.max(0, 1 - centered * centered));
+    const wrapScale = 1 - bend * 0.34 * Math.abs(centered);
+    const yOffset = bend * height * 0.16 * (1 - curve);
+    const destHeight = temp.height * wrapScale;
+    const x = -width / 2 + index * (width / columns);
+
+    targetCtx.drawImage(
+      temp,
+      index * sliceWidth, 0, sliceWidth + 1, temp.height,
+      x, -destHeight / 2 + yOffset, width / columns + 1, destHeight,
+    );
+  }
+  targetCtx.restore();
+
+  targetCtx.save();
+  targetCtx.translate(logoX, logoY);
+  targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
+  targetCtx.globalAlpha = Math.min(0.28, state.opacity * 0.32);
+  targetCtx.globalCompositeOperation = "screen";
+  const shine = targetCtx.createLinearGradient(-width / 2, 0, width / 2, 0);
+  shine.addColorStop(0, "rgba(255,255,255,0)");
+  shine.addColorStop(0.45, "rgba(255,255,255,0.42)");
+  shine.addColorStop(0.58, "rgba(255,255,255,0.08)");
+  shine.addColorStop(1, "rgba(255,255,255,0)");
+  targetCtx.fillStyle = shine;
+  targetCtx.fillRect(-width / 2, -height * 0.65, width, height * 1.3);
+  targetCtx.restore();
+}
+
+function applyLogoColor(targetCtx, width, height) {
+  const color = getLogoColor();
+  if (!color) return;
+  targetCtx.save();
+  targetCtx.globalCompositeOperation = "source-in";
+  targetCtx.fillStyle = color;
+  targetCtx.fillRect(0, 0, width, height);
+  targetCtx.restore();
+}
+
+function getLogoColor() {
+  if (state.logoColorMode === "original") return null;
+  if (state.logoColorMode === "custom") return state.logoColor;
+  return state.logoColorMode;
+}
+
+function isLightLogo() {
+  const forcedColor = getLogoColor();
+  if (forcedColor) return getColorBrightness(forcedColor) > 188;
+  if (!state.logoColors.length) return false;
+  const totalWeight = state.logoColors.reduce((total, color) => total + color.count, 0) || 1;
+  const averageBrightness = state.logoColors.reduce((total, color) => {
+    return total + getColorBrightness(color.hex) * color.count;
+  }, 0) / totalWeight;
+  return averageBrightness > 188;
+}
+
+function getColorBrightness(hex) {
+  const normalized = hex.replace("#", "");
+  if (normalized.length !== 6) return 0;
+  const red = parseInt(normalized.slice(0, 2), 16);
+  const green = parseInt(normalized.slice(2, 4), 16);
+  const blue = parseInt(normalized.slice(4, 6), 16);
+  return (red * 299 + green * 587 + blue * 114) / 1000;
+}
+
+function createPenMask(frame) {
+  const maskCanvas = document.createElement("canvas");
+  maskCanvas.width = canvas.width;
+  maskCanvas.height = canvas.height;
+  const maskCtx = maskCanvas.getContext("2d");
+
+  drawPen(maskCtx, frame);
+
+  const imageData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
+  const data = imageData.data;
+  const tolerance = state.maskTolerance;
+  let transparentPixels = 0;
+
+  for (let index = 3; index < data.length; index += 4) {
+    if (data[index] < 20) transparentPixels += 1;
+  }
+  const hasTransparentBackground = transparentPixels > data.length / 4 * 0.08;
+
+  for (let index = 0; index < data.length; index += 4) {
+    const red = data[index];
+    const green = data[index + 1];
+    const blue = data[index + 2];
+    const alpha = data[index + 3];
+    const nearWhite = red > 255 - tolerance && green > 255 - tolerance && blue > 255 - tolerance;
+    const visible = hasTransparentBackground ? alpha > 20 : alpha > 20 && !nearWhite;
+    data[index] = 255;
+    data[index + 1] = 255;
+    data[index + 2] = 255;
+    data[index + 3] = visible ? 255 : 0;
+  }
+  maskCtx.putImageData(imageData, 0, 0);
+  return maskCanvas;
+}
+
+/* ---- Alças de seleção (mover / redimensionar / girar) ------------------ */
+function getLogoGeometry() {
+  if (!state.logo) return null;
+  const width = Math.max(60, canvas.width * state.scale);
+  const height = width * (state.logo.height / state.logo.width);
+  const angle = ((state.rotation + getPenRotation()) * Math.PI) / 180;
+  return { width, height, angle, cx: state.logoX, cy: state.logoY };
+}
+
+function toLocal(px, py, geo) {
+  const dx = px - geo.cx;
+  const dy = py - geo.cy;
+  const cos = Math.cos(-geo.angle);
+  const sin = Math.sin(-geo.angle);
+  return { x: dx * cos - dy * sin, y: dx * sin + dy * cos };
+}
+
+function hitTest(px, py) {
+  const geo = getLogoGeometry();
+  if (!geo) return null;
+  const local = toLocal(px, py, geo);
+  const hw = geo.width / 2;
+  const hh = geo.height / 2;
+  const rotateHandle = { x: 0, y: -hh - 46 };
+  if (Math.hypot(local.x - rotateHandle.x, local.y - rotateHandle.y) <= HANDLE_HIT) return "rotate";
+  const corners = [[hw, hh], [-hw, hh], [hw, -hh], [-hw, -hh]];
+  for (const [cx, cy] of corners) {
+    if (Math.hypot(local.x - cx, local.y - cy) <= HANDLE_HIT) return "resize";
+  }
+  if (Math.abs(local.x) <= hw && Math.abs(local.y) <= hh) return "move";
+  return null;
+}
+
+function drawSelection(targetCtx, width, height, logoX, logoY) {
+  const hw = width / 2;
+  const hh = height / 2;
+  targetCtx.save();
+  targetCtx.translate(logoX, logoY);
+  targetCtx.rotate(((state.rotation + getPenRotation()) * Math.PI) / 180);
+
+  // moldura
+  targetCtx.strokeStyle = "rgba(225, 29, 42, 0.95)";
+  targetCtx.lineWidth = 2;
+  targetCtx.setLineDash([7, 6]);
+  targetCtx.strokeRect(-hw, -hh, width, height);
+  targetCtx.setLineDash([]);
+
+  // haste + alça de giro
+  targetCtx.beginPath();
+  targetCtx.moveTo(0, -hh);
+  targetCtx.lineTo(0, -hh - 46);
+  targetCtx.stroke();
+  drawHandle(targetCtx, 0, -hh - 46, true);
+
+  // alças de canto
+  [[hw, hh], [-hw, hh], [hw, -hh], [-hw, -hh]].forEach(([x, y]) => drawHandle(targetCtx, x, y, false));
+
+  targetCtx.restore();
+}
+
+function drawHandle(targetCtx, x, y, round) {
+  targetCtx.save();
+  targetCtx.fillStyle = "#ffffff";
+  targetCtx.strokeStyle = "rgba(225, 29, 42, 0.95)";
+  targetCtx.lineWidth = 2;
+  if (round) {
+    targetCtx.beginPath();
+    targetCtx.arc(x, y, 9, 0, Math.PI * 2);
+    targetCtx.fill();
+    targetCtx.stroke();
+  } else {
+    targetCtx.fillRect(x - 8, y - 8, 16, 16);
+    targetCtx.strokeRect(x - 8, y - 8, 16, 16);
+  }
+  targetCtx.restore();
+}
+
+function getPenRotation() {
+  return state.penOrientation + state.penTilt;
+}
+
+/* ---- Detecção de limites / cores --------------------------------------- */
+function detectImageBounds(image) {
+  const sampleCanvas = document.createElement("canvas");
+  const maxSide = 520;
+  const ratio = Math.min(1, maxSide / Math.max(image.width, image.height));
+  sampleCanvas.width = Math.max(1, Math.round(image.width * ratio));
+  sampleCanvas.height = Math.max(1, Math.round(image.height * ratio));
+
+  const sampleCtx = sampleCanvas.getContext("2d", { willReadFrequently: true });
+  sampleCtx.drawImage(image, 0, 0, sampleCanvas.width, sampleCanvas.height);
+  const pixels = sampleCtx.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data;
+
+  let minX = sampleCanvas.width, minY = sampleCanvas.height, maxX = 0, maxY = 0;
+
+  for (let y = 0; y < sampleCanvas.height; y += 1) {
+    for (let x = 0; x < sampleCanvas.width; x += 1) {
+      const index = (y * sampleCanvas.width + x) * 4;
+      const red = pixels[index];
+      const green = pixels[index + 1];
+      const blue = pixels[index + 2];
+      const alpha = pixels[index + 3];
+      const isInk = alpha > 30 && !(red > 245 && green > 245 && blue > 245);
+      if (isInk) {
+        minX = Math.min(minX, x); minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  if (minX >= maxX || minY >= maxY) return { x: 0, y: 0, width: image.width, height: image.height };
+
+  const padding = 10;
+  const scale = 1 / ratio;
+  return {
+    x: Math.max(0, Math.floor((minX - padding) * scale)),
+    y: Math.max(0, Math.floor((minY - padding) * scale)),
+    width: Math.min(image.width, Math.ceil((maxX - minX + padding * 2) * scale)),
+    height: Math.min(image.height, Math.ceil((maxY - minY + padding * 2) * scale)),
+  };
+}
+
+function detectLogoColors(sourceCanvas) {
+  const sampleCanvas = document.createElement("canvas");
+  const maxSide = 160;
+  const ratio = Math.min(1, maxSide / Math.max(sourceCanvas.width, sourceCanvas.height));
+  sampleCanvas.width = Math.max(1, Math.round(sourceCanvas.width * ratio));
+  sampleCanvas.height = Math.max(1, Math.round(sourceCanvas.height * ratio));
+  const sampleCtx = sampleCanvas.getContext("2d", { willReadFrequently: true });
+  sampleCtx.drawImage(sourceCanvas, 0, 0, sampleCanvas.width, sampleCanvas.height);
+
+  const pixels = sampleCtx.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data;
+  const buckets = new Map();
+  let whiteCount = 0, whiteRed = 0, whiteGreen = 0, whiteBlue = 0;
+
+  for (let index = 0; index < pixels.length; index += 4) {
+    const alpha = pixels[index + 3];
+    if (alpha < 40) continue;
+    const red = pixels[index];
+    const green = pixels[index + 1];
+    const blue = pixels[index + 2];
+    const nearWhite = red > 245 && green > 245 && blue > 245;
+    if (nearWhite) {
+      whiteCount += 1; whiteRed += red; whiteGreen += green; whiteBlue += blue;
+      continue;
+    }
+    const key = [red, green, blue].map((value) => Math.round(value / 32) * 32).join(",");
+    const bucket = buckets.get(key) || { count: 0, red: 0, green: 0, blue: 0 };
+    bucket.count += 1; bucket.red += red; bucket.green += green; bucket.blue += blue;
+    buckets.set(key, bucket);
+  }
+
+  const colors = [...buckets.values()]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 7)
+    .map((bucket) => ({
+      hex: rgbToHex(
+        Math.round(bucket.red / bucket.count),
+        Math.round(bucket.green / bucket.count),
+        Math.round(bucket.blue / bucket.count),
+      ),
+      count: bucket.count,
+    }));
+
+  if (whiteCount > 0 && colors.length < 7) {
+    colors.unshift({
+      hex: rgbToHex(
+        Math.round(whiteRed / whiteCount),
+        Math.round(whiteGreen / whiteCount),
+        Math.round(whiteBlue / whiteCount),
+      ),
+      count: whiteCount,
+    });
+  }
+  return colors.slice(0, 7);
+}
+
+function rgbToHex(red, green, blue) {
+  return `#${[red, green, blue].map((value) => value.toString(16).padStart(2, "0")).join("")}`;
+}
+
+/* ---- Sincronização de controles ---------------------------------------- */
+function updateControlLabels() {
+  updateLogoPositionLabels();
+  if (scaleValue) scaleValue.textContent = `${Math.round(state.scale * 100)}%`;
+  if (rotationValue) rotationValue.textContent = `${Math.round(state.rotation)}°`;
+  if (opacityValue) opacityValue.textContent = `${Math.round(state.opacity * 100)}%`;
+  if (logoCutoutValue) logoCutoutValue.textContent = `${state.logoCutout}`;
+  if (blendValue) blendValue.textContent = `${Math.round(state.blend * 100)}%`;
+  if (penRotationValue) penRotationValue.textContent = `${state.penTilt}°`;
+  if (maskValue) maskValue.textContent = `${state.maskTolerance}`;
+}
+
+function syncAllControls() {
+  if (scaleControl) scaleControl.value = Math.round(state.scale * 100);
+  if (rotationControl) rotationControl.value = Math.round(state.rotation);
+  if (opacityControl) opacityControl.value = Math.round(state.opacity * 100);
+  if (blendControl) blendControl.value = Math.round(state.blend * 100);
+  syncLogoPositionControls();
+  updateControlLabels();
+}
+
+function syncLogoPositionControls(updateValues = true) {
+  if (!logoXControl || !logoYControl) return;
+  const xPercent = Math.round((state.logoX / canvas.width) * 100);
+  const yPercent = Math.round((state.logoY / canvas.height) * 100);
+  if (updateValues) {
+    logoXControl.value = xPercent;
+    logoYControl.value = yPercent;
+  }
+  if (logoXValue) logoXValue.textContent = `${xPercent}%`;
+  if (logoYValue) logoYValue.textContent = `${yPercent}%`;
+}
+
+function updateLogoPositionLabels() {
+  if (!logoXControl || !logoYControl) return;
+  if (logoXValue) logoXValue.textContent = `${logoXControl.value}%`;
+  if (logoYValue) logoYValue.textContent = `${logoYControl.value}%`;
+}
+
+function updateLogoPositionFromControls() {
+  if (!logoXControl || !logoYControl) return;
+  state.logoX = (Number(logoXControl.value) / 100) * canvas.width;
+  state.logoY = (Number(logoYControl.value) / 100) * canvas.height;
+  updateLogoPositionLabels();
+  renderScene(ctx, true);
+}
+
+/* ---- Modo Simples / Avançado ------------------------------------------- */
+function setMode(mode) {
+  const advanced = mode === "advanced";
+  document.body.classList.toggle("mode-advanced", advanced);
+  document.body.classList.toggle("mode-simple", !advanced);
+  modeButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.mode === mode));
+}
+
+/* ---- Dica no canvas ---------------------------------------------------- */
+let hintTimer = null;
+function showHint(text, persist) {
+  if (!canvasHint) return;
+  canvasHint.textContent = text;
+  canvasHint.classList.add("is-visible");
+  clearTimeout(hintTimer);
+  if (!persist) {
+    hintTimer = setTimeout(() => canvasHint.classList.remove("is-visible"), 2200);
+  }
+}
+
+/* ---- Ações rápidas ----------------------------------------------------- */
+function handleLogoAction(action) {
+  if (action === "reset") {
+    autoPlaceLogo();
+    draw();
+  }
+}
+
+function handleCanvasAction(action) {
+  if (!state.logo) return;
+  const scaleStep = 0.04;
+  if (action === "bigger") state.scale = clamp(state.scale + scaleStep, 0.08, 0.9);
+  if (action === "smaller") state.scale = clamp(state.scale - scaleStep, 0.08, 0.9);
+  if (action === "rotate") state.rotation = clamp(state.rotation + 90, -360, 360);
+  if (action === "reset") { autoPlaceLogo(); }
+  syncAllControls();
+  draw();
+}
+
+/* ---- Exportação -------------------------------------------------------- */
+function exportImage() {
+  const sceneCanvas = document.createElement("canvas");
+  sceneCanvas.width = canvas.width;
+  sceneCanvas.height = canvas.height;
+  renderScene(sceneCanvas.getContext("2d"), false);
+
+  const finalCanvas = document.createElement("canvas");
+  finalCanvas.width = 1200;
+  finalCanvas.height = 1260;
+  const finalCtx = finalCanvas.getContext("2d");
+  const productLabel = state.selectedProduct
+    ? `${state.selectedProduct.category} - ${state.selectedProduct.name}`
+    : "Produto personalizado";
+  const notes = notesInput?.value?.trim() || "-";
+  const logoColorText = getLogoColor() ? `Cor aplicada: ${getLogoColor()}` : "Cor aplicada: original do arquivo";
+
+  finalCtx.fillStyle = "#ffffff";
+  finalCtx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+  if (brandImage.complete) finalCtx.drawImage(brandImage, 42, 34, 360, 74);
+
+  finalCtx.fillStyle = "#16191f";
+  finalCtx.font = "700 30px Inter, system-ui, sans-serif";
+  finalCtx.textAlign = "right";
+  finalCtx.fillText("Mockup de gravação", 1158, 62);
+  finalCtx.fillStyle = "#65707f";
+  finalCtx.font = "500 17px Inter, system-ui, sans-serif";
+  finalCtx.fillText(productLabel, 1158, 92);
+
+  finalCtx.drawImage(sceneCanvas, 0, 130, 1200, 760);
+
+  finalCtx.fillStyle = "#f3f6fa";
+  finalCtx.fillRect(0, 910, 1200, 310);
+  finalCtx.fillStyle = "#213746";
+  finalCtx.font = "800 24px Inter, system-ui, sans-serif";
+  finalCtx.textAlign = "left";
+  finalCtx.fillText("Ficha de aprovação", 42, 956);
+
+  finalCtx.font = "700 15px Inter, system-ui, sans-serif";
+  finalCtx.fillStyle = "#213746";
+  finalCtx.fillText("Produto", 42, 1002);
+  finalCtx.fillText("Logo", 42, 1066);
+  finalCtx.fillText("Observações", 620, 1002);
+
+  finalCtx.font = "500 16px Inter, system-ui, sans-serif";
+  finalCtx.fillStyle = "#53636f";
+  drawWrappedText(finalCtx, productLabel, 42, 1024, 500, 20);
+  drawWrappedText(finalCtx, logoColorText, 42, 1088, 500, 20);
+  drawWrappedText(finalCtx, notes, 620, 1024, 500, 20);
+
+  finalCtx.fillStyle = "#ffffff";
+  finalCtx.fillRect(0, 1220, 1200, 40);
+  finalCtx.fillStyle = "#65707f";
+  finalCtx.font = "600 14px Inter, system-ui, sans-serif";
+  finalCtx.fillText("Newpen Signature | Prévia visual para aprovação", 42, 1246);
+  finalCtx.textAlign = "right";
+  finalCtx.fillText(new Date().toLocaleDateString("pt-BR"), 1158, 1246);
+
+  const link = document.createElement("a");
+  link.download = "mockup-logo-caneta.png";
+  link.href = finalCanvas.toDataURL("image/png");
+  link.click();
+  draw();
+}
+
+function drawWrappedText(targetCtx, text, x, y, maxWidth, lineHeight) {
+  const words = `${text}`.split(/\s+/);
+  let line = "";
+  let currentY = y;
+  words.forEach((word) => {
+    const testLine = line ? `${line} ${word}` : word;
+    if (targetCtx.measureText(testLine).width > maxWidth && line) {
+      targetCtx.fillText(line, x, currentY);
+      line = word;
+      currentY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  });
+  if (line) targetCtx.fillText(line, x, currentY);
+  return currentY;
+}
+
+/* ---- Pointer / toque --------------------------------------------------- */
+function canvasPoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: ((event.clientX - rect.left) / rect.width) * canvas.width,
+    y: ((event.clientY - rect.top) / rect.height) * canvas.height,
+  };
+}
+
+function handlePointerDown(event) {
+  if (!state.logo) return;
+  const point = canvasPoint(event);
+  pointers.set(event.pointerId, point);
+  canvas.setPointerCapture(event.pointerId);
+
+  if (pointers.size === 1) {
+    const handle = hitTest(point.x, point.y);
+    if (!handle) { activeMode = null; return; }
+    activeMode = handle;
+    if (handle === "move") {
+      dragOffsetX = point.x - state.logoX;
+      dragOffsetY = point.y - state.logoY;
+    } else if (handle === "resize") {
+      startDist = Math.hypot(point.x - state.logoX, point.y - state.logoY) || 1;
+      startScale = state.scale;
+    } else if (handle === "rotate") {
+      startAngle = Math.atan2(point.y - state.logoY, point.x - state.logoX);
+      startRotation = state.rotation;
+    }
+  } else if (pointers.size === 2) {
+    activeMode = "pinch";
+    const pts = [...pointers.values()];
+    startDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+    startScale = state.scale;
+    startAngle = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+    startRotation = state.rotation;
+    startMid = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+    startLogo = { x: state.logoX, y: state.logoY };
+  }
+}
+
+function handlePointerMove(event) {
+  if (!pointers.has(event.pointerId)) {
+    updateCursor(event);
+    return;
+  }
+  pointers.set(event.pointerId, canvasPoint(event));
+
+  if (activeMode === "pinch" && pointers.size >= 2) {
+    const pts = [...pointers.values()];
+    const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+    state.scale = clamp(startScale * (dist / startDist), 0.08, 0.9);
+    const angle = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+    state.rotation = clamp(startRotation + ((angle - startAngle) * 180) / Math.PI, -360, 360);
+    const mid = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+    state.logoX = startLogo.x + (mid.x - startMid.x);
+    state.logoY = startLogo.y + (mid.y - startMid.y);
+    syncAllControls();
+    draw();
+    return;
+  }
+
+  const point = pointers.get(event.pointerId);
+  if (activeMode === "move") {
+    state.logoX = point.x - dragOffsetX;
+    state.logoY = point.y - dragOffsetY;
+  } else if (activeMode === "resize") {
+    const dist = Math.hypot(point.x - state.logoX, point.y - state.logoY);
+    state.scale = clamp(startScale * (dist / startDist), 0.08, 0.9);
+  } else if (activeMode === "rotate") {
+    const angle = Math.atan2(point.y - state.logoY, point.x - state.logoX);
+    state.rotation = clamp(startRotation + ((angle - startAngle) * 180) / Math.PI, -360, 360);
+  } else {
+    return;
+  }
+  syncAllControls();
+  draw();
+}
+
+function handlePointerUp(event) {
+  pointers.delete(event.pointerId);
+  if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+  if (pointers.size === 0) {
+    activeMode = null;
+  } else if (pointers.size === 1) {
+    activeMode = "move";
+    const point = [...pointers.values()][0];
+    dragOffsetX = point.x - state.logoX;
+    dragOffsetY = point.y - state.logoY;
+  }
+}
+
+function updateCursor(event) {
+  if (!state.logo) { canvas.style.cursor = "default"; return; }
+  const point = canvasPoint(event);
+  const handle = hitTest(point.x, point.y);
+  if (handle === "move") canvas.style.cursor = "grab";
+  else if (handle === "resize") canvas.style.cursor = "nwse-resize";
+  else if (handle === "rotate") canvas.style.cursor = "crosshair";
+  else canvas.style.cursor = "default";
+}
+
+function readFileAsDataUrl(file, callback) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => callback(reader.result);
+  reader.readAsDataURL(file);
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function updateLogoColorButtons() {
+  logoColorButtons.forEach((button) => {
+    const color = button.dataset.logoColor;
+    const active = color === "original" ? state.logoColorMode === "original" : state.logoColorMode === color;
+    button.classList.toggle("is-active", active);
+  });
+}
+
+/* ---- Eventos ----------------------------------------------------------- */
+penGrid.addEventListener("click", (event) => {
+  const option = event.target.closest("[data-src]");
+  if (!option) return;
+  const product = state.products.find((item) => item.src === option.dataset.src);
+  if (product) selectProduct(product);
+});
+
+penUpload?.addEventListener("change", (event) => {
+  readFileAsDataUrl(event.target.files[0], (src) => {
+    document.querySelectorAll(".pen-option").forEach((item) => item.classList.remove("is-active"));
+    state.selectedProduct = null;
+    if (selectedProductTitle) selectedProductTitle.textContent = "Caneta personalizada";
+    if (selectedProductDescription) selectedProductDescription.textContent = "Foto propria enviada para simulacao.";
+    loadPen(src);
+  });
+});
+
+productSearch?.addEventListener("input", renderProducts);
+categoryFilter?.addEventListener("change", renderProducts);
+
+productColorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    productColorButtons.forEach((item) => item.classList.remove("is-active"));
+    button.classList.add("is-active");
+    state.productColor = button.dataset.productColor;
+    renderProducts();
+  });
+});
+
+logoUpload?.addEventListener("change", (event) => {
+  readFileAsDataUrl(event.target.files[0], loadLogo);
+});
+
+penRotationControl?.addEventListener("input", () => {
+  state.penTilt = Number(penRotationControl.value);
+  if (state.logo) {
+    state.rotation = -getPenRotation();
+    if (rotationControl) rotationControl.value = Math.round(state.rotation);
+  }
+  draw();
+});
+
+maskControl?.addEventListener("input", () => {
+  state.maskTolerance = Number(maskControl.value);
+  draw();
+});
+
+scaleControl?.addEventListener("input", () => {
+  state.scale = Number(scaleControl.value) / 100;
+  draw();
+});
+
+rotationControl?.addEventListener("input", () => {
+  state.rotation = Number(rotationControl.value);
+  draw();
+});
+
+opacityControl?.addEventListener("input", () => {
+  state.opacity = Number(opacityControl.value) / 100;
+  draw();
+});
+
+logoCutoutControl?.addEventListener("input", () => {
+  state.logoCutout = Number(logoCutoutControl.value);
+  if (state.logoOriginal) {
+    state.logo = processLogoImage(state.logoOriginal);
+    state.logoColors = detectLogoColors(state.logo);
+  }
+  draw();
+});
+
+logoColorInput?.addEventListener("input", () => {
+  state.logoColor = logoColorInput.value;
+  if (state.logoColorMode === "custom") updateLogoColorButtons();
+  draw();
+});
+
+blendControl?.addEventListener("input", () => {
+  state.blend = Number(blendControl.value) / 100;
+  draw();
+});
+
+logoXControl?.addEventListener("input", updateLogoPositionFromControls);
+logoYControl?.addEventListener("input", updateLogoPositionFromControls);
+logoXControl?.addEventListener("change", updateLogoPositionFromControls);
+logoYControl?.addEventListener("change", updateLogoPositionFromControls);
+
+logoActionButtons.forEach((button) => {
+  button.addEventListener("click", () => handleLogoAction(button.dataset.logoAction));
+});
+
+canvasActionButtons.forEach((button) => {
+  button.addEventListener("click", () => handleCanvasAction(button.dataset.canvasAction));
+});
+
+logoColorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const color = button.dataset.logoColor;
+    state.logoColorMode = color;
+    customLogoColorPicker?.classList.toggle("is-visible", color === "custom");
+    if (color === "custom") {
+      state.logoColor = logoColorInput.value;
+      logoColorInput.focus();
+    }
+    updateLogoColorButtons();
+    draw();
+  });
+});
+
+modeButtons.forEach((button) => {
+  button.addEventListener("click", () => setMode(button.dataset.mode));
+});
+
+fitButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    fitButtons.forEach((item) => item.classList.remove("is-active"));
+    button.classList.add("is-active");
+    state.fit = button.dataset.fit;
+    draw();
+  });
+});
+
+notesInput?.addEventListener("input", () => {});
+
+canvas.addEventListener("pointerdown", handlePointerDown);
+canvas.addEventListener("pointermove", handlePointerMove);
+canvas.addEventListener("pointerup", handlePointerUp);
+canvas.addEventListener("pointercancel", handlePointerUp);
+canvas.addEventListener("pointerleave", () => { if (!activeMode) canvas.style.cursor = "default"; });
+
+canvas.addEventListener(
+  "wheel",
+  (event) => {
+    if (!state.logo) return;
+    event.preventDefault();
+    if (event.shiftKey) {
+      state.rotation = clamp(state.rotation + (event.deltaY > 0 ? 4 : -4), -360, 360);
+    } else {
+      state.scale = clamp(state.scale + (event.deltaY > 0 ? -0.015 : 0.015), 0.08, 0.9);
+    }
+    syncAllControls();
+    draw();
+  },
+  { passive: false },
+);
+
+downloadBtn?.addEventListener("click", exportImage);
+downloadBtnTop?.addEventListener("click", exportImage);
+</script>
 </html>
